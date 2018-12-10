@@ -1,8 +1,7 @@
 <template>
 <div>
 <ul class="content" v-for="item of siriList" :key="item.id">
-<li @click="selectItem(items)"
-    class="item border"
+<li class="item border"
     v-for="items of item"
     :key="items.id">
 <div class="item-img">
@@ -47,11 +46,6 @@ export default {
           desc: '找到你身边的伙伴'
         }]
       }
-    }
-  },
-  methods: {
-    selectItem(items) {
-      this.$emit('select', items)
     }
   }
 }

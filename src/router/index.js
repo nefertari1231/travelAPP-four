@@ -10,6 +10,7 @@ import Search from '@/pages/search/Search'
 import SingleDetail from '@/pages/singleDetail/SingleDetail'
 import Login from '@/pages/login/Login'
 import Speople from '@/pages/speople/Speople'
+import Register from '@/pages/register/Register'
 
 Vue.use(Router)
 
@@ -42,7 +43,7 @@ export default new Router({
       component: Siri,
       children: [
         {
-          path: ':speople',
+          path: 'speople',
           component: Speople
         }
       ]
@@ -50,16 +51,18 @@ export default new Router({
       path: '/message',
       component: Message
     }, {
+      path: '/login',
+      component: Login
+    }, {
+      path: '/register',
+      component: Register
+    }, {
       path: '/single',
       component: Single,
       children: [
         {
           path: 'detail',
           component: SingleDetail
-        },
-        {
-          path: 'login',
-          component: Login
         }
       ]
     }

@@ -3,7 +3,7 @@
 <single-header></single-header>
 <div class="singlelist" ref="wrapper">
 <div>
-<single-banner @select="enterSingle" @login="login"></single-banner>
+<single-banner></single-banner>
 <single-thumb></single-thumb>
 <single-list></single-list>
 <div class="content"></div>
@@ -28,18 +28,6 @@ export default {
   },
   mounted () {
     this.scroll = new Bscroll(this.$refs.wrapper)
-  },
-  methods: {
-    enterSingle(single) {
-      this.$router.push({
-        path: `/single/detail`
-      })
-    },
-    login(single) {
-      this.$router.push({
-        path: `/single/login`
-      })
-    }
   }
 }
 </script>

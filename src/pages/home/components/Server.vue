@@ -1,7 +1,7 @@
 <template>
 <div>
 <div class="server-bg">
-<div @click="selectItem(item)"
+<router-link tag="div" :to="item.to"
      class="server"
      v-for="item of serverList"
      :key="item.id"
@@ -12,7 +12,7 @@
     <p class="font">{{item.desc}}</p>
     </div>
   </div>
-</div>
+</router-link>
 </div>
 </div>
 </template>
@@ -25,15 +25,18 @@ export default {
       serverList: [{
         id: 'service',
         imgUrl: require('@/image/server1.jpg'),
-        desc: '找服务'
+        desc: '找服务',
+        to: '/home/service'
       }, {
         id: 'play',
         imgUrl: require('@/image/server2.jpg'),
-        desc: '周边玩'
+        desc: '周边玩',
+        to: '/'
       }, {
         id: 'around',
         imgUrl: require('@/image/server3.jpg'),
-        desc: '附近的人'
+        desc: '附近的人',
+        to: '/'
       }]
     }
   },

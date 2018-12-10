@@ -1,10 +1,10 @@
 <template>
 <div>
-<home-header @search="search"></home-header>
+<home-header></home-header>
 <div class="headlist" ref="wrapper">
 <div>
 <home-swiper></home-swiper>
-<home-server @select="selectService"></home-server>
+<home-server></home-server>
 <home-share></home-share>
 </div>
 </div>
@@ -29,18 +29,6 @@ export default {
   },
   mounted () {
     this.scroll = new Bscroll(this.$refs.wrapper)
-  },
-  methods: {
-    selectService(home) {
-      this.$router.push({
-        path: `home/service`
-      })
-    },
-    search(home) {
-      this.$router.push({
-        path: `home/search`
-      })
-    }
   }
 }
 </script>

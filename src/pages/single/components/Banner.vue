@@ -4,13 +4,13 @@
   <img class="banner-img" src="@/image/geren1.jpg">
     <div class="single-content">
       <div class="item-header">
-        <img class="item-img"  src="@/image/touxiang1.jpg" @click="Login()" />
+        <router-link tag="img" to="/login" class="item-img" :src="src"></router-link>
         <div class="icon-m">
         <div class="iconfont icon-man"></div>
         </div>
       <div class="item-info">
       <p class="item-title">爱你会上瘾丶</p>
-      <div class="iconfont icon-right" @click="Click()"></div>
+      <router-link tag="div" to="single/detail" class="iconfont icon-right"></router-link>
       </div>
       </div>
     </div>
@@ -21,12 +21,9 @@
 <script>
 export default {
   name: 'SingleBanner',
-  methods: {
-    Click() {
-      this.$emit('select')
-    },
-    Login() {
-      this.$emit('login')
+  data() {
+    return {
+      src: require('@/image/touxiang1.jpg')
     }
   }
 }

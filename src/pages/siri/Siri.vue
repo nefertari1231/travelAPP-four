@@ -4,7 +4,7 @@
 <siri-header></siri-header>
 <div class="headlist" ref="wrapper">
 <div>
-<siri-list @select="selectSiri"></siri-list>
+<siri-list></siri-list>
 <div class="content"></div>
 </div>
 </div>
@@ -22,16 +22,16 @@ export default {
   },
   mounted () {
     this.scroll = new Bscroll(this.$refs.wrapper)
-  },
-  methods: {
-    selectSiri(siri) {
-      if (siri.id !== '0002') {
-        this.$router.push({
-          path: `/siri/${siri.id}`
-        })
-      }
-    }
   }
+  // methods: {
+  //   selectSiri(siri) {
+  //     if (siri.id !== '0002') {
+  //       this.$router.push({
+  //         path: `/siri/${siri.id}`
+  //       })
+  //     }
+  //   }
+  // }
 }
 </script>
 

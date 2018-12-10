@@ -1,10 +1,6 @@
 <template>
 <div>
   <div class="content-bg">
-    <div class="content">
-    <p class="title title-tell">手机登录</p>
-    <p class="title title-student">学号登录</p>
-    </div>
     <div class="text1">
     <div class="iconfont icon-shouji"></div>
     <input class="user" type="text" name="user" placeholder="请输入手机号" />
@@ -16,7 +12,7 @@
     </div>
     <input class="btn" type="submit" value="登录">
     <div class="set">
-      <router-link tag="p" to="/register" class="new-user">新用户注册</router-link>>
+    <p class="new-user">新用户注册</p>
     <p class="forget">忘记密码?</p>
     </div>
     <div class="split">
@@ -34,7 +30,7 @@
 
 <script>
 export default {
-  name: 'LoginContent'
+  name: 'RegisterContent'
 }
 </script>
 
@@ -46,13 +42,6 @@ export default {
   overflow: hidden
   line-height: .7rem
   height: .7rem
-.title
-  float: left
-  line-height: .7rem
-  height: .7rem
-  font-size : .4rem
-.title-student
-  margin-left: .3rem
 .iconfont, .user
   float: left
 .text1, .text2
