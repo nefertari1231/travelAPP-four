@@ -4,7 +4,7 @@
     <div class="share-left iconfont icon-icon-test"></div>
     <div class="share-title">热门分享</div>
     </div>
-    <ul v-for="item in ShareList" :key="item.id">
+    <ul v-for="item in list" :key="item.id">
       <li class="item-header">
         <img class="item-img"  :src="item.imgUlr" />
         <div :class="item.color">
@@ -49,94 +49,8 @@
 <script>
 export default {
   name: 'HomeShare',
-  data () {
-    return {
-      ShareList: [{
-        id: '0001',
-        imgUlr: require('@/image/touxiang1.jpg'),
-        Name: '爱你会上瘾丶',
-        TimeName: '09-17 15：31',
-        color: 'icon-m',
-        sex: 'iconfont icon-man',
-        desc: '杯子在多数时候，盛装的仅仅是半杯水，遇见的那个人依然似乎无法填补内心的空洞，时间一点一点地过去，水也一点一点地蒸发掉，你开始觉得他越来越无法满足你的全部幻想全部期待',
-        PicList: [{
-          id: '0001',
-          PimgUlr: require('@/image/share1.jpg')
-        }, {
-          id: '0002',
-          PimgUlr: require('@/image/share2.jpg')
-        }, {
-          id: '0003',
-          PimgUlr: require('@/image/share3.jpg')
-        }, {
-          id: '0004',
-          PimgUlr: require('@/image/share4.jpg')
-        }]
-      }, {
-        id: '0002',
-        imgUlr: require('@/image/touxiang2.jpg'),
-        Name: 'Amber珈珈',
-        TimeName: '09-17 15：32',
-        color: 'icon-f',
-        sex: 'iconfont icon-woman',
-        desc: '美丽的地方',
-        PicList: [{
-          id: '0001',
-          PimgUlr: require('@/image/share5.jpg')
-        }, {
-          id: '0002',
-          PimgUlr: require('@/image/share6.jpg')
-        }, {
-          id: '0003',
-          PimgUlr: require('@/image/share7.jpg')
-        }, {
-          id: '0004',
-          PimgUlr: require('@/image/share8.jpg')
-        }]
-      }, {
-        id: '0003',
-        imgUlr: require('@/image/touxiang3.jpg'),
-        Name: '一起学猫叫',
-        TimeName: '09-17 15：33',
-        color: 'icon-m',
-        sex: 'iconfont icon-man',
-        desc: '离开这个喧嚣的世界，背上背包去旅行，去寻找一片宁静的乐园，让新鲜的风景新鲜的人和事不断的带给我们惊喜，放下杂念，放下世故的心，感受自由自在的空间。',
-        PicList: [{
-          id: '0001',
-          PimgUlr: require('@/image/share9.jpg')
-        }, {
-          id: '0002',
-          PimgUlr: require('@/image/share10.jpg')
-        }, {
-          id: '0003',
-          PimgUlr: require('@/image/share11.jpg')
-        }, {
-          id: '0004',
-          PimgUlr: require('@/image/share12.jpg')
-        }]
-      }, {
-        id: '0004',
-        imgUlr: require('@/image/touxiang4.jpg'),
-        Name: '丑的像整容',
-        TimeName: '09-17 15：34',
-        color: 'icon-f',
-        sex: 'iconfont icon-woman',
-        desc: '你好，世界',
-        PicList: [{
-          id: '0001',
-          PimgUlr: require('@/image/share13.jpg')
-        }, {
-          id: '0002',
-          PimgUlr: require('@/image/share14.jpg')
-        }, {
-          id: '0003',
-          PimgUlr: require('@/image/share15.jpg')
-        }, {
-          id: '0004',
-          PimgUlr: require('@/image/share16.jpg')
-        }]
-      }]
-    }
+  props: {
+    list: Array
   }
 }
 </script>

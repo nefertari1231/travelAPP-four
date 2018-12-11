@@ -10,20 +10,7 @@
     <input class="user" type="password" name="user" placeholder="请输入密码" />
     <span class="iconfont icon-yanjing-bi"></span>
     </div>
-    <input class="btn" type="submit" value="登录">
-    <div class="set">
-    <p class="new-user">新用户注册</p>
-    <p class="forget">忘记密码?</p>
-    </div>
-    <div class="split">
-      <hr class="split-left">
-      <div class="split-text">社交账号登录</div>
-      <hr class="split-right">
-    </div>
-    <div class="icons">
-    <div class="iconfont icon-QQ"></div>
-    <div class="iconfont icon-weixin"></div>
-    </div>
+    <input class="btn" type="submit" value="注册">
   </div>
 </div>
 </template>
@@ -82,35 +69,9 @@ export default {
 .forget
   float: right
   margin-right: .2rem
-.split
-  height: 1rem
-  margin-top: .8rem
-.split-left
-  float: left
-  width: 33.3%
-.split-right
-  float: right
-  width: 33.3%
-.split-text
-  float: left
-  width:33.3%
-  text-align: center
-  color: #999
 .icons
   margin-top: .6rem
   height: 2.4rem
   line-height: 2.4rem
   padding: 0 1.5rem
-.icon-QQ
-  height: 1.2rem
-  line-height: 1.2rem
-  font-size: 1.2rem
-  color:  #00BFFF
-  float: left
-.icon-weixin
-  height: 1.2rem
-  line-height: 1.2rem
-  font-size: 1.2rem
-  color:  #228B22
-  float: right
 </style>

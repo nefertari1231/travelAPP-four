@@ -1,7 +1,7 @@
 <template>
 <div>
 <div class="banner">
-  <img class="banner-img" src="@/image/geren1.jpg">
+  <img class="banner-img" src="static/image/geren1.jpg">
     <div class="single-content">
       <div class="item-header">
         <router-link tag="img" to="/login" class="item-img" :src="src"></router-link>
@@ -23,7 +23,7 @@ export default {
   name: 'SingleBanner',
   data() {
     return {
-      src: require('@/image/touxiang1.jpg')
+      src: 'static/image/touxiang1.jpg'
     }
   }
 }

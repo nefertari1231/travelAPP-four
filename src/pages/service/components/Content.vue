@@ -23,22 +23,22 @@ export default {
     return {
       serviceList: [{
         id: '0001',
-        imgUrl: require('@/image/service1.jpg'),
+        imgUrl: 'static/image/service1.jpg',
         title: '喀纳斯徒步',
         desc: '召集想去新疆的旅友'
       }, {
         id: '0002',
-        imgUrl: require('@/image/service2.jpg'),
+        imgUrl: 'static/image/service2.jpg',
         title: '三亚结伴',
         desc: '7-15出发'
       }, {
         id: '0003',
-        imgUrl: require('@/image/service3.jpg'),
+        imgUrl: 'static/image/service3.jpg',
         title: '周边游-云龙山',
         desc: '下午出发'
       }, {
         id: '0004',
-        imgUrl: require('@/image/service4.jpg'),
+        imgUrl: 'static/image/service4.jpg',
         title: '徐州缪斯酒吧，想high你就来',
         desc: '晚上包场'
       }]

@@ -2,7 +2,7 @@
 <div>
   <div class="header">
     <div class="header-title">
-      APP
+      {{this.homeTitle}}
     </div>
     <router-link tag="div" to="/home/search" class="header-right iconfont icon-search" ></router-link>
   </div>
@@ -11,7 +11,10 @@
 
 <script>
 export default {
-  name: 'HomeHeader'
+  name: 'HomeHeader',
+  props: {
+    homeTitle: String
+  }
 }
 </script>
 

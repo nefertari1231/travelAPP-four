@@ -8,9 +8,9 @@
   <div class="header-right iconfont icon-edit-square" ></div>
   </div>
 <div class="banner">
-   <img class="banner-img" src="@/image/geren2.jpg">
+   <img class="banner-img" src="static/image/geren2.jpg">
 </div>
-  <img class="item-img"  src="@/image/touxiang1.jpg" />
+  <img class="item-img"  src="static/image/touxiang1.jpg" />
   <div class="icon-info">
   <div class="desc">爱你会上瘾丶</div>
   <div class="icon-m">

@@ -5,7 +5,7 @@
     <div class="cut-off"></div>
     <div class="content-banner">
     <div class="banner" @click="handleBannerClick">
-      <img class="banner-img" src="@/image/service1.jpg" />
+      <img class="banner-img" src="static/image/service1.jpg" />
       <div class="banner-info">
         <div class="banner-number"><span class="iconfont icon-tupian"></span>4</div>
       </div>
@@ -30,7 +30,7 @@ export default {
   data () {
     return {
       showGallary: false,
-      imgs: [require('@/image/service1.jpg'), require('@/image/service1.1.jpg'), require('@/image/service1.2.jpg'), require('@/image/service1.3.jpg')]
+      imgs: ['static/image/service1.jpg', 'static/image/service1.1.jpg', 'static/image/service1.2.jpg', 'static/image/service1.3.jpg']
     }
   },
   methods: {

@@ -2,7 +2,7 @@
 <div >
     <div class="single-content">
       <div class="item-header">
-        <img class="item-img"  src="@/image/touxiang7.jpg" />
+        <img class="item-img"  src="static/image/touxiang7.jpg" />
         <div class="icon-m">
         <div class="iconfont icon-man"></div>
         </div>

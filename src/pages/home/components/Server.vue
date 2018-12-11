@@ -3,7 +3,7 @@
 <div class="server-bg">
 <router-link tag="div" :to="item.to"
      class="server"
-     v-for="item of serverList"
+     v-for="item of list"
      :key="item.id"
      >
   <div class="server-content">
@@ -20,30 +20,8 @@
 <script>
 export default {
   name: 'HomeServer',
-  data () {
-    return {
-      serverList: [{
-        id: 'service',
-        imgUrl: require('@/image/server1.jpg'),
-        desc: '找服务',
-        to: '/home/service'
-      }, {
-        id: 'play',
-        imgUrl: require('@/image/server2.jpg'),
-        desc: '周边玩',
-        to: '/'
-      }, {
-        id: 'around',
-        imgUrl: require('@/image/server3.jpg'),
-        desc: '附近的人',
-        to: '/'
-      }]
-    }
-  },
-  methods: {
-    selectItem(item) {
-      this.$emit('select', item)
-    }
+  props: {
+    list: Array
   }
 }
 </script>
