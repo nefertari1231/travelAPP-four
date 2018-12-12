@@ -18,7 +18,7 @@ export default {
 <style lang="stylus" scoped>
 .header
   display: flex
-  line-height: 1.25rem
+  line-height: 1.26rem
   background: #333
   color: white
 .header-title

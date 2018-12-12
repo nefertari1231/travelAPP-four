@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="header">
-    <div class="header-left iconfont icon-left" @click="back"></div>
+    <div class="header-left iconfont icon-left" @click="back()"></div>
     <div class="header-title">
       服务详情
     </div>
@@ -15,7 +15,7 @@ export default {
   name: 'ServiceDetailHeader',
   methods: {
     back() {
-      this.$router.back()
+      this.$emit('hide')
     }
   }
 }
@@ -24,7 +24,7 @@ export default {
 <style lang="stylus" scoped>
 .header
   display: flex
-  line-height: 1.25rem
+  line-height: 1.26rem
   background: #333
   color: white
 .header-title
@@ -33,7 +33,6 @@ export default {
   text-align: center
   font-size: .45rem
   margin-bottom: -.2rem
-  margin-left: .9rem
 .header-left
   font-size:.5rem
   margin-left: .3rem

@@ -23,15 +23,6 @@ export default {
   mounted () {
     this.scroll = new Bscroll(this.$refs.wrapper)
   }
-  // methods: {
-  //   selectSiri(siri) {
-  //     if (siri.id !== '0002') {
-  //       this.$router.push({
-  //         path: `/siri/${siri.id}`
-  //       })
-  //     }
-  //   }
-  // }
 }
 </script>
 

@@ -19,5 +19,5 @@ export default {
 
 <style lang="stylus" scoped>
 .footer
-  z-index: 150
+  z-index: 2
 </style>
