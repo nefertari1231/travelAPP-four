@@ -1,7 +1,6 @@
 {
   "ret": true,
   "data": {
-    "homeTitle": "首页",
     "swiperList": [{
       "id": "0001",
       "imgUrl": "static/image/shouye1.jpg"
