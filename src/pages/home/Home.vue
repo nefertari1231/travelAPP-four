@@ -1,81 +1,81 @@
 <template>
-<div>
-<div>
-    <div class="header">
-      <div class="header-title">
-        {{this.homeTitle}}
+  <div>
+    <div>
+      <div class="header">
+        <div class="header-title">
+          首页
+        </div>
+        <router-link tag="div" to="/home/search" class="header-right iconfont icon-search" ></router-link>
       </div>
-      <router-link tag="div" to="/home/search" class="header-right iconfont icon-search" ></router-link>
-    </div>
-  </div>  <!--header-->
-<div class="headlist" ref="wrapper">
-<div>
-<home-swiper :list="swiperList"></home-swiper>
-<div>
-    <div class="server-bg">
-      <router-link tag="div" :to="item.to"
-                   class="server"
-                   v-for="item of serverList"
-                   :key="item.id"
-      >
-        <div class="server-content">
-          <img  class="server-img" :src="item.imgUrl">
-          <div class="font-display">
-            <p class="font">{{item.desc}}</p>
+    </div>  <!--header-->
+  <div class="headlist" ref="wrapper">
+    <div>
+      <home-swiper :list="swiperList"></home-swiper>
+      <div>
+          <div class="server-bg">
+            <router-link tag="div" :to="item.to"
+                         class="server"
+                         v-for="item of serverList"
+                         :key="item.id"
+            >
+              <div class="server-content">
+                <img  class="server-img" :src="item.imgUrl">
+                <div class="font-display">
+                  <p class="font">{{item.desc}}</p>
+                </div>
+              </div>
+            </router-link>
           </div>
-        </div>
-      </router-link>
-    </div>
-  </div>  <!--Server-->
-<div >
-    <div class="share">
-      <div class="share-left iconfont icon-icon-test"></div>
-      <div class="share-title">热门分享</div>
-    </div>
-    <ul v-for="homeComment in shareList" :key="homeComment.id">
-      <div @click="selectComment(homeComment)">
-      <li class="item-header">
-        <img class="item-img"  :src="homeComment.imgUlr" />
-        <div :class="homeComment.color">
-          <div :class="homeComment.sex"></div>
-        </div>
-        <div class="item-info">
-          <p class="item-title">{{homeComment.Name}}</p>
-          <p class="item-time">{{homeComment.TimeName}}</p>
-          <div class="iconfont icon-down"></div>
-        </div>
-      </li>
-      <li>
-        <div class="item-text">{{homeComment.desc}}</div>
-        <div class="item-pic border-bottom">
-          <div class="pic" v-for="pic of homeComment.PicList" :key="pic.id">
-            <div class="pic-content">
-              <img class="pic-contents" :src="pic.PimgUlr" />
+        </div>  <!--Server-->
+      <div >
+          <div class="share">
+            <div class="share-left iconfont icon-icon-test"></div>
+            <div class="share-title">热门分享</div>
+          </div>
+          <ul v-for="homeComment in shareList" :key="homeComment.id">
+            <div @click="selectComment(homeComment)">
+            <li class="item-header">
+              <img class="item-img"  :src="homeComment.imgUlr" />
+              <div :class="homeComment.color">
+                <div :class="homeComment.sex"></div>
+              </div>
+              <div class="item-info">
+                <p class="item-title">{{homeComment.Name}}</p>
+                <p class="item-time">{{homeComment.TimeName}}</p>
+                <div class="iconfont icon-down"></div>
+              </div>
+            </li>
+            <li>
+              <div class="item-text">{{homeComment.desc}}</div>
+              <div class="item-pic border-bottom">
+                <div class="pic" v-for="pic of homeComment.PicList" :key="pic.id">
+                  <div class="pic-content">
+                    <img class="pic-contents" :src="pic.PimgUlr" />
+                  </div>
+                </div>
+              </div>
+            </li>
             </div>
-          </div>
-        </div>
-      </li>
-      </div>
-      <div class="item-footer">
-        <ul>
-          <div class="foot-content">
-            <li class="iconfont icon-like">
-              <span class="footer-text">赞(0)
-              </span>
-            </li>
-          </div>
-          <div class="foot-content border-left">
-            <li class="iconfont icon-edit-square">
-              <span class="footer-text">评论(0)
-              </span>
-            </li>
-          </div>
-        </ul>
-      </div>
-    </ul>
-  </div>  <!--Share-->
-</div>
-</div>
+            <div class="item-footer">
+              <ul>
+                <div class="foot-content">
+                  <li class="iconfont icon-like">
+                    <span class="footer-text">赞(0)
+                    </span>
+                  </li>
+                </div>
+                <div class="foot-content border-left">
+                  <li class="iconfont icon-edit-square">
+                    <span class="footer-text">评论(0)
+                    </span>
+                  </li>
+                </div>
+              </ul>
+            </div>
+          </ul>
+        </div>  <!--Share-->
+    </div>
+  </div>
 <transition name="HomeT" tag="div">
 <router-view></router-view>
 </transition>
@@ -96,7 +96,6 @@ export default {
   },
   data() {
     return {
-      homeTitle: '',
       swiperList: [],
       serverList: [],
       shareList: [],
@@ -112,7 +111,6 @@ export default {
       res = res.data
       if (res.ret && res.data) {
         const data = res.data
-        this.homeTitle = data.homeTitle
         this.swiperList = data.swiperList
         this.serverList = data.serverList
         this.shareList = data.shareList

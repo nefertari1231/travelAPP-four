@@ -8,51 +8,60 @@
       </div>
     </div>
   </div> <!--header-->
-<div class="singlelist" ref="wrapper">
-<div>
   <div>
     <div class="banner">
-      <img class="banner-img" src="static/image/geren1.jpg">
+      <img class="banner-img" :src="bgImgUrl">
       <div class="single-content">
         <div class="item-header">
-          <router-link tag="img" to="/login" class="item-img" :src="src"></router-link>
-          <div class="icon-m">
-            <div class="iconfont icon-man"></div>
+          <router-link tag="img" to="/login" class="item-img" :src="enteredSingleDetail.imgUrl"></router-link>
+          <div :class="enteredSingleDetail.color">
+            <div :class="enteredSingleDetail.sex"></div>
           </div>
           <div class="item-info">
-            <p class="item-title">爱你会上瘾丶</p>
-            <router-link tag="div" to="single/detail" class="iconfont icon-right"></router-link>
+            <p class="item-title">{{enteredSingleDetail.Name}}</p>
+            <div class="iconfont icon-right" @click="enterSingleDetail()"></div>
           </div>
         </div>
       </div>
     </div>
   </div> <!--banner-->
   <div class="content-bg">
-    <div class="content" v-for="item of contentList" :key="item.id">
+    <div class="content" >
       <div class="content-box">
-        <p class="text-top">{{item.textTop}}</p>
-        <p class="text-bottom">{{item.textBottom}}</p>
+        <p class="text-top">{{enteredSingleDetail.sharecount}}</p>
+        <p class="text-bottom">分享</p>
+      </div>
+    </div>
+    <div class="content">
+      <div class="content-box">
+        <p class="text-top">{{enteredSingleDetail.followcount}}</p>
+        <p class="text-bottom">关注</p>
+      </div>
+    </div>
+    <div class="content">
+      <div class="content-box">
+        <p class="text-top">{{enteredSingleDetail.fanscount}}</p>
+        <p class="text-bottom">粉丝</p>
       </div>
     </div>
   </div> <!--thumb-->
   <single-list></single-list>
   <single-list></single-list><!--list-->
-</div>
-</div>
 <router-view></router-view>
+  <single-detail :singleDetail="enteredSingleDetail" ref="singleDetail"></single-detail>
 </div>
 </template>
 
 <script>
-import Bscroll from 'better-scroll'
 import SingleList from './components/List'
+import SingleDetail from '../singleDetail/SingleDetail'
 export default {
   name: 'Single',
   components: {
+    SingleDetail,
     SingleList
   },
   mounted () {
-    this.scroll = new Bscroll(this.$refs.wrapper)
     window.addEventListener('scroll', this.handleTouchMove)
   },
   data () {
@@ -61,20 +70,16 @@ export default {
       opacityStyle: {
         opacity: 0
       },
-      src: 'static/image/touxiang1.jpg',
-      contentList: [{
-        id: '0001',
-        textTop: '0',
-        textBottom: '分享'
-      }, {
-        id: '0002',
-        textTop: '2',
-        textBottom: '关注'
-      }, {
-        id: '0003',
-        textTop: '0',
-        textBottom: '粉丝'
-      }]
+      bgImgUrl: 'static/image/geren1.jpg',
+      enteredSingleDetail: {
+        Name: '爱你会上瘾丶',
+        imgUrl: 'static/image/touxiang1.jpg',
+        color: 'icon-m',
+        sex: 'iconfont icon-man',
+        sharecount: '0',
+        followcount: '2',
+        fanscount: '2'
+      }
     }
   },
   methods: {
@@ -88,6 +93,9 @@ export default {
       } else {
         this.showHeader = false
       }
+    },
+    enterSingleDetail () {
+      this.$refs.singleDetail.show()
     }
   }
 }
@@ -159,13 +167,24 @@ export default {
     background: skyblue
     border-radius:50%
     border: .03rem solid #FFF
-  .icon-man
+  .icon-man,.icon-woman
     position: absolute
     top: 0.05rem
     left: 0.04rem
     right: 0
     bottom: 0
     color: #FFF
+  .icon-f
+    position: absolute
+    top: 1.2rem
+    left: 1.2rem
+    right: 0
+    bottom: 0
+    width: .4rem
+    height: .4rem
+    background: pink
+    border-radius:50%
+    border: .03rem solid #FFF
   .item-info
     flex: 1
     padding: .1rem

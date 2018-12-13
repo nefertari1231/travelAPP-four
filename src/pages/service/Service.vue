@@ -1,4 +1,4 @@
- <template>
+<template>
 <div class="bg">
   <div>
     <div class="header">
@@ -9,26 +9,31 @@
       <div class="header-right">地图</div>
     </div>
   </div>  <!--header-->
-  <div>
-    <ul>
-      <li @click="selectServer(serverDetail)"
-          class="item border-bottom"
-          v-for="serverDetail in serviceList"
-          :key="serverDetail.id">
-        <img class="item-img" :src="serverDetail.imgUrl" />
-        <div class="item-info">
-          <p class="item-title">{{serverDetail.title}}</p>
-          <p class="item-desc">{{serverDetail.desc}}</p>
-          <button class="item-button">查看详情</button>
-        </div>
-      </li>
-    </ul>
-  </div>  <!--content-->
+  <div class="headlist" ref="wrapper">
+    <div>
+      <div>
+        <ul>
+          <li @click="selectServer(serverDetail)"
+              class="item border-bottom"
+              v-for="serverDetail in serviceList"
+              :key="serverDetail.id">
+            <img class="item-img" :src="serverDetail.imgUrl" />
+            <div class="item-info">
+              <p class="item-title">{{serverDetail.title}}</p>
+              <p class="item-desc">{{serverDetail.desc}}</p>
+              <button class="item-button">查看详情</button>
+            </div>
+          </li>
+        </ul>
+      </div>  <!--content-->
+    </div>
+  </div>
 <serviceDetail :serverDetail="selectedServer" ref="serviceDetail"></serviceDetail>
 </div>
 </template>
 
 <script>
+import Bscroll from 'better-scroll'
 import serviceDetail from '@/pages/serviceDetail/ServiceDetail'
 export default {
   name: 'Service',
@@ -57,9 +62,32 @@ export default {
         imgUrl: 'static/image/service4.jpg',
         title: '徐州缪斯酒吧，想high你就来',
         desc: '晚上包场'
+      }, {
+        id: '0005',
+        imgUrl: 'static/image/service1.jpg',
+        title: '喀纳斯徒步',
+        desc: '召集想去新疆的旅友'
+      }, {
+        id: '0006',
+        imgUrl: 'static/image/service2.jpg',
+        title: '三亚结伴',
+        desc: '7-15出发'
+      }, {
+        id: '0007',
+        imgUrl: 'static/image/service3.jpg',
+        title: '周边游-云龙山',
+        desc: '下午出发'
+      }, {
+        id: '0008',
+        imgUrl: 'static/image/service4.jpg',
+        title: '徐州缪斯酒吧，想high你就来',
+        desc: '晚上包场'
       }],
       selectedServer: {}
     }
+  },
+  mounted() {
+    this.scroll = new Bscroll(this.$refs.wrapper)
   },
   methods: {
     back() {
@@ -77,6 +105,14 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  .headlist
+    overflow: hidden
+    position: absolute
+    top: 1.25rem
+    left: 0
+    right: 0
+    bottom: 0
+    z-index:2
   .bg
     position: fixed
     background: #FFF
@@ -91,7 +127,7 @@ export default {
     background: #333
     color: white
   .header-title
-    width:.86rem
+    width:1.2rem
     flex: 1
     text-align: center
     font-size: .45rem

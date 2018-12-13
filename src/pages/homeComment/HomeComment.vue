@@ -3,7 +3,7 @@
   <div v-show="showHomeComment" class="bg">
     <div>
       <div class="header-fixed">
-        <div class="header-right iconfont icon-left" @click="hide()"></div>
+        <div class="header-left iconfont icon-left" @click="hide()"></div>
         <div class="header-title">
           详情
         </div>
@@ -13,19 +13,19 @@
       <div>
         <div class="single-content">
           <div class="item-header">
-            <img class="item-img"  src="static/image/touxiang1.jpg" />
-            <div class="icon-m">
-              <div class="iconfont icon-man"></div>
+            <img class="item-img"  :src="homeComment.imgUlr" />
+            <div :class="homeComment.color">
+              <div :class="homeComment.sex"></div>
             </div>
             <div class="item-info">
-              <p class="item-title">爱你会上瘾丶<span class="item-attention"> + 关注</span></p>
-              <p class="item-time">09-17 15:31</p>
+              <p class="item-title">{{homeComment.Name}}<span class="item-attention"> + 关注</span></p>
+              <p class="item-time">{{homeComment.TimeName}}</p>
             </div>
           </div>
         </div>  <!--title-->
         <div>
-          <div class="content-desc">杯子在多数时候，盛装的仅仅是半杯水，遇见的那个人依然似乎无法填补内心的空洞，时间一点一点地过去，水也一点一点地蒸发掉，你开始觉得他越来越无法满足你的全部幻想全部期待</div>
-          <div class="pic" v-for="pic of PicList" :key="pic.id">
+          <div class="content-desc">{{homeComment.desc}}</div>
+          <div class="pic" v-for="pic of homeComment.PicList" :key="pic.id">
             <div class="pic-content">
               <img :src="pic.PimgUlr" />
             </div>
@@ -63,23 +63,7 @@ export default {
   },
   data() {
     return {
-      showHomeComment: false,
-      PicList: [{
-        id: '0001',
-        PimgUlr: 'static/image/share1.jpg'
-      },
-      {
-        id: '0002',
-        PimgUlr: 'static/image/share2.jpg'
-      },
-      {
-        id: '0003',
-        PimgUlr: 'static/image/share3.jpg'
-      },
-      {
-        id: '0004',
-        PimgUlr: 'static/image/share4.jpg'
-      }]
+      showHomeComment: false
     }
   },
   methods: {
@@ -140,7 +124,7 @@ export default {
     font-size: .45rem
     margin-bottom: -.2rem
     margin-left: -.9rem
-  .header-right
+  .header-left
     font-size:.5rem
     margin-left: .3rem
     color: #FFF
@@ -163,7 +147,7 @@ export default {
     margin-right: .1rem
   .icon-m
     position: absolute
-    top: 1.1rem
+    top: 1rem
     left: 0.9rem
     right: 0
     bottom: 0
@@ -172,13 +156,24 @@ export default {
     background: skyblue
     border-radius:50%
     border: .03rem solid #FFF
-  .icon-man
+  .icon-man,.icon-woman
     position: absolute
     top: 0.05rem
     left: 0.04rem
     right: 0
     bottom: 0
     color: #FFF
+   .icon-f
+    position: absolute
+    top: 1rem
+    left: 0.9rem
+    right: 0
+    bottom: 0
+    width: .4rem
+    height: .4rem
+    background: pink
+    border-radius:50%
+    border: .03rem solid #FFF
   .item-info
     flex: 1
     padding: .1rem
@@ -195,11 +190,6 @@ export default {
     text-align: center
     border-radius: 10%
     color: red
-  .icon-right
-    font-size: .4rem
-    float: right
-    margin-right: .2rem
-    margin-top: -.1rem
   .item-time
     margin-top: .2rem
     margin-left: .2rem

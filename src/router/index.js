@@ -6,7 +6,6 @@ import Message from '@/pages/message/Message'
 import Single from '@/pages/single/Single'
 import Service from '@/pages/service/Service'
 import Search from '@/pages/search/Search'
-import SingleDetail from '@/pages/singleDetail/SingleDetail'
 import Login from '@/pages/login/Login'
 import Register from '@/pages/register/Register'
 
@@ -44,13 +43,7 @@ export default new Router({
       component: Register
     }, {
       path: '/single',
-      component: Single,
-      children: [
-        {
-          path: 'detail',
-          component: SingleDetail
-        }
-      ]
+      component: Single
     }
   ]
 })
