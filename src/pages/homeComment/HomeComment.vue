@@ -93,7 +93,7 @@ export default {
     top: 0
     left: 0
     right: 0
-    bottom: 1.1rem
+    bottom: 0
   .bg
     position: fixed
     background: #FFF

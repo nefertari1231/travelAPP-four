@@ -135,7 +135,7 @@ export default {
     top: 1.25rem
     left: 0
     right: 0
-    bottom: 1.2rem
+    bottom: 1.1rem
     z-index:2
   .HomeT-enter-active,.HomeT-leave-active
     transition: all 0.3s
