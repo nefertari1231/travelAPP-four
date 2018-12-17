@@ -5,7 +5,7 @@
         <div class="header-title">
           首页
         </div>
-        <router-link tag="div" to="/home/search" class="header-right iconfont icon-search" ></router-link>
+        <div class="header-right iconfont icon-search" @click="showSearch()"></div>
       </div>
     </div>  <!--header-->
   <div class="headlist" ref="wrapper">
@@ -33,7 +33,6 @@
             <div class="share-title">热门分享</div>
           </div>
           <ul v-for="homeComment in shareList" :key="homeComment.id">
-            <div @click="selectComment(homeComment)">
             <li class="item-header">
               <img class="item-img"  :src="homeComment.imgUlr" />
               <div :class="homeComment.color">
@@ -45,7 +44,7 @@
                 <div class="iconfont icon-down"></div>
               </div>
             </li>
-            <li>
+            <li @click="selectComment(homeComment)">
               <div class="item-text">{{homeComment.desc}}</div>
               <div class="item-pic border-bottom">
                 <div class="pic" v-for="pic of homeComment.PicList" :key="pic.id">
@@ -55,7 +54,6 @@
                 </div>
               </div>
             </li>
-            </div>
             <div class="item-footer">
               <ul>
                 <div class="foot-content">
@@ -80,6 +78,7 @@
 <router-view></router-view>
 </transition>
   <home-comment :homeComment="selectedComment" ref="homeComment"></home-comment>
+    <search ref="search"></search>
 </div>
 </template>
 
@@ -88,9 +87,11 @@ import Bscroll from 'better-scroll'
 import HomeSwiper from './components/Swiper'
 import HomeComment from '../homeComment/HomeComment'
 import axios from 'axios'
+import Search from '../search/Search'
 export default {
   name: 'Home',
   components: {
+    Search,
     HomeComment,
     HomeSwiper
   },
@@ -119,6 +120,9 @@ export default {
     selectComment(homeComment) {
       this.selectedComment = homeComment
       this.$refs.homeComment.show()
+    },
+    showSearch() {
+      this.$refs.search.show()
     }
   },
   mounted() {

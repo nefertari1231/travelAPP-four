@@ -117,7 +117,7 @@ export default {
     left: 0
     right: 0
     display: flex
-    line-height: 1.26rem
+    line-height: 1.1rem
     background: #333
     color: white
   .header-title

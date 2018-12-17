@@ -30,34 +30,35 @@
               <img :src="pic.PimgUlr" />
             </div>
           </div>
+          <div class="line"></div>
           <div class="goods">0个人点赞了</div>
+          <div class="line2"></div>
+          <div class="content-tail">暂无评论</div>
         </div> <!--content-->
       </div>
     </div>
     <div class="footer">
-      <ul>
         <div class="foot-content">
-          <li class="iconfont icon-like">
-              <span class="footer-text">赞(0)
-              </span>
-          </li>
+          <span class="iconfont icon-like"></span>
+              <span class="footer-text">赞</span>
         </div>
         <div class="foot-content border-left">
-          <li class="iconfont icon-edit-square">
-              <span class="footer-text">评论(0)
-              </span>
-          </li>
+          <span class="iconfont icon-edit-square"></span>
+              <span class="footer-text" @click="selectTalk()">评论</span>
         </div>
-      </ul>
     </div> <!--footer-->
+    <home-comment-talk ref="homeCommentTalk"></home-comment-talk>
   </div>
   </transition>
 </template>
 
 <script>
 import Bscroll from 'better-scroll'
+import HomeCommentTalk from '../homeCommentTalk/homeCommentTalk'
 export default {
   name: 'HomeComment',
+  components: {HomeCommentTalk
+  },
   props: {
     homeComment: Object
   },
@@ -81,6 +82,9 @@ export default {
     },
     hide() {
       this.showHomeComment = false
+    },
+    selectTalk() {
+      this.$refs.homeCommentTalk.show()
     }
   }
 }
@@ -108,13 +112,13 @@ export default {
     transform: translate3d(100%, 0, 0)
   //header
   .header-fixed
-    z-index: 99
+    z-index: 30
     position: fixed
     top: 0
     left: 0
     right: 0
     display: flex
-    line-height: 1.26rem
+    line-height: 1.1rem
     background: #333
     color: white
   .header-title
@@ -200,6 +204,18 @@ export default {
   .pic
     margin-top :.4rem
     text-align :center
+  .line
+    margin-top .2rem
+    height: .1rem
+    background: #ddd
+  .line2
+    margin-top: .8rem
+    height: .1rem
+    background: #ddd
+  .content-tail
+    height: 2.5rem
+    text-align: center
+    margin-top: .5rem
   //footer
   .footer
     bottom: 0
@@ -208,7 +224,7 @@ export default {
     height: 0.9rem
     background-color: #fff
     overflow: hidden
-    border-top: 0.1rem solid #bbb
+    border-top: 0.05rem solid #bbb
   .foot-content
     float: left
     position: relative
@@ -217,11 +233,14 @@ export default {
     text-align: center
     color: #888
     margin-top:.2rem
-  .icon-like, .icon-edit-square
-    font-size: .35rem
+    line-height :.35rem
+    height: 0.9rem
+  .icon-like,.icon-edit-square
+    margin-top .2rem
+    font-size: .5rem
   .footer-text
     font-size: .35rem
-    margin-left 0.2rem
+    margin-left 0.1rem
   .goods
     float: right
     margin-top: 0.2rem

@@ -21,12 +21,25 @@
             <div class="item-info">
               <p class="item-title">{{serverDetail.title}}</p>
               <p class="item-desc">{{serverDetail.desc}}</p>
+              <p class="item-time">{{serverDetail.time}}</p>
               <button class="item-button">查看详情</button>
             </div>
           </li>
         </ul>
       </div>  <!--content-->
     </div>
+  </div>
+  <div class="footer">
+      <div class="foot-content">
+         <span class="iconfont icon-dizhi"></span>
+              <span class="footer-text">按距离筛选
+              </span>
+      </div>
+      <div class="foot-content border-left">
+        <span class="iconfont icon-paixu"></span>
+              <span class="footer-text">按日期筛选
+              </span>
+      </div>
   </div>
 <serviceDetail :serverDetail="selectedServer" ref="serviceDetail"></serviceDetail>
 </div>
@@ -46,42 +59,50 @@ export default {
         id: '0001',
         imgUrl: 'static/image/service1.jpg',
         title: '喀纳斯徒步',
-        desc: '召集想去新疆的旅友'
+        desc: '召集想去新疆的旅友',
+        time: '2017'
       }, {
         id: '0002',
         imgUrl: 'static/image/service2.jpg',
         title: '三亚结伴',
-        desc: '7-15出发'
+        desc: '7-15出发',
+        time: '2017'
       }, {
         id: '0003',
         imgUrl: 'static/image/service3.jpg',
         title: '周边游-云龙山',
-        desc: '下午出发'
+        desc: '下午出发',
+        time: '2017'
       }, {
         id: '0004',
         imgUrl: 'static/image/service4.jpg',
         title: '徐州缪斯酒吧，想high你就来',
-        desc: '晚上包场'
+        desc: '晚上包场',
+        time: '2017'
       }, {
         id: '0005',
         imgUrl: 'static/image/service1.jpg',
         title: '喀纳斯徒步',
-        desc: '召集想去新疆的旅友'
+        desc: '召集想去新疆的旅友',
+        time: '2017'
       }, {
         id: '0006',
         imgUrl: 'static/image/service2.jpg',
         title: '三亚结伴',
-        desc: '7-15出发'
+        desc: '7-15出发',
+        time: '2017'
       }, {
         id: '0007',
         imgUrl: 'static/image/service3.jpg',
         title: '周边游-云龙山',
-        desc: '下午出发'
+        desc: '下午出发',
+        time: '2017'
       }, {
         id: '0008',
         imgUrl: 'static/image/service4.jpg',
         title: '徐州缪斯酒吧，想high你就来',
-        desc: '晚上包场'
+        desc: '晚上包场',
+        time: '2017'
       }],
       selectedServer: {}
     }
@@ -108,10 +129,10 @@ export default {
   .headlist
     overflow: hidden
     position: absolute
-    top: 1.25rem
+    top: 1.1rem
     left: 0
     right: 0
-    bottom: 0
+    bottom: 1.1rem
     z-index:2
   .bg
     position: fixed
@@ -123,7 +144,7 @@ export default {
     bottom: 0
   .header
     display: flex
-    line-height: 1.26rem
+    line-height: 1.1rem
     background: #333
     color: white
   .header-title
@@ -164,11 +185,37 @@ export default {
     overflow: hidden
     white-space: nowrap
     text-overflow: ellipsis
+  .item-time
+    margin-top: .2rem
+    float: left
   .item-button
+    float: right
     line-height: .44rem
     margin-top: .16rem
     background: #ff9300
     padding: 0 .2rem
     border-radius: .06rem
     color: #fff
+    //footer
+  .footer
+    bottom: 0
+    position: fixed
+    width: 100%
+    height: 1.1rem
+    background-color: #333
+    overflow: hidden
+  .foot-content
+    float: left
+    position: relative
+    overflow: hidden
+    width: 50%
+    text-align: center
+    line-height: 0.7rem
+    color: #fff
+    margin-top:.2rem
+  .footer-text
+    font-size: .35rem
+    margin-left 0.2rem
+  .icon-dizhi,.icon-paixu
+    font-size : .4rem
 </style>
