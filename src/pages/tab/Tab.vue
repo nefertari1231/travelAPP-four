@@ -128,25 +128,25 @@ export default {
     font-size: .6rem
     margin-top: .07rem
   .hamburger .line
-    width: 24px
-    height: 4px
+    width: 0.55rem
+    height: 0.08rem
     background-color: #fff;
     display: block
-    margin: 5px auto
+    margin: 0.1rem auto
     transition: all 0.3s ease-in-out
   #hamburger-6.is-active
     transition: all 0.3s ease-in-out
     transition-delay: 0.6s
     transform: rotate(45deg)
   #hamburger-6.is-active .line:nth-child(2)
-    width: 0px
+    width: 0rem
   #hamburger-6.is-active .line:nth-child(1),
   #hamburger-6.is-active .line:nth-child(3)
     transition-delay: 0.3s
   #hamburger-6.is-active .line:nth-child(1)
-    transform: translateY(8px) translateX(0)
+    transform: translateY(0.17rem) translateX(0)
   #hamburger-6.is-active .line:nth-child(3)
-    transform: translateY(-9px) rotate(90deg)
+    transform: translateY(-0.2rem) rotate(90deg)
   .fadeleft-enter, .fadeleft-leave-to
     transform: translate3d(0,100%, 0)
     opacity: 0
