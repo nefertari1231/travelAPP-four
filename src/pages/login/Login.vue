@@ -1,9 +1,9 @@
 <template>
 <transition name="login" tag="div">
-<div class="bg">
+<div class="bg" v-show="showlogin">
 <div>
     <div class="header">
-      <div class="header-right iconfont icon-left" @click="back"></div>
+      <div class="header-right iconfont icon-left" @click="hide()"></div>
       <div class="header-title">
         登录
       </div>
@@ -13,20 +13,20 @@
     <div class="content-bg">
       <div class="content">
         <p class="title title-tell">手机登录</p>
-        <p class="title title-student">学号登录</p>
       </div>
       <div class="text1">
         <div class="iconfont icon-shouji"></div>
-        <input class="user" type="text" name="user" placeholder="请输入手机号" />
+        <input class="user" v-model="username" type="text" name="user" placeholder="请输入手机号" />
       </div>
       <div class="text2">
         <div class="iconfont icon-jiesuo"></div>
-        <input class="user" type="password" name="user" placeholder="请输入密码" />
+        <input class="user" v-model="password" type="password" name="user" placeholder="请输入密码" />
         <span class="iconfont icon-yanjing-bi"></span>
       </div>
-      <input class="btn" type="submit" value="登录">
+      <p class="error-text" v-show="errorText">{{errorText}}</p>
+      <input class="btn" type="submit"  @click.stop.prevent="submit" value="登录">
       <div class="set">
-        <router-link tag="p" to="/register" class="new-user">新用户注册</router-link>>
+        <p class="new-user">新用户注册</p>
         <p class="forget">忘记密码?</p>
       </div>
       <div class="split">
@@ -47,9 +47,33 @@
 <script>
 export default {
   name: 'Login',
+  props: {
+    loginInfo: Object
+  },
+  data() {
+    return {
+      password: '',
+      username: '',
+      errorText: '',
+      showlogin: false
+    }
+  },
   methods: {
-    back() {
-      this.$router.back()
+    submit() {
+      if (this.username !== this.loginInfo.username || this.password !== this.loginInfo.password) {
+        this.errorText = '账号和密码不符'
+      } else if (this.username === this.loginInfo.username && this.password === this.loginInfo.password) {
+        this.hide()
+        this.$emit('closeL')
+        localStorage.setItem('user', this.username)
+        localStorage.setItem('pass', this.password)
+      }
+    },
+    show() {
+      this.showlogin = true
+    },
+    hide() {
+      this.showlogin = false
     }
   }
 }
@@ -117,6 +141,9 @@ export default {
     float: right
     margin-top: -.7rem
     margin-right: .7rem
+  .error-text
+    margin-left: 1rem
+    color: red
   .btn
     border-radius: 0.5rem;
     width: 100%

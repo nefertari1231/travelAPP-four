@@ -1,48 +1,50 @@
 <template>
-<div class="bg">
-  <div>
-    <div class="header">
-      <div class="header-left iconfont icon-left" @click="back"></div>
-      <div class="header-title">
-        定位
-      </div>
-      <div class="header-right">地图</div>
-    </div>
-  </div>  <!--header-->
-  <div class="headlist" ref="wrapper">
-    <div>
+  <transition name="HomeT" tag="div">
+    <div class="bg" v-show="showService">
       <div>
-        <ul>
-          <li @click="selectServer(serverDetail)"
-              class="item border-bottom"
-              v-for="serverDetail in serviceList"
-              :key="serverDetail.id">
-            <img class="item-img" :src="serverDetail.imgUrl" />
-            <div class="item-info">
-              <p class="item-title">{{serverDetail.title}}</p>
-              <p class="item-desc">{{serverDetail.desc}}</p>
-              <p class="item-time">{{serverDetail.time}}</p>
-              <button class="item-button">查看详情</button>
-            </div>
-          </li>
-        </ul>
-      </div>  <!--content-->
+        <div class="header">
+          <div class="header-left iconfont icon-left" @click="hide()"></div>
+          <div class="header-title">
+            定位
+          </div>
+          <div class="header-right">地图</div>
+        </div>
+      </div>  <!--header-->
+      <div class="headlist" ref="wrapper">
+        <div>
+          <div>
+            <ul>
+              <li @click="selectServer(serverDetail)"
+                  class="item border-bottom"
+                  v-for="serverDetail in serviceList"
+                  :key="serverDetail.id">
+                <img class="item-img" :src="serverDetail.imgUrl" />
+                <div class="item-info">
+                  <p class="item-title">{{serverDetail.title}}</p>
+                  <p class="item-desc">{{serverDetail.desc}}</p>
+                  <p class="item-time">{{serverDetail.time}}</p>
+                  <button class="item-button">查看详情</button>
+                </div>
+              </li>
+            </ul>
+          </div>  <!--content-->
+        </div>
+      </div>
+      <div class="footer">
+          <div class="foot-content">
+             <span class="iconfont icon-dizhi"></span>
+                  <span class="footer-text">按距离筛选
+                  </span>
+          </div>
+          <div class="foot-content border-left">
+            <span class="iconfont icon-paixu"></span>
+                  <span class="footer-text">按日期筛选
+                  </span>
+          </div>
+      </div>
+    <serviceDetail :serverDetail="selectedServer" ref="serviceDetail"></serviceDetail>
     </div>
-  </div>
-  <div class="footer">
-      <div class="foot-content">
-         <span class="iconfont icon-dizhi"></span>
-              <span class="footer-text">按距离筛选
-              </span>
-      </div>
-      <div class="foot-content border-left">
-        <span class="iconfont icon-paixu"></span>
-              <span class="footer-text">按日期筛选
-              </span>
-      </div>
-  </div>
-<serviceDetail :serverDetail="selectedServer" ref="serviceDetail"></serviceDetail>
-</div>
+  </transition>
 </template>
 
 <script>
@@ -104,22 +106,29 @@ export default {
         desc: '晚上包场',
         time: '2017'
       }],
-      selectedServer: {}
+      selectedServer: {},
+      showService: false
     }
   },
-  mounted() {
-    this.scroll = new Bscroll(this.$refs.wrapper)
-  },
   methods: {
-    back() {
-      this.$router.back()
-    },
-    selectServer(ServerDetail, event) {
-      // if (!event._constructed) {
-      //   return
-      // }
+    selectServer(ServerDetail) {
       this.selectedServer = ServerDetail
       this.$refs.serviceDetail.show()
+    },
+    show() {
+      this.showService = true
+      this.$nextTick(() => {
+        if (!this.scroll) {
+          this.scroll = new Bscroll(this.$refs.wrapper, {
+            click: true
+          })
+        } else {
+          this.scroll.refresh()
+        }
+      })
+    },
+    hide() {
+      this.showService = false
     }
   }
 }
@@ -134,6 +143,10 @@ export default {
     right: 0
     bottom: 1.1rem
     z-index:2
+  .HomeT-enter-active,.HomeT-leave-active
+    transition: all 0.3s
+  .HomeT-enter, .HomeT-leave-to
+    transform: translate3d(100%, 0, 0)
   .bg
     position: fixed
     background: #FFF

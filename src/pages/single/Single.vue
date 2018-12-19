@@ -10,80 +10,146 @@
   </div> <!--header-->
   <div>
     <div class="banner">
-      <img class="banner-img" :src="bgImgUrl">
-      <div class="single-content">
+      <img class="banner-img" :src="user.bgImgUrl">
+      <div class="single-content" v-show="!loggedIn" v-if="closeL">
         <div class="item-header">
-          <router-link tag="img" to="/login" class="item-img" :src="enteredSingleDetail.imgUrl"></router-link>
-          <div :class="enteredSingleDetail.color">
-            <div :class="enteredSingleDetail.sex"></div>
+          <img class="item-img" :src="user.imgUrl" />
+          <div :class="user.color">
+            <div :class="user.sex"></div>
           </div>
           <div class="item-info">
-            <p class="item-title">{{enteredSingleDetail.Name}}</p>
+            <p class="item-title">{{user.nickName}}</p>
             <div class="iconfont icon-right" @click="enterSingleDetail()"></div>
           </div>
         </div>
-      </div>
+      </div>  <!--登录-->
+      <div class="single-content" v-show="loggedIn">
+        <div class="item-header">
+          <img @click="login()" class="item-img" src="static/image/login.jpg" />
+          <div class="item-info">
+            <p class="item-title">请登录/注册</p>
+            <div class="iconfont icon-right" @click="login()"></div>
+          </div>
+        </div>
+      </div>  <!--未登录-->
     </div>
   </div> <!--banner-->
   <div class="content-bg">
     <div class="content" >
       <div class="content-box">
-        <p class="text-top">{{enteredSingleDetail.sharecount}}</p>
+        <p class="text-top">{{user.sharecount}}</p>
         <p class="text-bottom">分享</p>
       </div>
     </div>
     <div class="content">
       <div class="content-box">
-        <p class="text-top">{{enteredSingleDetail.followcount}}</p>
+        <p class="text-top">{{user.followcount}}</p>
         <p class="text-bottom">关注</p>
       </div>
     </div>
     <div class="content">
       <div class="content-box">
-        <p class="text-top">{{enteredSingleDetail.fanscount}}</p>
+        <p class="text-top">{{user.fanscount}}</p>
         <p class="text-bottom">粉丝</p>
       </div>
     </div>
   </div> <!--thumb-->
-  <single-list></single-list>
-  <single-list></single-list><!--list-->
-<router-view></router-view>
-  <single-detail :singleDetail="enteredSingleDetail" ref="singleDetail"></single-detail>
+  <div class="content-list">
+    <ul class="list-icon">
+      <div class="title">我的服务</div>
+      <li class="item border">
+        <div class="item-picture">
+          <span class="item-pictures iconfont icon-bulb"></span>
+        </div>
+        <div class="item-infos">
+          <p class="item-desc">我的服务</p>
+          <div class=" iconfont icon-right"></div>
+        </div>
+      </li>
+    </ul>
+    <ul class="list-icon">
+      <div class="title">已选服务</div>
+      <li class="item border">
+        <div class="item-picture">
+          <span class="item-pictures iconfont icon-gouwuche"></span>
+        </div>
+        <div class="item-infos">
+          <p class="item-desc">已选服务</p>
+          <div class=" iconfont icon-right"></div>
+        </div>
+      </li>
+    </ul>
+    <ul class="list-icon">
+      <div class="title">系统工具</div>
+      <li class="item border">
+        <div class="item-picture">
+          <span class="item-pictures iconfont icon-shoucang1"></span>
+        </div>
+        <div class="item-infos">
+          <p class="item-desc">我的收藏</p>
+          <div class=" iconfont icon-right"></div>
+        </div>
+      </li>
+      <li class="item border">
+        <div class="item-picture">
+          <span class="item-pictures iconfont icon-qrcode"></span>
+        </div>
+        <div class="item-infos">
+          <p class="item-desc">我的二维码</p>
+          <div class=" iconfont icon-right"></div>
+        </div>
+      </li>
+      <li class="item border" @click="showsettings()">
+        <div class="item-picture">
+          <span class="item-pictures iconfont icon-setting"></span>
+        </div>
+        <div class="item-infos">
+          <p class="item-desc">设置中心</p>
+          <div class=" iconfont icon-right"></div>
+        </div>
+      </li>
+    </ul>
+  </div><!--list-->
+  <router-view></router-view>
+  <single-detail :singleDetail="user"  ref="singleDetail"></single-detail>
+  <login ref="login" :loginInfo="user" @closeL="closeL"></login>
+  <settings ref="settings" @closeU="closeU"></settings>
 </div>
 </template>
 
 <script>
-import SingleList from './components/List'
 import SingleDetail from '../singleDetail/SingleDetail'
+import Login from '../login/Login'
+import axios from 'axios'
+import Settings from '../settings/Settings'
 export default {
   name: 'Single',
   components: {
+    Settings,
     SingleDetail,
-    SingleList
+    Login
   },
-  mounted () {
+  mounted() {
     window.addEventListener('scroll', this.handleTouchMove)
+    this.getSingleInfo()
+    let localUser = localStorage.getItem('user')
+    let localPass = localStorage.getItem('pass')
+    if (localUser && localPass) {
+      this.loggedIn = false
+    }
   },
-  data () {
+  data() {
     return {
+      user: {},
       showHeader: true,
       opacityStyle: {
         opacity: 0
       },
-      bgImgUrl: 'static/image/geren1.jpg',
-      enteredSingleDetail: {
-        Name: '爱你会上瘾丶',
-        imgUrl: 'static/image/touxiang1.jpg',
-        color: 'icon-m',
-        sex: 'iconfont icon-man',
-        sharecount: '0',
-        followcount: '2',
-        fanscount: '2'
-      }
+      loggedIn: true
     }
   },
   methods: {
-    handleTouchMove () {
+    handleTouchMove() {
       const top = document.documentElement.scrollTop
       if (top > 60) {
         let opacity = top / 140
@@ -94,8 +160,31 @@ export default {
         this.showHeader = false
       }
     },
-    enterSingleDetail () {
+    enterSingleDetail() {
       this.$refs.singleDetail.show()
+    },
+    getSingleInfo() {
+      axios.get('/static/mock/single.json')
+        .then(this.getSingleInfoSucc)
+    },
+    getSingleInfoSucc(res) {
+      res = res.data
+      if (res.ret && res.user) {
+        this.user = res.user
+      }
+      console.log(res)
+    },
+    login() {
+      this.$refs.login.show()
+    },
+    closeL() {
+      this.loggedIn = false
+    },
+    closeU() {
+      this.loggedIn = true
+    },
+    showsettings() {
+      this.$refs.settings.show()
     }
   }
 }
@@ -111,7 +200,7 @@ export default {
   //   bottom: 1.2rem
   //header
   .header-fixed
-    z-index: 99
+    z-index: 30
     position: fixed
     top: 0
     left: 0
@@ -216,4 +305,55 @@ export default {
   .text-bottom
     padding-top: .05rem
     font-size: .3rem
+  //list
+  .title
+    padding-left: .2rem
+    background: #ddd
+    height: .5rem
+    line-height: .5rem
+  .item
+    overflow: hidden
+    display: flex
+    height: 0.8rem
+    padding: .1rem
+  .item-picture
+    height: .7rem
+    width: .7rem
+    margin-left: .2rem
+  .item-pictures
+    border-radius: 30%
+  .item-infos
+    flex: 1
+  .item-desc
+    height: 0.8rem
+    line-height: 0.8rem
+    float: left
+    font-size: .4rem
+    margin-left: .2rem
+  .icon-right
+    float: right
+    height: 0.8rem
+    line-height: 0.8rem
+    font-size: .5rem
+    color: #ddd
+  .icon-bulb
+    font-size: .7rem
+    color: #FFF
+    background: #32CD32
+  .icon-gouwuche
+    font-size: .7rem
+    color: #FFF
+    background: skyblue
+  .icon-shoucang1
+    font-size: .7rem
+    color: #FFF
+    background: #FFD700
+  .icon-qrcode
+    font-size: .7rem
+    color: #FFF
+    background: #FF8C00
+  .icon-setting
+    font-size: .7rem
+    color: #FFF
+    background: #9932CC
 </style>

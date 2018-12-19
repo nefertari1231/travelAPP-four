@@ -36,7 +36,7 @@ export default {
   .headlist
     overflow: hidden
     position: absolute
-    top: 1.27rem
+    top: 1.2rem
     left: 0
     right: 0
     bottom: 1.5rem

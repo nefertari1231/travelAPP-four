@@ -3,14 +3,17 @@
     <div v-show="showHomeCommentTalk" class="bg">
       <div>
         <div class="header-fixed">
-          <div class="header-left" @click="hide()"> 取消</div>
+          <div class="header-left"  @click="hide()">取消</div>
           <div class="header-title"></div>
-          <div class="header-right">确定</div>
+          <div class="header-right" >确定</div>
         </div>
       </div> <!--header-->
       <div class="content-bg">
-        <textarea class="content" rows="20" cols="50">
-          在w3school，你可以找到你所需要的所有的网站建设教程。</textarea>
+        <textarea class="content" placeholder="请填写评论" contenteditable="" rows="10" v-model="words"></textarea>
+        <p class="word">
+          <span>{{wordslength}}</span>
+          <span>/270</span>
+        </p>
       </div> <!--content-->
     </div>
   </transition>
@@ -21,7 +24,8 @@ export default {
   name: 'homeCommentTalk',
   data() {
     return {
-      showHomeCommentTalk: false
+      showHomeCommentTalk: false,
+      words: ''
     }
   },
   methods: {
@@ -31,8 +35,16 @@ export default {
     hide() {
       this.showHomeCommentTalk = false
     }
+  },
+  computed: {
+    wordslength() {
+      let length
+      length = this.words.length
+      return length
+    }
   }
 }
+
 </script>
 
 <style lang="stylus" scoped>
@@ -76,4 +88,6 @@ export default {
   .content
     margin-top: 1.2rem
     width :100%
+  .word
+    float right
 </style>

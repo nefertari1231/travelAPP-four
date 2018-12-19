@@ -10,21 +10,33 @@
     </div>  <!--header-->
   <div class="headlist" ref="wrapper">
     <div>
-      <home-swiper :list="swiperList"></home-swiper>
+      <home-swiper></home-swiper>
       <div>
           <div class="server-bg">
-            <router-link tag="div" :to="item.to"
-                         class="server"
-                         v-for="item of serverList"
-                         :key="item.id"
-            >
+            <div @click="showSever()" class="server">
               <div class="server-content">
-                <img  class="server-img" :src="item.imgUrl">
+                <img  class="server-img" src="static/image/server1.jpg">
                 <div class="font-display">
-                  <p class="font">{{item.desc}}</p>
+                  <p class="font">找服务</p>
                 </div>
               </div>
-            </router-link>
+            </div>
+          <div class="server">
+            <div class="around-content">
+              <img  class="server-img" src="static/image/server2.jpg">
+              <div class="font-display">
+                <p class="font">周边玩</p>
+              </div>
+            </div>
+          </div>
+          <div  class="server">
+            <div class="nearby-content">
+              <img  class="server-img" src="static/image/server3.jpg">
+              <div class="font-display">
+                <p class="font">附近的人</p>
+              </div>
+            </div>
+          </div>
           </div>
         </div>  <!--Server-->
       <div >
@@ -74,11 +86,10 @@
         </div>  <!--Share-->
     </div>
   </div>
-<transition name="HomeT" tag="div">
-<router-view></router-view>
-</transition>
+ <router-view></router-view>
   <home-comment :homeComment="selectedComment" ref="homeComment"></home-comment>
     <search ref="search"></search>
+    <service ref="server"></service>
 </div>
 </template>
 
@@ -86,48 +97,133 @@
 import Bscroll from 'better-scroll'
 import HomeSwiper from './components/Swiper'
 import HomeComment from '../homeComment/HomeComment'
-import axios from 'axios'
 import Search from '../search/Search'
+import Service from '../service/Service'
 export default {
   name: 'Home',
   components: {
+    Service,
     Search,
     HomeComment,
     HomeSwiper
   },
   data() {
     return {
-      swiperList: [],
-      serverList: [],
-      shareList: [],
+      shareList: [{
+        id: '0001',
+        imgUlr: 'static/image/touxiang1.jpg',
+        Name: '爱你会上瘾丶',
+        TimeName: '09-17 15：31',
+        color: 'icon-m',
+        sex: 'iconfont icon-man',
+        desc: '杯子在多数时候，盛装的仅仅是半杯水，遇见的那个人依然似乎无法填补内心的空洞，时间一点一点地过去，水也一点一点地蒸发掉，你开始觉得他越来越无法满足你的全部幻想全部期待',
+        PicList: [{
+          id: '0001',
+          PimgUlr: 'static/image/share1.jpg'
+        },
+        {
+          id: '0002',
+          PimgUlr: 'static/image/share2.jpg'
+        },
+        {
+          id: '0003',
+          PimgUlr: 'static/image/share3.jpg'
+        },
+        {
+          id: '0004',
+          PimgUlr: 'static/image/share4.jpg'
+        }]
+      }, {
+        id: '0002',
+        imgUlr: 'static/image/touxiang2.jpg',
+        Name: 'Amber珈珈',
+        TimeName: '09-17 15：32',
+        color: 'icon-f',
+        sex: 'iconfont icon-woman',
+        desc: '美丽的地方',
+        PicList: [{
+          id: '0001',
+          PimgUlr: 'static/image/share5.jpg'
+        },
+        {
+          id: '0002',
+          PimgUlr: 'static/image/share6.jpg'
+        },
+        {
+          id: '0003',
+          PimgUlr: 'static/image/share7.jpg'
+        },
+        {
+          id: '0004',
+          PimgUlr: 'static/image/share8.jpg'
+        }]
+      }, {
+        id: '0003',
+        imgUlr: 'static/image/touxiang3.jpg',
+        Name: '一起学猫叫',
+        TimeName: '09-17 15：33',
+        color: 'icon-m',
+        sex: 'iconfont icon-man',
+        desc: '离开这个喧嚣的世界，背上背包去旅行，去寻找一片宁静的乐园，让新鲜的风景新鲜的人和事不断的带给我们惊喜，放下杂念，放下世故的心，感受自由自在的空间。',
+        PicList: [{
+          id: '0001',
+          PimgUlr: 'static/image/share9.jpg'
+        },
+        {
+          id: '0002',
+          PimgUlr: 'static/image/share10.jpg'
+        },
+        {
+          id: '0003',
+          PimgUlr: 'static/image/share11.jpg'
+        },
+        {
+          id: '0004',
+          PimgUlr: 'static/image/share12.jpg'
+        }]
+      }, {
+        id: '0004',
+        imgUlr: 'static/image/touxiang4.jpg',
+        Name: '丑的像整容',
+        TimeName: '09-17 15：34',
+        color: 'icon-f',
+        sex: 'iconfont icon-woman',
+        desc: '你好，世界',
+        PicList: [{
+          id: '0001',
+          PimgUlr: 'static/image/share13.jpg'
+        },
+        {
+          id: '0002',
+          PimgUlr: 'static/image/share14.jpg'
+        },
+        {
+          id: '0003',
+          PimgUlr: 'static/image/share15.jpg'
+        },
+        {
+          id: '0004',
+          PimgUlr: 'static/image/share16.jpg'
+        }]
+      }
+      ],
       selectedComment: {}
     }
   },
   methods: {
-    getHomeInfo () {
-      axios.get('/static/mock/home.json')
-        .then(this.getHomeInfoSucc)
-    },
-    getHomeInfoSucc (res) {
-      res = res.data
-      if (res.ret && res.data) {
-        const data = res.data
-        this.swiperList = data.swiperList
-        this.serverList = data.serverList
-        this.shareList = data.shareList
-      }
-    },
     selectComment(homeComment) {
       this.selectedComment = homeComment
       this.$refs.homeComment.show()
     },
     showSearch() {
       this.$refs.search.show()
+    },
+    showSever() {
+      this.$refs.server.show()
     }
   },
   mounted() {
     this.scroll = new Bscroll(this.$refs.wrapper)
-    this.getHomeInfo()
   }
 }
 </script>
@@ -136,20 +232,16 @@ export default {
   .headlist
     overflow: hidden
     position: absolute
-    top: 1.25rem
+    top: 1.1rem
     left: 0
     right: 0
     bottom: 1.1rem
-    z-index:2
-  .HomeT-enter-active,.HomeT-leave-active
-    transition: all 0.3s
-  .HomeT-enter, .HomeT-leave-to
-    transform: translate3d(100%, 0, 0)
+    z-index: 0
     //header
   .header
     position: relative
     display: flex
-    line-height: 1.26rem
+    line-height: 1.1rem
     background: #333
     color: white
   .header-title
@@ -167,9 +259,9 @@ export default {
     height: 0
     padding-bottom: 25%
   .server
+    float: left
     position: relative
     overflow: hidden
-    float: left
     height: 0
     width: 33.333%
     padding-bottom: 25%
@@ -180,7 +272,23 @@ export default {
     right: 0
     bottom: 0
     box-sizing: border-box
-    padding: .15rem
+    padding: .15rem 0.075rem 0.15rem 0.15rem
+  .around-content
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    box-sizing: border-box
+    padding: .15rem 0.075rem 0.15rem 0.075rem
+  .nearby-content
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    box-sizing: border-box
+    padding: .15rem 0.15rem 0.15rem 0.075rem
   .server-img
     display: block
     height: 100%

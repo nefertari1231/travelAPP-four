@@ -14,7 +14,7 @@
     </div>
     <img class="item-img"  :src="singleDetail.imgUrl" />
     <div class="icon-info">
-      <div class="desc">{{singleDetail.Name}}</div>
+      <div class="desc">{{singleDetail.nickName}}</div>
       <div :class="singleDetail.color">
         <div :class="singleDetail.sex"></div>
       </div>
