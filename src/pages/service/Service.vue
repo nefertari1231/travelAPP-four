@@ -21,6 +21,7 @@
                 <img class="item-img" :src="serverDetail.imgUrl" />
                 <div class="item-info">
                   <p class="item-title">{{serverDetail.title}}</p>
+                  <p class="item-gold">￥{{serverDetail.gold}}</p>
                   <p class="item-desc">{{serverDetail.desc}}</p>
                   <p class="item-time">{{serverDetail.time}}</p>
                   <button class="item-button">查看详情</button>
@@ -62,36 +63,42 @@ export default {
         imgUrl: 'static/image/service1.jpg',
         title: '喀纳斯徒步',
         desc: '召集想去新疆的旅友',
+        gold: '28',
         time: '2017'
       }, {
         id: '0002',
         imgUrl: 'static/image/service2.jpg',
         title: '三亚结伴',
         desc: '7-15出发',
+        gold: '28',
         time: '2017'
       }, {
         id: '0003',
         imgUrl: 'static/image/service3.jpg',
         title: '周边游-云龙山',
         desc: '下午出发',
+        gold: '28',
         time: '2017'
       }, {
         id: '0004',
         imgUrl: 'static/image/service4.jpg',
         title: '徐州缪斯酒吧，想high你就来',
         desc: '晚上包场',
+        gold: '28',
         time: '2017'
       }, {
         id: '0005',
         imgUrl: 'static/image/service1.jpg',
         title: '喀纳斯徒步',
         desc: '召集想去新疆的旅友',
+        gold: '28',
         time: '2017'
       }, {
         id: '0006',
         imgUrl: 'static/image/service2.jpg',
         title: '三亚结伴',
         desc: '7-15出发',
+        gold: '28',
         time: '2017'
       }, {
         id: '0007',
@@ -192,6 +199,10 @@ export default {
     overflow: hidden
     white-space: nowrap
     text-overflow: ellipsis
+  .item-gold
+    float: right
+    margin-right : 0.2rem
+    font-size: 0.3rem
   .item-desc
     line-height: .4rem
     color: #ccc

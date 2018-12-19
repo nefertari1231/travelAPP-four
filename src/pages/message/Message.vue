@@ -109,6 +109,8 @@ export default {
     border-radius: 50%
     font-size: .6rem
     color: #FFF
+    height: 1rem
+    width: 1rem
   .icon-dingdan
     background: green
   .icon-bulb

@@ -1,115 +1,119 @@
 <template>
 <div>
   <div>
-    <div class="header-fixed" :style="opacityStyle" v-show="showHeader">
+    <div class="header-fixed" >
       <div class="header-right iconfont icon-left"></div>
       <div class="header-title">
         我
       </div>
     </div>
   </div> <!--header-->
-  <div>
-    <div class="banner">
-      <img class="banner-img" :src="user.bgImgUrl">
-      <div class="single-content" v-show="!loggedIn" v-if="closeL">
-        <div class="item-header">
-          <img class="item-img" :src="user.imgUrl" />
-          <div :class="user.color">
-            <div :class="user.sex"></div>
+  <div   class="headlist" ref="wrapper">
+    <div>
+      <div>
+        <div class="banner">
+          <img class="banner-img" :src="user.bgImgUrl">
+          <div class="single-content" v-show="!loggedIn" v-if="closeL">
+            <div class="item-header">
+              <img class="item-img" :src="user.imgUrl" />
+              <div :class="user.color">
+                <div :class="user.sex"></div>
+              </div>
+              <div class="item-info">
+                <p class="item-title">{{user.nickName}}</p>
+                <div class="iconfont icon-right" @click="enterSingleDetail()"></div>
+              </div>
+            </div>
+          </div>  <!--登录-->
+          <div class="single-content" v-show="loggedIn">
+            <div class="item-header">
+              <img @click="login()" class="item-img" src="static/image/login.jpg" />
+              <div class="item-info">
+                <p class="item-title">请登录/注册</p>
+                <div class="iconfont icon-right" @click="login()"></div>
+              </div>
+            </div>
+          </div>  <!--未登录-->
+        </div>
+      </div> <!--banner-->
+      <div class="content-bg">
+        <div class="content" >
+          <div class="content-box">
+            <p class="text-top">{{user.sharecount}}</p>
+            <p class="text-bottom">分享</p>
           </div>
-          <div class="item-info">
-            <p class="item-title">{{user.nickName}}</p>
-            <div class="iconfont icon-right" @click="enterSingleDetail()"></div>
+        </div>
+        <div class="content">
+          <div class="content-box">
+            <p class="text-top">{{user.followcount}}</p>
+            <p class="text-bottom">关注</p>
           </div>
         </div>
-      </div>  <!--登录-->
-      <div class="single-content" v-show="loggedIn">
-        <div class="item-header">
-          <img @click="login()" class="item-img" src="static/image/login.jpg" />
-          <div class="item-info">
-            <p class="item-title">请登录/注册</p>
-            <div class="iconfont icon-right" @click="login()"></div>
+        <div class="content">
+          <div class="content-box">
+            <p class="text-top">{{user.fanscount}}</p>
+            <p class="text-bottom">粉丝</p>
           </div>
         </div>
-      </div>  <!--未登录-->
+      </div> <!--thumb-->
+      <div class="content-list">
+        <ul class="list-icon">
+          <div class="title">我的服务</div>
+          <li class="item border">
+            <div class="item-picture">
+              <span class="item-pictures iconfont icon-bulb"></span>
+            </div>
+            <div class="item-infos">
+              <p class="item-desc">我的服务</p>
+              <div class=" iconfont icon-right"></div>
+            </div>
+          </li>
+        </ul>
+        <ul class="list-icon">
+          <div class="title">已选服务</div>
+          <li class="item border">
+            <div class="item-picture">
+              <span class="item-pictures iconfont icon-gouwuche"></span>
+            </div>
+            <div class="item-infos">
+              <p class="item-desc">已选服务</p>
+              <div class=" iconfont icon-right"></div>
+            </div>
+          </li>
+        </ul>
+        <ul class="list-icon">
+          <div class="title">系统工具</div>
+          <li class="item border">
+            <div class="item-picture">
+              <span class="item-pictures iconfont icon-shoucang1"></span>
+            </div>
+            <div class="item-infos">
+              <p class="item-desc">我的收藏</p>
+              <div class=" iconfont icon-right"></div>
+            </div>
+          </li>
+          <li class="item border">
+            <div class="item-picture">
+              <span class="item-pictures iconfont icon-qrcode"></span>
+            </div>
+            <div class="item-infos">
+              <p class="item-desc">我的二维码</p>
+              <div class=" iconfont icon-right"></div>
+            </div>
+          </li>
+          <li class="item border" @click="showsettings()">
+            <div class="item-picture">
+              <span class="item-pictures iconfont icon-setting"></span>
+            </div>
+            <div class="item-infos">
+              <p class="item-desc">设置中心</p>
+              <div class=" iconfont icon-right"></div>
+            </div>
+          </li>
+        </ul>
+      </div><!--list-->
     </div>
-  </div> <!--banner-->
-  <div class="content-bg">
-    <div class="content" >
-      <div class="content-box">
-        <p class="text-top">{{user.sharecount}}</p>
-        <p class="text-bottom">分享</p>
-      </div>
-    </div>
-    <div class="content">
-      <div class="content-box">
-        <p class="text-top">{{user.followcount}}</p>
-        <p class="text-bottom">关注</p>
-      </div>
-    </div>
-    <div class="content">
-      <div class="content-box">
-        <p class="text-top">{{user.fanscount}}</p>
-        <p class="text-bottom">粉丝</p>
-      </div>
-    </div>
-  </div> <!--thumb-->
-  <div class="content-list">
-    <ul class="list-icon">
-      <div class="title">我的服务</div>
-      <li class="item border">
-        <div class="item-picture">
-          <span class="item-pictures iconfont icon-bulb"></span>
-        </div>
-        <div class="item-infos">
-          <p class="item-desc">我的服务</p>
-          <div class=" iconfont icon-right"></div>
-        </div>
-      </li>
-    </ul>
-    <ul class="list-icon">
-      <div class="title">已选服务</div>
-      <li class="item border">
-        <div class="item-picture">
-          <span class="item-pictures iconfont icon-gouwuche"></span>
-        </div>
-        <div class="item-infos">
-          <p class="item-desc">已选服务</p>
-          <div class=" iconfont icon-right"></div>
-        </div>
-      </li>
-    </ul>
-    <ul class="list-icon">
-      <div class="title">系统工具</div>
-      <li class="item border">
-        <div class="item-picture">
-          <span class="item-pictures iconfont icon-shoucang1"></span>
-        </div>
-        <div class="item-infos">
-          <p class="item-desc">我的收藏</p>
-          <div class=" iconfont icon-right"></div>
-        </div>
-      </li>
-      <li class="item border">
-        <div class="item-picture">
-          <span class="item-pictures iconfont icon-qrcode"></span>
-        </div>
-        <div class="item-infos">
-          <p class="item-desc">我的二维码</p>
-          <div class=" iconfont icon-right"></div>
-        </div>
-      </li>
-      <li class="item border" @click="showsettings()">
-        <div class="item-picture">
-          <span class="item-pictures iconfont icon-setting"></span>
-        </div>
-        <div class="item-infos">
-          <p class="item-desc">设置中心</p>
-          <div class=" iconfont icon-right"></div>
-        </div>
-      </li>
-    </ul>
-  </div><!--list-->
+  </div>
   <router-view></router-view>
   <single-detail :singleDetail="user"  ref="singleDetail"></single-detail>
   <login ref="login" :loginInfo="user" @closeL="closeL"></login>
@@ -122,6 +126,7 @@ import SingleDetail from '../singleDetail/SingleDetail'
 import Login from '../login/Login'
 import axios from 'axios'
 import Settings from '../settings/Settings'
+import Bscroll from 'better-scroll'
 export default {
   name: 'Single',
   components: {
@@ -137,29 +142,15 @@ export default {
     if (localUser && localPass) {
       this.loggedIn = false
     }
+    this.scroll = new Bscroll(this.$refs.wrapper)
   },
   data() {
     return {
       user: {},
-      showHeader: true,
-      opacityStyle: {
-        opacity: 0
-      },
       loggedIn: true
     }
   },
   methods: {
-    handleTouchMove() {
-      const top = document.documentElement.scrollTop
-      if (top > 60) {
-        let opacity = top / 140
-        opacity = opacity > 1 ? 1 : opacity
-        this.opacityStyle = {opacity}
-        this.showHeader = true
-      } else {
-        this.showHeader = false
-      }
-    },
     enterSingleDetail() {
       this.$refs.singleDetail.show()
     },
@@ -191,16 +182,16 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  // .singlelist
-  //   overflow: hidden
-  //   position: absolute
-  //   top: 0
-  //   left: 0
-  //   right: 0
-  //   bottom: 1.2rem
+  .headlist
+    overflow: hidden
+    position: absolute
+    top: 1.1rem
+    left: 0
+    right: 0
+    bottom: 1.1rem
+    z-index: 0
   //header
   .header-fixed
-    z-index: 30
     position: fixed
     top: 0
     left: 0

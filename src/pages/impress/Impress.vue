@@ -8,30 +8,38 @@
     </div>
     <div class="icon">
       <div class="box-1 animated bounceInUp">
-        <div class="box-bg-1">
+        <div class="box-bg-1" @click="showServerOut">
           <i class="iconfont icon-iconzhucetouxiang"></i>
         </div>
         <div class="icon-desc">发服务</div>
       </div>
       <div class="box-2 animated bounceInUp">
-        <div class="box-bg-2">
+        <div class="box-bg-2" @click="showShareOut">
           <i class="iconfont icon-fenxiang"></i>
         </div>
         <div class="icon-desc">发分享</div>
       </div>
     </div>
   </div>
+    <server-out ref="serverout"></server-out>
+    <share-out ref="shareout"></share-out>
   </div>
 </template>
 <script>
+import ServerOut from '../serverOut/ServerOut'
+import ShareOut from '../shareOut/ShareOut'
 export default {
   name: 'Impress',
-  mouted() {
-
+  components: {
+    ShareOut,
+    ServerOut
   },
   methods: {
-    show() {
-
+    showServerOut () {
+      this.$refs.serverout.show()
+    },
+    showShareOut () {
+      this.$refs.shareout.show()
     }
   }
 }
@@ -49,7 +57,7 @@ export default {
     bottom: 1.1rem
     width: 100%
     background-color rgba(12,12,12,0.9)
-    z-index: 40
+    z-index: 99
   .single em
     width: 1.8rem
     height: 1.8rem

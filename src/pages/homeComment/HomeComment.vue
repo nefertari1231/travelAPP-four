@@ -232,12 +232,10 @@ export default {
     width: 50%
     text-align: center
     color: #888
-    margin-top:.2rem
-    line-height :.35rem
+    line-height :.9rem
     height: 0.9rem
   .icon-like,.icon-edit-square
-    margin-top .2rem
-    font-size: .5rem
+    font-size: .45rem
   .footer-text
     font-size: .35rem
     margin-left 0.1rem
