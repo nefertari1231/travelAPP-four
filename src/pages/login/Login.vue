@@ -1,52 +1,55 @@
 <template>
-<transition name="login" tag="div">
-<div class="bg" v-show="showlogin">
-<div>
-    <div class="header">
-      <div class="header-right iconfont icon-left" @click="hide()"></div>
-      <div class="header-title">
-        登录
-      </div>
+  <transition name="login" tag="div">
+    <div class="bg" v-show="showlogin">
+      <div>
+          <div class="header">
+            <div class="header-right iconfont icon-left" @click="hide()"></div>
+            <div class="header-title">
+              登录
+            </div>
+          </div>
+        </div> <!--header-->
+      <div>
+          <div class="content-bg">
+            <div class="content">
+              <p class="title title-tell">手机登录</p>
+            </div>
+            <div class="text1">
+              <div class="iconfont icon-shouji"></div>
+              <input class="user" v-model="username" type="text" name="user" placeholder="请输入手机号" />
+            </div>
+            <div class="text2">
+              <div class="iconfont icon-jiesuo"></div>
+              <input class="user" v-model="password" type="password" name="user" placeholder="请输入密码" />
+              <span class="iconfont icon-yanjing-bi"></span>
+            </div>
+            <p class="error-text" v-show="errorText">{{errorText}}</p>
+            <input class="btn" type="submit"  @click.stop.prevent="submit" value="登录">
+            <div class="set">
+              <p class="new-user" @click="enterRegister">新用户注册</p>
+              <p class="forget">忘记密码?</p>
+            </div>
+            <div class="split">
+              <hr class="split-left">
+              <div class="split-text">社交账号登录</div>
+              <hr class="split-right">
+            </div>
+            <div class="icons">
+              <div class="iconfont icon-QQ"></div>
+              <div class="iconfont icon-weixin"></div>
+            </div>
+          </div>
+        </div> <!--content-->
+      <register ref="enteredRegister"></register>
     </div>
-  </div> <!--header-->
-<div>
-    <div class="content-bg">
-      <div class="content">
-        <p class="title title-tell">手机登录</p>
-      </div>
-      <div class="text1">
-        <div class="iconfont icon-shouji"></div>
-        <input class="user" v-model="username" type="text" name="user" placeholder="请输入手机号" />
-      </div>
-      <div class="text2">
-        <div class="iconfont icon-jiesuo"></div>
-        <input class="user" v-model="password" type="password" name="user" placeholder="请输入密码" />
-        <span class="iconfont icon-yanjing-bi"></span>
-      </div>
-      <p class="error-text" v-show="errorText">{{errorText}}</p>
-      <input class="btn" type="submit"  @click.stop.prevent="submit" value="登录">
-      <div class="set">
-        <p class="new-user">新用户注册</p>
-        <p class="forget">忘记密码?</p>
-      </div>
-      <div class="split">
-        <hr class="split-left">
-        <div class="split-text">社交账号登录</div>
-        <hr class="split-right">
-      </div>
-      <div class="icons">
-        <div class="iconfont icon-QQ"></div>
-        <div class="iconfont icon-weixin"></div>
-      </div>
-    </div>
-  </div> <!--content-->
-</div>
-</transition>
+  </transition>
 </template>
 
 <script>
+import Register from '../register/Register'
 export default {
   name: 'Login',
+  components: {Register},
   props: {
     loginInfo: Object
   },
@@ -74,6 +77,9 @@ export default {
     },
     hide() {
       this.showlogin = false
+    },
+    enterRegister() {
+      this.$refs.enteredRegister.show()
     }
   }
 }
@@ -148,7 +154,7 @@ export default {
     border-radius: 0.5rem;
     width: 100%
     height: .9rem
-    background: #00BFFF
+    background: dodgerblue
     margin-top: .6rem
     line-height: .9rem
     text-align: center
@@ -189,7 +195,7 @@ export default {
     height: 1.2rem
     line-height: 1.2rem
     font-size: 1.2rem
-    color:  #00BFFF
+    color: dodgerblue
     float: left
   .icon-weixin
     height: 1.2rem

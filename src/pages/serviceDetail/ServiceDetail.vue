@@ -14,12 +14,12 @@
     <div>
       <div class="single-content">
         <div class="item-header">
-          <img class="item-img"  :src="HpImgUrl" />
+          <img class="item-img"  :src="sellImgUrl" />
           <div class="icon-m">
             <div class="iconfont icon-man"></div>
           </div>
           <div class="item-info">
-            <p class="item-title">老王<span class="item-attention"> + 关注</span></p>
+            <p class="item-title">{{sellName}}<span class="item-attention"> + 关注</span></p>
             <p class="item-count">已经出游3次</p>
           </div>
         </div>
@@ -28,6 +28,7 @@
         <div class="cut-off"></div>
         <div class="content-title">详细信息: <span class="content-title-s">{{serverDetail.title}}</span></div>
         <div class="content-desc">{{serverDetail.desc}}</div>
+        <div class="content-money">价格：￥{{serverDetail.gold}}</div>
         <div class="cut-off2"></div>
       </div>  <!--信息详情-->
       <div>
@@ -40,26 +41,6 @@
           </div>
         </div>
       </div>  <!--picture-->
-      <div>
-        <div class="detail-title">注意事项:</div>
-        <div class="detail-desc">一切费用自备，建议代一些厚衣服，有意联系我 <br>
-          v： afsdafdsf ，脑残勿扰。
-        </div>
-        <div class="cut-off2"></div>
-        <div class="appraise">暂无评价</div>
-        <div class="cut-off2"></div>
-        <div class="thumbtext"> 等0个人喜欢</div>
-      </div>  <!--评价-->
-      <div>
-        <div class="detail-title">注意事项:</div>
-        <div class="detail-desc">一切费用自备，建议代一些厚衣服，有意联系我 <br>
-          v： afsdafdsf ，脑残勿扰。
-        </div>
-        <div class="cut-off2"></div>
-        <div class="appraise">暂无评价</div>
-        <div class="cut-off2"></div>
-        <div class="thumbtext"> 等0个人喜欢</div>
-      </div>  <!--评价-->
       <div>
         <div class="detail-title">注意事项:</div>
         <div class="detail-desc">一切费用自备，建议代一些厚衣服，有意联系我 <br>
@@ -109,26 +90,30 @@
         </div>
       </div>
       <div class="talk">聊一聊</div>
-      <div class="join">加入</div>
+      <div class="join" @click="enterOrder">加入</div>
     </div>
   </div>  <!--footer-->
+  <order-master :orderMaster="serverDetail" ref="enterOrdered"></order-master>
 </div>
 </transition>
 </template>
 <script>
 import Bscroll from 'better-scroll'
 import CommonGallary from 'common/gallary/Gallary'
+import OrderMaster from '../orderMaster/OrderMaster'
 export default {
   name: 'ServiceDetail',
   props: {
     serverDetail: Object
   },
   components: {
+    OrderMaster,
     CommonGallary
   },
   data() {
     return {
-      HpImgUrl: 'static/image/touxiang7.jpg',
+      sellName: '老王',
+      sellImgUrl: 'static/image/touxiang7.jpg',
       showServiceDetail: false,
       showGallary: false,
       imgs: ['static/image/service1.jpg', 'static/image/service1.1.jpg', 'static/image/service1.2.jpg', 'static/image/service1.3.jpg']
@@ -155,6 +140,9 @@ export default {
     },
     handleGallaryClose () {
       this.showGallary = false
+    },
+    enterOrder() {
+      this.$refs.enterOrdered.show()
     }
   }
 }
@@ -182,7 +170,7 @@ export default {
     transform: translate3d(100%, 0, 0)
     //header
   .header-fixed
-    z-index: 99
+    z-index: 16
     position: fixed
     top: 0
     left: 0
@@ -191,6 +179,7 @@ export default {
     line-height: 1.1rem
     background: #333
     color: white
+    padding-right :0.3rem
   .header-title
     width:.86rem
     flex: 1
@@ -263,6 +252,9 @@ export default {
     font-size: .35rem
     margin-left: .2rem
   .content-desc
+    margin-left: 1.8rem
+    margin-bottom: .2rem
+  .content-money
     margin-left: 1.8rem
     margin-bottom: .2rem
   .item-attention
@@ -364,7 +356,7 @@ export default {
     height: 1.1rem
     line-height: 1.1rem
     width: 33.3%
-    background: #00BFFF
+    background: dodgerblue
     color: #fff
     text-align: center
   .join

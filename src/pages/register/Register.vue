@@ -1,9 +1,9 @@
 <template>
 <transition name="register" tag="div">
-<div class="bg">
+<div class="bg" v-show="showRegister">
 <div>
     <div class="header">
-      <div class="header-right iconfont icon-left" @click="back"></div>
+      <div class="header-right iconfont icon-left" @click="hide()"></div>
       <div class="header-title">
         注册
       </div>
@@ -30,9 +30,17 @@
 <script>
 export default {
   name: 'Register',
+  data() {
+    return {
+      showRegister: false
+    }
+  },
   methods: {
-    back() {
-      this.$router.back()
+    show() {
+      this.showRegister = true
+    },
+    hide() {
+      this.showRegister = false
     }
   }
 }
@@ -97,7 +105,7 @@ export default {
     border-radius: 0.5rem;
     width: 100%
     height: .9rem
-    background: #00BFFF
+    background: dodgerblue
     margin-top: .6rem
     line-height: .9rem
     text-align: center

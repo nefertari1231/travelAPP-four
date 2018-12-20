@@ -33,8 +33,7 @@
       </div>
       <div class="footer">
           <div class="foot-content">
-             <span class="iconfont icon-dizhi"></span>
-                  <span class="footer-text">按距离筛选
+                  <span class="footer-text"> ￥ 按价格筛选
                   </span>
           </div>
           <div class="foot-content border-left">
@@ -70,28 +69,28 @@ export default {
         imgUrl: 'static/image/service2.jpg',
         title: '三亚结伴',
         desc: '7-15出发',
-        gold: '28',
+        gold: '19',
         time: '2017'
       }, {
         id: '0003',
         imgUrl: 'static/image/service3.jpg',
         title: '周边游-云龙山',
         desc: '下午出发',
-        gold: '28',
+        gold: '7',
         time: '2017'
       }, {
         id: '0004',
         imgUrl: 'static/image/service4.jpg',
         title: '徐州缪斯酒吧，想high你就来',
         desc: '晚上包场',
-        gold: '28',
+        gold: '18',
         time: '2017'
       }, {
         id: '0005',
         imgUrl: 'static/image/service1.jpg',
         title: '喀纳斯徒步',
         desc: '召集想去新疆的旅友',
-        gold: '28',
+        gold: '9',
         time: '2017'
       }, {
         id: '0006',
@@ -240,6 +239,6 @@ export default {
   .footer-text
     font-size: .35rem
     margin-left 0.2rem
-  .icon-dizhi,.icon-paixu
+  .icon-paixu
     font-size : .4rem
 </style>
