@@ -155,7 +155,6 @@ export default {
   .item-desc
     margin-top: 0.1rem
     height: 2rem
-    background dodgerblue
   .cut-off
     margin-top 3rem
     height: .03rem
@@ -173,7 +172,6 @@ export default {
     margin-right: .2rem
     float right
   .talk-bg
-    background dodgerblue
     height: 1rem
     border-bottom 0.15rem  solid #ddd
   //footer
@@ -186,5 +184,5 @@ export default {
     line-height :1.1rem
     text-align:center
     color white
-    font-size:0.35rem
+    font-size:0.3rem
 </style>

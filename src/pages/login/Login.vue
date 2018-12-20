@@ -20,8 +20,8 @@
             </div>
             <div class="text2">
               <div class="iconfont icon-jiesuo"></div>
-              <input class="user" v-model="password" type="password" name="user" placeholder="请输入密码" />
-              <span class="iconfont icon-yanjing-bi"></span>
+              <input class="user" v-model="password" :type="passwordType" name="user" placeholder="请输入密码" />
+              <span :class="pwdEye" @click="changeType"></span>
             </div>
             <p class="error-text" v-show="errorText">{{errorText}}</p>
             <input class="btn" type="submit"  @click.stop.prevent="submit" value="登录">
@@ -58,7 +58,9 @@ export default {
       password: '',
       username: '',
       errorText: '',
-      showlogin: false
+      showlogin: false,
+      pwdEye: 'iconfont icon-yanjing-bi',
+      passwordType: 'password'
     }
   },
   methods: {
@@ -80,6 +82,10 @@ export default {
     },
     enterRegister() {
       this.$refs.enteredRegister.show()
+    },
+    changeType() {
+      this.passwordType = this.passwordType === 'password' ? 'text' : 'password'
+      this.pwdEye = this.pwdEye === 'iconfont icon-yanjing-bi' ? 'iconfont icon-yanjing-zheng' : 'iconfont icon-yanjing-bi'
     }
   }
 }
@@ -143,10 +149,11 @@ export default {
     width: 80%
     height: .8rem
     line-height: .8rem
-  .icon-yanjing-bi
+  .icon-yanjing-bi, .icon-yanjing-zheng
     float: right
     margin-top: -.7rem
-    margin-right: .7rem
+    margin-right: .4rem
+    font-size: 0.4rem
   .error-text
     margin-left: 1rem
     color: red

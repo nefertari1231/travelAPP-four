@@ -60,7 +60,8 @@ export default {
   name: 'Settings',
   data() {
     return {
-      showSettings: false
+      showSettings: false,
+      value1: true
     }
   },
   methods: {

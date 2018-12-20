@@ -103,7 +103,7 @@ export default {
     },
     enterOrderDetail () {
       if (this.buyerName === '' || this.buyerPhone === '') {
-        console.log('请完善订单')
+        this.$toast.center('请完善订单')
       } else {
         this.$refs.orderDetail.show()
       }
