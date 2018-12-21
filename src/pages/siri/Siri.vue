@@ -2,32 +2,41 @@
 <div>
 <router-view></router-view>
   <div>
-    <div class="header">
-      <div class="header-right iconfont icon-left"></div>
-      <div class="header-title">
-        发现
+      <div class="header">
+        <div class="header-right iconfont icon-left"></div>
+        <div class="header-title">
+          发现
+        </div>
+      </div>
+    </div> <!--header-->
+    <div class="headlist" ref="wrapper" @click="login">
+      <div>
+        <siri-list></siri-list>
       </div>
     </div>
-  </div> <!--header-->
-<div class="headlist" ref="wrapper">
-<div>
-<siri-list></siri-list>
-<div class="content"></div>
-</div>
-</div>
+  <login ref="login"></login>
 </div>
 </template>
 
 <script>
 import Bscroll from 'better-scroll'
 import SiriList from './components/List'
+import Login from '../login/Login'
 export default {
   name: 'Siri',
   components: {
+    Login,
     SiriList
   },
   mounted () {
     this.scroll = new Bscroll(this.$refs.wrapper)
+  },
+  methods: {
+    login() {
+      if (this.$store.state.singleBg === 'static/image/login-bg.jpg') {
+        this.$refs.login.show()
+      }
+    }
   }
 }
 </script>
@@ -40,8 +49,6 @@ export default {
     left: 0
     right: 0
     bottom: 1.5rem
-  .content
-    height: 6.37rem
     //header
   .header
     display: flex

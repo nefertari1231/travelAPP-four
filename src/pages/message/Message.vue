@@ -1,33 +1,41 @@
 <template>
 <div>
-<div>
-    <div class="header">
-      <div class="header-title">
-        消息
-      </div>
-      <div class="header-right iconfont icon-team"></div>
-    </div>
-  </div> <!--header-->
-<div>
-    <div class="icons">
-      <div class="icon" v-for="item in messageList" :key="item.id">
-        <div class="imgs">
-          <div class="imgs-icon">
-            <div class="iconfonts" :class="item.icon"></div>
-          </div>
+  <div>
+      <div class="header">
+        <div class="header-title">
+          消息
         </div>
-        <p class="icon-desc">{{item.desc}}</p>
+        <div class="header-right iconfont icon-team"></div>
+      </div>
+    </div> <!--header-->
+    <div class="headlist" ref="wrapper" @click="login">
+      <div>
+      <div>
+          <div class="icons">
+            <div class="icon" v-for="item in messageList" :key="item.id">
+              <div class="imgs">
+                <div class="imgs-icon">
+                  <div class="iconfonts" :class="item.icon"></div>
+                </div>
+              </div>
+              <p class="icon-desc">{{item.desc}}</p>
+            </div>
+          </div>
+        </div> <!--content-->
       </div>
     </div>
-  </div> <!--content-->
   <router-view></router-view>
+  <login ref="login"></login>
 </div>
 </template>
 
 <script>
 
+import Bscroll from 'better-scroll'
+import Login from '../login/Login'
 export default {
   name: 'Message',
+  components: {Login},
   data () {
     return {
       messageList: [{
@@ -56,12 +64,29 @@ export default {
         desc: '提到我的'
       }]
     }
+  },
+  mounted () {
+    this.scroll = new Bscroll(this.$refs.wrapper)
+  },
+  methods: {
+    login() {
+      if (this.$store.state.singleBg === 'static/image/login-bg.jpg') {
+        this.$refs.login.show()
+      }
+    }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
   //header
+  .headlist
+    overflow: hidden
+    position: absolute
+    top: 1.1rem
+    left: 0
+    right: 0
+    bottom: 1.5rem
   .header
     overflow: hidden
     position: relative
@@ -81,7 +106,7 @@ export default {
     margin-right: .2rem
   //content
   .icons
-    margin-top: .2rem
+    margin-top: .4rem
     overflow: hidden
     height: 4.2rem
   .icon

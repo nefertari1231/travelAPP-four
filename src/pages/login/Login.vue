@@ -1,6 +1,6 @@
 <template>
   <transition name="login" tag="div">
-    <div class="bg" v-show="showlogin">
+    <div class="bg" v-show="showLogin">
       <div>
           <div class="header">
             <div class="header-right iconfont icon-left" @click="hide()"></div>
@@ -16,14 +16,13 @@
             </div>
             <div class="text1">
               <div class="iconfont icon-shouji"></div>
-              <input class="user" v-model="username" type="text" name="user" placeholder="请输入手机号" />
+              <input class="user" v-model="username"  placeholder="请输入手机号" />
             </div>
             <div class="text2">
               <div class="iconfont icon-jiesuo"></div>
-              <input class="user" v-model="password" :type="passwordType" name="user" placeholder="请输入密码" />
+              <input class="user" v-model="password" :type="passwordType"  placeholder="请输入密码" />
               <span :class="pwdEye" @click="changeType"></span>
             </div>
-            <p class="error-text" v-show="errorText">{{errorText}}</p>
             <input class="btn" type="submit"  @click.stop.prevent="submit" value="登录">
             <div class="set">
               <p class="new-user" @click="enterRegister">新用户注册</p>
@@ -46,39 +45,40 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Register from '../register/Register'
 export default {
   name: 'Login',
   components: {Register},
-  props: {
-    loginInfo: Object
-  },
   data() {
     return {
       password: '',
       username: '',
-      errorText: '',
-      showlogin: false,
+      showLogin: false,
       pwdEye: 'iconfont icon-yanjing-bi',
-      passwordType: 'password'
+      passwordType: 'password',
+      single: {}
     }
+  },
+  mounted() {
+    this.getSingleInfo()
   },
   methods: {
     submit() {
-      if (this.username !== this.loginInfo.username || this.password !== this.loginInfo.password) {
-        this.errorText = '账号和密码不符'
-      } else if (this.username === this.loginInfo.username && this.password === this.loginInfo.password) {
+      if (this.username !== this.single.username || this.password !== this.single.password) {
+        this.$toast.center('用户名和密码不符')
+      } else if (this.username === this.single.username && this.password === this.single.password) {
         this.hide()
-        this.$emit('closeL')
-        localStorage.setItem('user', this.username)
-        localStorage.setItem('pass', this.password)
+        this.$store.dispatch('getSingleDetail', this.single)
+        this.username = ''
+        this.password = ''
       }
     },
     show() {
-      this.showlogin = true
+      this.showLogin = true
     },
     hide() {
-      this.showlogin = false
+      this.showLogin = false
     },
     enterRegister() {
       this.$refs.enteredRegister.show()
@@ -86,6 +86,17 @@ export default {
     changeType() {
       this.passwordType = this.passwordType === 'password' ? 'text' : 'password'
       this.pwdEye = this.pwdEye === 'iconfont icon-yanjing-bi' ? 'iconfont icon-yanjing-zheng' : 'iconfont icon-yanjing-bi'
+    },
+    getSingleInfo () {
+      axios.get('/static/mock/single.json')
+        .then(this.getSingleInfoSucc)
+    },
+    getSingleInfoSucc (res) {
+      console.log(res)
+      res = res.data
+      if (res.ret && res.single) {
+        this.single = res.single
+      }
     }
   }
 }
@@ -149,16 +160,14 @@ export default {
     width: 80%
     height: .8rem
     line-height: .8rem
+    font-size: .33rem
   .icon-yanjing-bi, .icon-yanjing-zheng
     float: right
     margin-top: -.7rem
     margin-right: .4rem
     font-size: 0.4rem
-  .error-text
-    margin-left: 1rem
-    color: red
   .btn
-    border-radius: 0.5rem;
+    border-radius: 0.5rem
     width: 100%
     height: .9rem
     background: dodgerblue

@@ -50,13 +50,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .headlist
-    overflow: hidden
-    position: absolute
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
   .bg
     position: fixed
     background: #FFF

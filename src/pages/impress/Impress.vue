@@ -6,14 +6,14 @@
         <em></em>
       </div>
     </div>
-    <div class="icon">
-      <div class="box-1 animated bounceInUp">
+    <div class="icon" >
+      <div class="box-1 animated bounceInUp" @click="login">
         <div class="box-bg-1" @click="showServerOut">
           <i class="iconfont icon-iconzhucetouxiang"></i>
         </div>
         <div class="icon-desc">发服务</div>
       </div>
-      <div class="box-2 animated bounceInUp">
+      <div class="box-2 animated bounceInUp" @click="login">
         <div class="box-bg-2" @click="showShareOut">
           <i class="iconfont icon-fenxiang"></i>
         </div>
@@ -23,14 +23,17 @@
   </div>
     <server-out ref="serverout"></server-out>
     <share-out ref="shareout"></share-out>
+    <login ref="login"></login>
   </div>
 </template>
 <script>
 import ServerOut from '../serverOut/ServerOut'
 import ShareOut from '../shareOut/ShareOut'
+import Login from '../login/Login'
 export default {
   name: 'Impress',
   components: {
+    Login,
     ShareOut,
     ServerOut
   },
@@ -40,6 +43,13 @@ export default {
     },
     showShareOut () {
       this.$refs.shareout.show()
+    },
+    login() {
+      if (this.$store.state.singleBg === 'static/image/login-bg.jpg') {
+        this.$refs.login.show()
+        this.$refs.serverout.hide()
+        this.$refs.shareout.hide()
+      }
     }
   }
 }

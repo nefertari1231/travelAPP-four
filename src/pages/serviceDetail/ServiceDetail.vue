@@ -29,6 +29,7 @@
         <div class="content-title">详细信息: <span class="content-title-s">{{serverDetail.title}}</span></div>
         <div class="content-desc">{{serverDetail.desc}}</div>
         <div class="content-money">价格：￥{{serverDetail.gold}}</div>
+        <div class="content-place">出游城市：{{serverDetail.place}}</div>
         <div class="cut-off2"></div>
       </div>  <!--信息详情-->
       <div>
@@ -251,7 +252,7 @@ export default {
     font-weight: bold
     font-size: .35rem
     margin-left: .2rem
-  .content-desc
+  .content-desc,.content-place
     margin-left: 1.8rem
     margin-bottom: .2rem
   .content-money

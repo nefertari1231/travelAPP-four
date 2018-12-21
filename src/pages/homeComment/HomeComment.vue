@@ -14,8 +14,11 @@
         <div class="single-content">
           <div class="item-header">
             <img class="item-img"  :src="homeComment.imgUlr" />
-            <div :class="homeComment.color">
-              <div :class="homeComment.sex"></div>
+            <div class="icon-m" v-show="homeComment.sex === '男'">
+              <div class="iconfont icon-man"></div>
+            </div>
+            <div class="icon-f" v-show="homeComment.sex === '女'">
+              <div class="iconfont icon-woman"></div>
             </div>
             <div class="item-info">
               <p class="item-title">{{homeComment.Name}}<span class="item-attention"> + 关注</span></p>

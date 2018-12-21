@@ -10,18 +10,21 @@
       <div class="header-right iconfont icon-edit-square" ></div>
     </div>
     <div class="banner">
-      <img class="banner-img" :src="bgImgUrl">
+      <img class="banner-img" :src="this.$store.state.singleBg">
     </div>
-    <img class="item-img"  :src="singleDetail.imgUrl" />
+    <img class="item-img"  :src="this.$store.state.singleIcon" />
     <div class="icon-info">
-      <div class="desc">{{singleDetail.nickName}}</div>
-      <div :class="singleDetail.color">
-        <div :class="singleDetail.sex"></div>
+      <div class="desc">{{this.$store.state.singleNickname}}</div>
+      <div class="icon-m" v-show="this.$store.state.singleSex === '男'">
+        <div class="iconfont icon-man"></div>
+      </div>
+      <div class="icon-f" v-show="this.$store.state.singleSex === '女'">
+        <div class="iconfont icon-woman"></div>
       </div>
     </div>
     <div class="icon-desc">
-      <div class="desc-attention">关注 {{singleDetail.followcount}}</div>
-      <div class="desc-fun">粉丝 {{singleDetail.fanscount}}</div>
+      <div class="desc-attention">关注 {{this.$store.state.followCount}}</div>
+      <div class="desc-fun">粉丝 {{this.$store.state.fansCount}}</div>
     </div>
     <div class="text">简介：这家伙很懒，什么也没留下</div>
     <div class="split"></div>
@@ -116,10 +119,10 @@ export default {
     height: .4rem
     background: skyblue
     border-radius:50%
-  .icon-man
+  .icon-man,.icon-woman
     color: #FFF
     margin-top:.05rem
-  .icon-f,.icon-woman
+  .icon-f
     float: left
     width: .4rem
     height: .4rem

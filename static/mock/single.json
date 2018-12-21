@@ -1,16 +1,15 @@
 {
   "ret": true,
-  "user": {
-    "bgImgUrl": "static/image/geren1.jpg",
-    "nickName": "爱你会上瘾丶",
-    "imgUrl": "static/image/touxiang1.jpg",
-    "color": "icon-m",
-    "sex": "iconfont icon-man",
+  "single": {
     "username": "18796255910",
     "password": "123456",
-    "sharecount": "0",
-    "followcount": "2",
-    "fanscount": "2"
+    "singleBg": "static/image/geren1.jpg",
+    "singleNickname": "爱你会上瘾丶",
+    "singleIcon": "static/image/touxiang1.jpg",
+    "singleSex": "男",
+    "shareCount": "0",
+    "followCount": "2",
+    "fansCount": "2"
   }
 }
 

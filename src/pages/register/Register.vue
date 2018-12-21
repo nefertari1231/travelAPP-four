@@ -13,14 +13,17 @@
     <div class="content-bg">
       <div class="text1">
         <div class="iconfont icon-shouji"></div>
-        <input class="user" type="text" name="user" placeholder="请输入手机号" />
+        <input class="user" v-model="username" placeholder="请输入手机号" />
       </div>
       <div class="text2">
         <div class="iconfont icon-jiesuo"></div>
-        <input class="user" type="password" name="user" placeholder="请输入密码" />
-        <span class="iconfont icon-yanjing-bi"></span>
+        <input class="user" v-model="password" type="password"  placeholder="请输入密码" />
       </div>
-      <input class="btn" type="submit" value="注册">
+      <div class="text2">
+        <div class="iconfont icon-jiesuo"></div>
+        <input class="user" v-model="repassword" type="password"  placeholder="请再次输入密码" />
+      </div>
+      <input class="btn" type="submit" value="注册" @click.stop.prevent="successRegister()">
     </div>
   </div> <!--content-->
 </div>
@@ -32,7 +35,10 @@ export default {
   name: 'Register',
   data() {
     return {
-      showRegister: false
+      showRegister: false,
+      password: '',
+      repassword: '',
+      username: ''
     }
   },
   methods: {
@@ -41,6 +47,21 @@ export default {
     },
     hide() {
       this.showRegister = false
+    },
+    successRegister() {
+      if (this.username !== '') {
+        if (this.password !== '' && this.repassword !== '') {
+          if (this.password === this.repassword) {
+            this.hide()
+          } else {
+            this.$toast.center('二次输入密码不同')
+          }
+        } else {
+          this.$toast.center('请填入密码')
+        }
+      } else {
+        this.$toast.center('请填入用户名和密码')
+      }
     }
   }
 }
@@ -97,6 +118,7 @@ export default {
     width: 80%
     height: .8rem
     line-height: .8rem
+    font-size .33rem
   .icon-yanjing-bi
     float: right
     margin-top: -.7rem

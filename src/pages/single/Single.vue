@@ -1,7 +1,7 @@
 <template>
 <div>
   <div>
-    <div class="header-fixed" >
+    <div class="header" >
       <div class="header-right iconfont icon-left"></div>
       <div class="header-title">
         我
@@ -9,49 +9,41 @@
     </div>
   </div> <!--header-->
   <div   class="headlist" ref="wrapper">
-    <div>
-      <div>
-        <div class="banner">
-          <img class="banner-img" :src="user.bgImgUrl">
-          <div class="single-content" v-show="!loggedIn" v-if="closeL">
+    <div @click="login()">
+      <div class="banner">
+          <img class="banner-img" :src="this.$store.state.singleBg">
+          <div class="single-content">
             <div class="item-header">
-              <img class="item-img" :src="user.imgUrl" />
-              <div :class="user.color">
-                <div :class="user.sex"></div>
+              <img class="item-img" :src="this.$store.state.singleIcon" />
+              <div class="icon-m" v-show="this.$store.state.singleSex === '男'">
+                <div class="iconfont icon-man"></div>
+              </div>
+              <div class="icon-f" v-show="this.$store.state.singleSex === '女'">
+                <div class="iconfont icon-woman"></div>
               </div>
               <div class="item-info">
-                <p class="item-title">{{user.nickName}}</p>
+                <p class="item-title">{{this.$store.state.singleNickname}}</p>
                 <div class="iconfont icon-right" @click="enterSingleDetail()"></div>
               </div>
             </div>
           </div>  <!--登录-->
-          <div class="single-content" v-show="loggedIn">
-            <div class="item-header">
-              <img @click="login()" class="item-img" src="static/image/login.jpg" />
-              <div class="item-info">
-                <p class="item-title">请登录/注册</p>
-                <div class="iconfont icon-right" @click="login()"></div>
-              </div>
-            </div>
-          </div>  <!--未登录-->
-        </div>
       </div> <!--banner-->
       <div class="content-bg">
         <div class="content" >
           <div class="content-box">
-            <p class="text-top">{{user.sharecount}}</p>
+            <p class="text-top">{{this.$store.state.shareCount}}</p>
             <p class="text-bottom">分享</p>
           </div>
         </div>
         <div class="content">
           <div class="content-box">
-            <p class="text-top">{{user.followcount}}</p>
+            <p class="text-top">{{this.$store.state.followCount}}</p>
             <p class="text-bottom">关注</p>
           </div>
         </div>
         <div class="content">
           <div class="content-box">
-            <p class="text-top">{{user.fanscount}}</p>
+            <p class="text-top">{{this.$store.state.fansCount}}</p>
             <p class="text-bottom">粉丝</p>
           </div>
         </div>
@@ -101,7 +93,7 @@
               <div class=" iconfont icon-right"></div>
             </div>
           </li>
-          <li class="item border" @click="showsettings()">
+          <li class="item border" @click="showSettings()">
             <div class="item-picture">
               <span class="item-pictures iconfont icon-setting"></span>
             </div>
@@ -115,16 +107,15 @@
     </div>
   </div>
   <router-view></router-view>
-  <single-detail :singleDetail="user"  ref="singleDetail"></single-detail>
-  <login ref="login" :loginInfo="user" @closeL="closeL"></login>
-  <settings ref="settings" @closeU="closeU"></settings>
+  <single-detail ref="singleDetail"></single-detail>
+  <login ref="login" ></login>
+  <settings ref="settings"></settings>
 </div>
 </template>
 
 <script>
 import SingleDetail from '../singleDetail/SingleDetail'
 import Login from '../login/Login'
-import axios from 'axios'
 import Settings from '../settings/Settings'
 import Bscroll from 'better-scroll'
 export default {
@@ -135,47 +126,32 @@ export default {
     Login
   },
   mounted() {
-    window.addEventListener('scroll', this.handleTouchMove)
-    this.getSingleInfo()
-    let localUser = localStorage.getItem('user')
-    let localPass = localStorage.getItem('pass')
-    if (localUser && localPass) {
-      this.loggedIn = false
-    }
     this.scroll = new Bscroll(this.$refs.wrapper)
   },
   data() {
     return {
-      user: {},
-      loggedIn: true
+      single: {}
     }
   },
   methods: {
     enterSingleDetail() {
       this.$refs.singleDetail.show()
     },
-    getSingleInfo() {
-      axios.get('/static/mock/single.json')
-        .then(this.getSingleInfoSucc)
-    },
-    getSingleInfoSucc(res) {
-      res = res.data
-      if (res.ret && res.user) {
-        this.user = res.user
-      }
-      console.log(res)
+    exitSingleDetail() {
+      this.$refs.singleDetail.hide()
     },
     login() {
-      this.$refs.login.show()
+      if (this.$store.state.singleBg === 'static/image/login-bg.jpg') {
+        this.$refs.login.show()
+        this.exitSingleDetail()
+        this.hideSettings()
+      }
     },
-    closeL() {
-      this.loggedIn = false
-    },
-    closeU() {
-      this.loggedIn = true
-    },
-    showsettings() {
+    showSettings() {
       this.$refs.settings.show()
+    },
+    hideSettings() {
+      this.$refs.settings.hide()
     }
   }
 }
@@ -191,11 +167,8 @@ export default {
     bottom: 1.1rem
     z-index: 0
   //header
-  .header-fixed
-    position: fixed
-    top: 0
-    left: 0
-    right: 0
+  .header
+    position: relative
     display: flex
     line-height: 1.1rem
     background: #333
@@ -213,6 +186,7 @@ export default {
     color: #FFF
   //banner
   .banner
+    z-index 0
     overflow: hidden
     height: 0
     padding-bottom: 50%
@@ -222,7 +196,7 @@ export default {
     width: 90%
     position: absolute
     left: .5rem
-    top: 1.4rem
+    top: 1.1rem
   .icon-left
     color: #333
   .item-header
@@ -233,7 +207,6 @@ export default {
     border-radius:50%
     width: 1.5rem
     height: 1.5rem
-    margin-top: .2rem
     margin-left: .2rem
     margin-right: .1rem
   .icon-m
@@ -270,14 +243,13 @@ export default {
     padding: .1rem
     color: #fff
   .item-title
-    margin-top: .2rem
     line-height: .54rem
     font-size: .34rem
   .icon-right
     font-size: .4rem
     float: right
     margin-right: .2rem
-    margin-top: -.1rem
+    margin-top: -.3rem
   //thumb
   .content-bg
     overflow: hidden

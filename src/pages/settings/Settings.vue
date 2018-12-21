@@ -72,9 +72,7 @@ export default {
       this.showSettings = false
     },
     submit() {
-      localStorage.removeItem('user')
-      localStorage.removeItem('pass')
-      this.$emit('closeU')
+      this.$store.dispatch('logOff')
       this.hide()
     }
   }

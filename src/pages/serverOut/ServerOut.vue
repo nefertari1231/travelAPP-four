@@ -13,7 +13,7 @@
       <div class="content-bg">
         <div class="text1">
           <div class="">标题
-            <input class="content-1" type="text" name="user" placeholder="标题需要体现服务内容" />
+            <input class="content-1" type="text"  placeholder="标题需要体现服务内容" />
           </div>
         </div>
         <hr class="hro" />
@@ -22,21 +22,28 @@
         <div class="line2"></div>
         <textarea class="content" placeholder="备注注意事项" contenteditable="" rows="6" ></textarea>
         <div class="text1">
-          <div class="gold-title">输入金额(￥)
+          <div class="place-title">出游城市:
+            <span class="place" @click="enterCity">{{city}} (点击切换)</span>
+          </div>
+          <div class="gold-title">输入金额(￥):
             <input class="content-1" type="text" />
           </div>
         </div>
       </div><!--content-->
+      <city ref="enteredCity" @changeCity="changeCity" :city="city"></city>
     </div>
   </transition>
 </template>
 
 <script>
+import City from '../city/City'
 export default {
   name: 'ServerOut',
+  components: {City},
   data() {
     return {
-      showServerout: false
+      showServerout: false,
+      city: '徐州市'
     }
   },
   methods: {
@@ -45,19 +52,18 @@ export default {
     },
     hide() {
       this.showServerout = false
+    },
+    enterCity() {
+      this.$refs.enteredCity.show()
+    },
+    changeCity(city) {
+      this.city = city
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-  .headlist
-    overflow: hidden
-    position: absolute
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
   .bg
     position: fixed
     background: #FFF
@@ -66,6 +72,7 @@ export default {
     left: 0
     right: 0
     bottom: 0
+    color: #666
   .serverout-enter-active,.serverout-leave-active
     transition: all 0.3s
   .serverout-enter, .serverout-leave-to
@@ -94,8 +101,9 @@ export default {
     margin: .25rem 0 0.1rem 0.5rem
     font-size : .4rem
   .content-1
-    margin-top: -.12rem
+    margin-top: -0.05rem
     margin-left .2rem
+    font-size .3rem
   .hro
     width: 90%
     margin : 0 auto
@@ -115,4 +123,9 @@ export default {
     background: #ddd
   .gold-title
     font-size : 0.35rem
+  .place-title
+    font-size: 0.35rem
+    margin-bottom : 0.2rem
+  .place
+    font-size: 0.3rem
 </style>

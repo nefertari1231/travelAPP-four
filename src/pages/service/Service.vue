@@ -63,54 +63,76 @@ export default {
         title: '喀纳斯徒步',
         desc: '召集想去新疆的旅友',
         gold: '28',
-        time: '2017'
+        time: '2017',
+        place: '徐州'
       }, {
         id: '0002',
         imgUrl: 'static/image/service2.jpg',
         title: '三亚结伴',
         desc: '7-15出发',
         gold: '19',
-        time: '2017'
+        time: '2017',
+        place: '三亚'
       }, {
         id: '0003',
         imgUrl: 'static/image/service3.jpg',
         title: '周边游-云龙山',
         desc: '下午出发',
         gold: '7',
-        time: '2017'
+        time: '2017',
+        place: '徐州'
       }, {
         id: '0004',
         imgUrl: 'static/image/service4.jpg',
         title: '徐州缪斯酒吧，想high你就来',
         desc: '晚上包场',
         gold: '18',
-        time: '2017'
+        time: '2017',
+        place: '徐州'
       }, {
         id: '0005',
         imgUrl: 'static/image/service1.jpg',
         title: '喀纳斯徒步',
         desc: '召集想去新疆的旅友',
         gold: '9',
-        time: '2017'
+        time: '2017',
+        place: '徐州'
       }, {
         id: '0006',
         imgUrl: 'static/image/service2.jpg',
         title: '三亚结伴',
         desc: '7-15出发',
         gold: '28',
-        time: '2017'
+        time: '2017',
+        place: '徐州'
       }, {
         id: '0007',
         imgUrl: 'static/image/service3.jpg',
         title: '周边游-云龙山',
         desc: '下午出发',
-        time: '2017'
+        time: '2017',
+        place: '徐州'
       }, {
         id: '0008',
         imgUrl: 'static/image/service4.jpg',
         title: '徐州缪斯酒吧，想high你就来',
         desc: '晚上包场',
-        time: '2017'
+        time: '2017',
+        place: '徐州'
+      }, {
+        id: '0009',
+        imgUrl: 'static/image/service4.jpg',
+        title: '徐州缪斯酒吧，想high你就来',
+        desc: '晚上包场',
+        time: '2017',
+        place: '徐州'
+      }, {
+        id: '00010',
+        imgUrl: 'static/image/service4.jpg',
+        title: '徐州缪斯酒吧，想high你就来',
+        desc: '晚上包场',
+        time: '2017',
+        place: '徐州'
       }],
       selectedServer: {},
       showService: false

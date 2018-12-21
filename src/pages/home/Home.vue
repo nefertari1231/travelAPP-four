@@ -8,7 +8,7 @@
         <div class="header-right iconfont icon-search" @click="showSearch()"></div>
       </div>
     </div>  <!--header-->
-  <div class="headlist" ref="wrapper">
+  <div class="headlist" ref="wrapper" @click="login">
     <div>
       <home-swiper></home-swiper>
       <div>
@@ -46,9 +46,12 @@
           </div>
           <ul v-for="homeComment in shareList" :key="homeComment.id">
             <li class="item-header">
-              <img class="item-img"  :src="homeComment.imgUlr" />
-              <div :class="homeComment.color">
-                <div :class="homeComment.sex"></div>
+              <img class="item-img" :src="homeComment.imgUlr" />
+              <div class="icon-m" v-show="homeComment.sex === '男'">
+                <div class="iconfont icon-man"></div>
+              </div>
+              <div class="icon-f" v-show="homeComment.sex === '女'">
+                <div class="iconfont icon-woman"></div>
               </div>
               <div class="item-info">
                 <p class="item-title">{{homeComment.Name}}</p>
@@ -90,6 +93,7 @@
   <home-comment :homeComment="selectedComment" ref="homeComment"></home-comment>
     <search ref="search"></search>
     <service ref="server"></service>
+    <login ref="login"></login>
 </div>
 </template>
 
@@ -99,9 +103,11 @@ import HomeSwiper from './components/Swiper'
 import HomeComment from '../homeComment/HomeComment'
 import Search from '../search/Search'
 import Service from '../service/Service'
+import Login from '../login/Login'
 export default {
   name: 'Home',
   components: {
+    Login,
     Service,
     Search,
     HomeComment,
@@ -114,8 +120,7 @@ export default {
         imgUlr: 'static/image/touxiang1.jpg',
         Name: '爱你会上瘾丶',
         TimeName: '09-17 15：31',
-        color: 'icon-m',
-        sex: 'iconfont icon-man',
+        sex: '男',
         desc: '杯子在多数时候，盛装的仅仅是半杯水，遇见的那个人依然似乎无法填补内心的空洞，时间一点一点地过去，水也一点一点地蒸发掉，你开始觉得他越来越无法满足你的全部幻想全部期待',
         PicList: [{
           id: '0001',
@@ -139,8 +144,7 @@ export default {
         Name: 'Amber珈珈',
         TimeName: '09-17 15：32',
         color: 'icon-f',
-        sex: 'iconfont icon-woman',
-        desc: '美丽的地方',
+        sex: '女',
         PicList: [{
           id: '0001',
           PimgUlr: 'static/image/share5.jpg'
@@ -162,8 +166,7 @@ export default {
         imgUlr: 'static/image/touxiang3.jpg',
         Name: '一起学猫叫',
         TimeName: '09-17 15：33',
-        color: 'icon-m',
-        sex: 'iconfont icon-man',
+        sex: '男',
         desc: '离开这个喧嚣的世界，背上背包去旅行，去寻找一片宁静的乐园，让新鲜的风景新鲜的人和事不断的带给我们惊喜，放下杂念，放下世故的心，感受自由自在的空间。',
         PicList: [{
           id: '0001',
@@ -186,8 +189,7 @@ export default {
         imgUlr: 'static/image/touxiang4.jpg',
         Name: '丑的像整容',
         TimeName: '09-17 15：34',
-        color: 'icon-f',
-        sex: 'iconfont icon-woman',
+        sex: '女',
         desc: '你好，世界',
         PicList: [{
           id: '0001',
@@ -220,6 +222,13 @@ export default {
     },
     showSever() {
       this.$refs.server.show()
+    },
+    login() {
+      if (this.$store.state.singleBg === 'static/image/login-bg.jpg') {
+        this.$refs.login.show()
+        this.$refs.homeComment.hide()
+        this.$refs.server.hide()
+      }
     }
   },
   mounted() {
@@ -239,6 +248,7 @@ export default {
     z-index: 0
     //header
   .header
+    z-index 0
     position: relative
     display: flex
     line-height: 1.1rem
