@@ -88,7 +88,7 @@ export default {
       this.pwdEye = this.pwdEye === 'iconfont icon-yanjing-bi' ? 'iconfont icon-yanjing-zheng' : 'iconfont icon-yanjing-bi'
     },
     getSingleInfo () {
-      axios.get('/static/mock/single.json')
+      axios.get('api/single.json')
         .then(this.getSingleInfoSucc)
     },
     getSingleInfoSucc (res) {
