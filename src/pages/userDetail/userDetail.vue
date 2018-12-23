@@ -1,6 +1,6 @@
 <template>
-<transition name="single" tag="div">
-<div class="bg" v-show="showSingleDetail">
+<transition name="user" tag="div">
+<div class="bg" v-show="showuserDetail">
   <div>
     <div class="header-fixed" >
       <div class="header-left iconfont icon-left" @click="hide()"></div>
@@ -10,15 +10,15 @@
       <div class="header-right iconfont icon-edit-square" ></div>
     </div>
     <div class="banner">
-      <img class="banner-img" :src="this.$store.state.singleBg">
+      <img class="banner-img" :src="this.$store.state.userBg">
     </div>
-    <img class="item-img"  :src="this.$store.state.singleIcon" />
+    <img class="item-img"  :src="this.$store.state.userIcon" />
     <div class="icon-info">
-      <div class="desc">{{this.$store.state.singleNickname}}</div>
-      <div class="icon-m" v-show="this.$store.state.singleSex === '男'">
+      <div class="desc">{{this.$store.state.userNickname}}</div>
+      <div class="icon-m" v-show="this.$store.state.userSex === '男'">
         <div class="iconfont icon-man"></div>
       </div>
-      <div class="icon-f" v-show="this.$store.state.singleSex === '女'">
+      <div class="icon-f" v-show="this.$store.state.userSex === '女'">
         <div class="iconfont icon-woman"></div>
       </div>
     </div>
@@ -35,22 +35,22 @@
 
 <script>
 export default {
-  name: 'SingleDetail',
+  name: 'userDetail',
   props: {
-    singleDetail: Object
+    userDetail: Object
   },
   data () {
     return {
       bgImgUrl: 'static/image/geren2.jpg',
-      showSingleDetail: false
+      showuserDetail: false
     }
   },
   methods: {
     show () {
-      this.showSingleDetail = true
+      this.showuserDetail = true
     },
     hide () {
-      this.showSingleDetail = false
+      this.showuserDetail = false
     }
   },
   mounted () {
@@ -68,9 +68,9 @@ export default {
     left: 0
     right: 0
     bottom: 0
-  .single-enter-active,.single-leave-active
+  .user-enter-active,.user-leave-active
     transition: all 0.3s
-  .single-enter, .single-leave-to
+  .user-enter, .user-leave-to
     transform: translate3d(100%, 0, 0)
     //banner
   .header-fixed

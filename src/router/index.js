@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from '@/pages/home/Home'
 import Siri from '@/pages/siri/Siri'
 import Message from '@/pages/message/Message'
-import Single from '@/pages/single/Single'
+import User from '@/pages/user/user'
 
 Vue.use(Router)
 
@@ -22,8 +22,8 @@ export default new Router({
       path: '/message',
       component: Message
     }, {
-      path: '/single',
-      component: Single
+      path: '/user',
+      component: User
     }
   ]
 })

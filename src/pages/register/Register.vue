@@ -12,8 +12,8 @@
 <div>
     <div class="content-bg">
       <div class="text1">
-        <div class="iconfont icon-shouji"></div>
-        <input class="user" v-model="username" placeholder="请输入手机号" />
+        <div class="iconfont icon-renren"></div>
+        <input class="user" v-model="username" placeholder="请输入学号" />
       </div>
       <div class="text2">
         <div class="iconfont icon-jiesuo"></div>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Register',
   data() {
@@ -52,7 +53,20 @@ export default {
       if (this.username !== '') {
         if (this.password !== '' && this.repassword !== '') {
           if (this.password === this.repassword) {
-            this.hide()
+            axios({
+              method: 'post',
+              url: 'http://localhost:8090/api/users/register',
+              changeOrigin: true,
+              data: {
+                'username': this.username,
+                'password': this.password
+              }
+            }).then(response => {
+              this.$toast.center('注册成功')
+              this.hide()
+            }).catch(error => {
+              console.log(error)
+            })
           } else {
             this.$toast.center('二次输入密码不同')
           }
@@ -111,7 +125,7 @@ export default {
     margin: .4rem .2rem .3rem .2rem
     height: .8rem
     line-height: .8rem
-  .icon-shouji, .icon-jiesuo
+  .icon-renren, .icon-jiesuo
     font-size: .6rem
     margin-right: .2rem
   .user

@@ -5,37 +5,37 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    singleBg: 'static/image/login-bg.jpg',
-    singleIcon: 'static/image/login.jpg',
-    singleNickname: '请登录/注册',
-    singleSex: '',
+    userBg: 'static/image/login-bg.jpg',
+    userIcon: 'static/image/login.jpg',
+    userNickname: '请登录/注册',
+    userSex: '',
     shareCount: 0,
     followCount: 0,
     fansCount: 0
   },
   actions: {
-    getSingleDetail(ctx, single) {
-      ctx.commit('getSingleDetail', single)
+    getuserDetail(ctx, user) {
+      ctx.commit('getuserDetail', user)
     },
     logOff(ctx) {
       ctx.commit('logOff')
     }
   },
   mutations: {
-    getSingleDetail(state, single) {
-      state.singleBg = single.singleBg
-      state.singleIcon = single.singleIcon
-      state.singleNickname = single.singleNickname
-      state.singleSex = single.singleSex
-      state.shareCount = single.shareCount
-      state.followCount = single.followCount
-      state.fansCount = single.fansCount
+    getuserDetail(state, user) {
+      state.userBg = user.userBg
+      state.userIcon = user.userIcon
+      state.userNickname = user.userNickname
+      state.userSex = user.userSex
+      state.shareCount = user.shareCount
+      state.followCount = user.followCount
+      state.fansCount = user.fansCount
     },
     logOff(state) {
-      state.singleBg = 'static/image/login-bg.jpg'
-      state.singleIcon = 'static/image/login.jpg'
-      state.singleNickname = '请登录/注册'
-      state.singleSex = ''
+      state.userBg = 'static/image/login-bg.jpg'
+      state.userIcon = 'static/image/login.jpg'
+      state.userNickname = '请登录/注册'
+      state.userSex = ''
       state.shareCount = 0
       state.followCount = 0
       state.fansCount = 0

@@ -12,11 +12,11 @@
       <div>
           <div class="content-bg">
             <div class="content">
-              <p class="title title-tell">手机登录</p>
+              <p class="title title-tell">学号登录</p>
             </div>
             <div class="text1">
-              <div class="iconfont icon-shouji"></div>
-              <input class="user" v-model="username"  placeholder="请输入手机号" />
+              <div class="iconfont icon-renren"></div>
+              <input class="user" v-model="username"  placeholder="请输入学号" />
             </div>
             <div class="text2">
               <div class="iconfont icon-jiesuo"></div>
@@ -57,19 +57,19 @@ export default {
       showLogin: false,
       pwdEye: 'iconfont icon-yanjing-bi',
       passwordType: 'password',
-      single: {}
+      user: {}
     }
   },
   mounted() {
-    this.getSingleInfo()
+    this.getuserInfo()
   },
   methods: {
     submit() {
-      if (this.username !== this.single.username || this.password !== this.single.password) {
+      if (this.username !== this.user.username || this.password !== this.user.password) {
         this.$toast.center('用户名和密码不符')
-      } else if (this.username === this.single.username && this.password === this.single.password) {
+      } else if (this.username === this.user.username && this.password === this.user.password) {
         this.hide()
-        this.$store.dispatch('getSingleDetail', this.single)
+        this.$store.dispatch('getuserDetail', this.user)
         this.username = ''
         this.password = ''
       }
@@ -87,15 +87,15 @@ export default {
       this.passwordType = this.passwordType === 'password' ? 'text' : 'password'
       this.pwdEye = this.pwdEye === 'iconfont icon-yanjing-bi' ? 'iconfont icon-yanjing-zheng' : 'iconfont icon-yanjing-bi'
     },
-    getSingleInfo () {
-      axios.get('api/single.json')
-        .then(this.getSingleInfoSucc)
+    getuserInfo () {
+      axios.get('api/user.json')
+        .then(this.getuserInfoSucc)
     },
-    getSingleInfoSucc (res) {
+    getuserInfoSucc (res) {
       console.log(res)
       res = res.data
-      if (res.ret && res.single) {
-        this.single = res.single
+      if (res.ret && res.user) {
+        this.user = res.user
       }
     }
   }
@@ -153,7 +153,7 @@ export default {
     margin: .4rem .2rem .3rem .2rem
     height: .8rem
     line-height: .8rem
-  .icon-shouji, .icon-jiesuo
+  .icon-renren, .icon-jiesuo
     font-size: .6rem
     margin-right: .2rem
   .user

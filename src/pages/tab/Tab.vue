@@ -63,7 +63,7 @@ export default {
         desc: '消息'
       }, {
         id: '0005',
-        to: '/single',
+        to: '/user',
         iconUrl: 'iconfont icon-user',
         iconUrl2: 'iconfont icon-yonghu-tianchong',
         desc: '我的'

@@ -11,19 +11,19 @@
   <div   class="headlist" ref="wrapper">
     <div @click="login()">
       <div class="banner">
-          <img class="banner-img" :src="this.$store.state.singleBg">
-          <div class="single-content">
+          <img class="banner-img" :src="this.$store.state.userBg">
+          <div class="user-content">
             <div class="item-header">
-              <img class="item-img" :src="this.$store.state.singleIcon" />
-              <div class="icon-m" v-show="this.$store.state.singleSex === '男'">
+              <img class="item-img" :src="this.$store.state.userIcon" />
+              <div class="icon-m" v-show="this.$store.state.userSex === '男'">
                 <div class="iconfont icon-man"></div>
               </div>
-              <div class="icon-f" v-show="this.$store.state.singleSex === '女'">
+              <div class="icon-f" v-show="this.$store.state.userSex === '女'">
                 <div class="iconfont icon-woman"></div>
               </div>
               <div class="item-info">
-                <p class="item-title">{{this.$store.state.singleNickname}}</p>
-                <div class="iconfont icon-right" @click="enterSingleDetail()"></div>
+                <p class="item-title">{{this.$store.state.userNickname}}</p>
+                <div class="iconfont icon-right" @click="enteruserDetail()"></div>
               </div>
             </div>
           </div>  <!--登录-->
@@ -107,22 +107,22 @@
     </div>
   </div>
   <router-view></router-view>
-  <single-detail ref="singleDetail"></single-detail>
+  <user-detail ref="userDetail"></user-detail>
   <login ref="login" ></login>
   <settings ref="settings"></settings>
 </div>
 </template>
 
 <script>
-import SingleDetail from '../singleDetail/SingleDetail'
+import userDetail from '../userDetail/userDetail'
 import Login from '../login/Login'
 import Settings from '../settings/Settings'
 import Bscroll from 'better-scroll'
 export default {
-  name: 'Single',
+  name: 'user',
   components: {
     Settings,
-    SingleDetail,
+    userDetail,
     Login
   },
   mounted() {
@@ -130,20 +130,20 @@ export default {
   },
   data() {
     return {
-      single: {}
+      user: {}
     }
   },
   methods: {
-    enterSingleDetail() {
-      this.$refs.singleDetail.show()
+    enteruserDetail() {
+      this.$refs.userDetail.show()
     },
-    exitSingleDetail() {
-      this.$refs.singleDetail.hide()
+    exituserDetail() {
+      this.$refs.userDetail.hide()
     },
     login() {
-      if (this.$store.state.singleBg === 'static/image/login-bg.jpg') {
+      if (this.$store.state.userBg === 'static/image/login-bg.jpg') {
         this.$refs.login.show()
-        this.exitSingleDetail()
+        this.exituserDetail()
         this.hideSettings()
       }
     },
@@ -192,7 +192,7 @@ export default {
     padding-bottom: 50%
   .banner-img
     width: 100%
-  .single-content
+  .user-content
     width: 90%
     position: absolute
     left: .5rem

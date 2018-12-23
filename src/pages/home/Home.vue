@@ -15,7 +15,7 @@
           <div class="server-bg">
             <div @click="showSever()" class="server">
               <div class="server-content">
-                <img  class="server-img" src="static/image/server1.jpg">
+                <img  class="server-img" src="static/image/server1.jpg" />
                 <div class="font-display">
                   <p class="font">找服务</p>
                 </div>
@@ -23,7 +23,7 @@
             </div>
           <div class="server">
             <div class="around-content">
-              <img  class="server-img" src="static/image/server2.jpg">
+              <img  class="server-img" src="static/image/server2.jpg" />
               <div class="font-display">
                 <p class="font">周边玩</p>
               </div>
@@ -73,14 +73,12 @@
               <ul>
                 <div class="foot-content">
                   <li class="iconfont icon-like">
-                    <span class="footer-text">赞(0)
-                    </span>
+                    <span class="footer-text">赞(0)</span>
                   </li>
                 </div>
                 <div class="foot-content border-left">
                   <li class="iconfont icon-edit-square">
-                    <span class="footer-text">评论(0)
-                    </span>
+                    <span class="footer-text">评论(0)</span>
                   </li>
                 </div>
               </ul>
@@ -224,7 +222,7 @@ export default {
       this.$refs.server.show()
     },
     login() {
-      if (this.$store.state.singleBg === 'static/image/login-bg.jpg') {
+      if (this.$store.state.userBg === 'static/image/login-bg.jpg') {
         this.$refs.login.show()
         this.$refs.homeComment.hide()
         this.$refs.server.hide()
@@ -232,7 +230,7 @@ export default {
     }
   },
   mounted() {
-    this.scroll = new Bscroll(this.$refs.wrapper)
+    this.scroll = new Bscroll(this.$refs.wrapper, {})
   }
 }
 </script>
