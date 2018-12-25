@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     login() {
-      if (this.$store.state.userBg === 'static/image/login-bg.jpg') {
+      if (this.$store.state.userId === null) {
         this.$refs.login.show()
       }
     }

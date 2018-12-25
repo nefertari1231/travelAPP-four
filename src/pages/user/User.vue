@@ -141,7 +141,7 @@ export default {
       this.$refs.userDetail.hide()
     },
     login() {
-      if (this.$store.state.userBg === 'static/image/login-bg.jpg') {
+      if (this.$store.state.userId === null) {
         this.$refs.login.show()
         this.exituserDetail()
         this.hideSettings()

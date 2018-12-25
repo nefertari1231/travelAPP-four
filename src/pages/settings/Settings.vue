@@ -50,7 +50,9 @@
           </li>
         </ul>
       </div><!--list-->
-      <input class="btn" type="submit" @click="submit"  value="退出登录">
+      <div class="btn">
+      <input  class="btn-content" type="submit" @click="submit"  value="退出登录">
+      </div>
     </div>
   </transition>
 </template>
@@ -167,12 +169,15 @@ export default {
     color: #FFF
     background: #9932CC
   .btn
-    border-radius: 0.5rem;
-    width: 100%
+    border-radius: 0.5rem
+    width: 90%
     height: .9rem
-    background: #00BFFF
-    margin-top: .6rem
+    text-align center
+    background: dodgerblue
+    margin: .6rem auto
     line-height: .9rem
-    color: #FFF
     font-size: .4rem
+  .btn-content
+    color: #fff
+    background: dodgerblue
 </style>

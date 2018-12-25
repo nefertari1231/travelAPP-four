@@ -7,17 +7,17 @@
           <div class="header-title">
             发送服务
           </div>
-          <div class="header-right">发布</div>
+          <div class="header-right" @click="send()">发布</div>
         </div>
       </div>  <!--header-->
       <div class="content-bg">
         <div class="text1">
           <div class="">标题
-            <input class="content-1" type="text"  placeholder="标题需要体现服务内容" />
+            <input class="content-1" type="text"  placeholder="标题需要体现服务内容" v-model="serverName"/>
           </div>
         </div>
         <hr class="hro" />
-        <textarea class="content" placeholder="请描述一下你的服务" contenteditable="" rows="6"></textarea>
+        <textarea class="content" placeholder="请描述一下你的服务" contenteditable="" rows="6" v-model="serverDescription"></textarea>
         <div class="picture"></div>
         <div class="line2"></div>
         <textarea class="content" placeholder="备注注意事项" contenteditable="" rows="6" ></textarea>
@@ -26,7 +26,7 @@
             <span class="place" @click="enterCity">{{city}} (点击切换)</span>
           </div>
           <div class="gold-title">输入金额(￥):
-            <input class="content-1" type="text" />
+            <input class="content-1" type="text" v-model="serverPrice"/>
           </div>
         </div>
       </div><!--content-->
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import City from '../city/City'
 export default {
   name: 'ServerOut',
@@ -43,7 +44,10 @@ export default {
   data() {
     return {
       showServerout: false,
-      city: '徐州市'
+      city: '徐州市',
+      serverName: '',
+      serverDescription: '',
+      serverPrice: ''
     }
   },
   methods: {
@@ -58,6 +62,29 @@ export default {
     },
     changeCity(city) {
       this.city = city
+    },
+    send() {
+      if (this.serverName !== '' && this.serverDescription !== '' && this.serverPrice !== '') {
+        axios({
+          method: 'post',
+          url: 'http://localhost:8090/api/servers/saveServer',
+          changeOrigin: true,
+          data: {
+            'serverName': this.serverName,
+            'serverDescription': this.serverDescription,
+            'serverPrice': this.serverPrice,
+            'serverPlace': this.city
+          }
+        }).then(response => {
+          console.log(response)
+          this.$toast.center('发布成功')
+          this.hide()
+        }).catch(error => {
+          console.log(error)
+        })
+      } else {
+        this.$toast.center('请填完整信息')
+      }
     }
   }
 }

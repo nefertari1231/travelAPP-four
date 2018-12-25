@@ -147,9 +147,4 @@ export default {
     transform: translateY(0.17rem) translateX(0)
   #hamburger-6.is-active .line:nth-child(3)
     transform: translateY(-0.2rem) rotate(90deg)
-  .fadeleft-enter, .fadeleft-leave-to
-    transform: translate3d(0,100%, 0)
-    opacity: 0
-  .fadeleft-enter-active, .fadeleft-leave-active
-    transition: all 0.4s linear
 </style>

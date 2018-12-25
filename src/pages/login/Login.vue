@@ -60,19 +60,30 @@ export default {
       user: {}
     }
   },
-  mounted() {
-    this.getuserInfo()
-  },
   methods: {
     submit() {
-      if (this.username !== this.user.username || this.password !== this.user.password) {
-        this.$toast.center('用户名和密码不符')
-      } else if (this.username === this.user.username && this.password === this.user.password) {
-        this.hide()
-        this.$store.dispatch('getuserDetail', this.user)
-        this.username = ''
-        this.password = ''
-      }
+      axios({
+        method: 'post',
+        url: 'http://localhost:8090/api/users/login',
+        changeOrigin: true,
+        data: {
+          'username': this.username,
+          'password': this.password
+        }
+      }).then(response => {
+        this.user = response.data.data
+        if (response.data.status === 200) {
+          this.$toast.center('登录成功')
+          this.hide()
+          this.$store.dispatch('getuserDetail', this.user)
+          this.username = ''
+          this.password = ''
+        } else {
+          this.$toast.center('登录失败')
+        }
+      }).catch(error => {
+        console.log(error)
+      })
     },
     show() {
       this.showLogin = true
@@ -86,17 +97,6 @@ export default {
     changeType() {
       this.passwordType = this.passwordType === 'password' ? 'text' : 'password'
       this.pwdEye = this.pwdEye === 'iconfont icon-yanjing-bi' ? 'iconfont icon-yanjing-zheng' : 'iconfont icon-yanjing-bi'
-    },
-    getuserInfo () {
-      axios.get('api/user.json')
-        .then(this.getuserInfoSucc)
-    },
-    getuserInfoSucc (res) {
-      console.log(res)
-      res = res.data
-      if (res.ret && res.user) {
-        this.user = res.user
-      }
     }
   }
 }

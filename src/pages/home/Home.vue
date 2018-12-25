@@ -222,7 +222,7 @@ export default {
       this.$refs.server.show()
     },
     login() {
-      if (this.$store.state.userBg === 'static/image/login-bg.jpg') {
+      if (this.$store.state.userId === null) {
         this.$refs.login.show()
         this.$refs.homeComment.hide()
         this.$refs.server.hide()
