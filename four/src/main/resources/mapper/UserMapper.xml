@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.four.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.example.four.entity.User">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+
+  <select id="queryUsername" parameterType="com.example.four.entity.User" resultMap="BaseResultMap">
+    SELECT *
+    FROM user where username=#{username}
+  </select>
+
+  <insert id="save" parameterType="com.example.four.entity.User">
+    insert into user (user_id, username, password)
+    values (#{userId},#{username},#{password})
+  </insert>
+
+  <!--<update id="update" parameterType="com.example.four.entity.User">-->
+    <!--update user-->
+    <!--<set>-->
+      <!--<if test="username != null">username=#{username},</if>-->
+      <!--<if test="password != null">password=#{password}</if>-->
+    <!--</set>-->
+    <!--where user_id=#{userId}-->
+  <!--</update>-->
+
+  <!--<delete id="delete" >-->
+    <!--delete from user where user_id=#{userId}-->
+  <!--</delete>-->
+
+</mapper>
