@@ -71,15 +71,16 @@ export default {
           'password': this.password
         }
       }).then(response => {
+        console.log(response)
         this.user = response.data.data
         if (response.data.status === 200) {
-          this.$toast.center('登录成功')
+          this.$toast.success('登录成功')
           this.hide()
           this.$store.dispatch('getuserDetail', this.user)
           this.username = ''
           this.password = ''
         } else {
-          this.$toast.center('登录失败')
+          this.$toast.fail('登录失败')
         }
       }).catch(error => {
         console.log(error)
@@ -144,6 +145,7 @@ export default {
     line-height: .7rem
     height: .7rem
     font-size : .4rem
+    margin-left .2rem
   .title-student
     margin-left: .3rem
   .iconfont, .user

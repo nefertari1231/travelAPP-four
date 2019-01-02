@@ -10,6 +10,7 @@
     </div>  <!--header-->
   <div class="headlist" ref="wrapper" @click="login">
     <div>
+      <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <home-swiper></home-swiper>
       <div>
           <div class="server-bg">
@@ -85,6 +86,7 @@
             </div>
           </ul>
         </div>  <!--Share-->
+      </van-pull-refresh>
     </div>
   </div>
  <router-view></router-view>
@@ -113,6 +115,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       shareList: [{
         id: '0001',
         imgUlr: 'static/image/touxiang1.jpg',
@@ -227,6 +230,11 @@ export default {
         this.$refs.homeComment.hide()
         this.$refs.server.hide()
       }
+    },
+    onRefresh() {
+      setTimeout(() => {
+        this.isLoading = false
+      }, 700)
     }
   },
   mounted() {

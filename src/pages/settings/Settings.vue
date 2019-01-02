@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Settings',
   data() {
@@ -74,8 +75,17 @@ export default {
       this.showSettings = false
     },
     submit() {
-      this.$store.dispatch('logOff')
-      this.hide()
+      axios({
+        method: 'post',
+        url: 'http://localhost:8090/api/users/logout?userId=' + this.$store.state.userId,
+        changeOrigin: true
+      }).then(response => {
+        console.log(response)
+        this.$store.dispatch('logOff')
+        this.hide()
+      }).catch(error => {
+        console.log(error)
+      })
     }
   }
 }
@@ -178,6 +188,8 @@ export default {
     line-height: .9rem
     font-size: .4rem
   .btn-content
+    height: .8rem
+    line-height: .8rem
     color: #fff
     background: dodgerblue
 </style>

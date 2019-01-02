@@ -10,14 +10,18 @@ import './assets/styles/iconfont.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import animated from 'animate.css'
-import 'vue2-toast/lib/toast.css'
-import Toast from 'vue2-toast'
+import Vant from 'vant'
+import 'vant/lib/index.css'
 
+Vue.use(Vant)
 Vue.config.productionTip = false
 fastClick.attach(document.body)
 Vue.use(VueAwesomeSwiper)
 Vue.use(animated)
-Vue.use(Toast)
+Vue.prototype.$toast.setDefaultOptions({
+  duration: 500,
+  loadingType: 'spinner'
+})
 
 /* eslint-disable no-new */
 new Vue({

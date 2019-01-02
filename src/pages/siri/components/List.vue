@@ -52,48 +52,48 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.content
-  margin-top: .2rem
-.item
-  overflow: hidden
-  display: flex
-  height: 0.8rem
-  padding: .1rem
-.item-img
-  height: .7rem
-  width: .7rem
-  margin-left: .2rem
-.item-imgs
-  border-radius: 30%
-.iconfont
-  font-size: .7rem
-  color: #FFF
-.item-info
-  flex: 1
-.item-title
-  height: 0.8rem
-  line-height: 0.8rem
-  float: left
-  font-size: .4rem
-  margin-left: .2rem
-.item-desc
-  float: right
-  height: 0.8rem
-  line-height: 0.8rem
-  font-size: .32rem
-  color: #bbb
-.icon-right
-  float: right
-  height: 0.8rem
-  line-height: 0.8rem
-  font-size: .5rem
-  color: #ddd
-.icon-duoyuyan
-  background: skyblue
-.icon-scan
-  background: #FFD700
-.icon-sousuo
-  background: #FF8C00
-.icon-dangdi
-  background: #9932CC
+  .content
+    margin-top: .2rem
+  .item
+    overflow: hidden
+    display: flex
+    height: 0.8rem
+    padding: .1rem
+  .item-img
+    height: .7rem
+    width: .7rem
+    margin-left: .2rem
+  .item-imgs
+    border-radius: 30%
+  .iconfont
+    font-size: .7rem
+    color: #FFF
+  .item-info
+    flex: 1
+  .item-title
+    height: 0.8rem
+    line-height: 0.8rem
+    float: left
+    font-size: .4rem
+    margin-left: .2rem
+  .item-desc
+    float: right
+    height: 0.8rem
+    line-height: 0.8rem
+    font-size: .32rem
+    color: #bbb
+  .icon-right
+    float: right
+    height: 0.8rem
+    line-height: 0.8rem
+    font-size: .5rem
+    color: #ddd
+  .icon-duoyuyan
+    background: skyblue
+  .icon-scan
+    background: #FFD700
+  .icon-sousuo
+    background: #FF8C00
+  .icon-dangdi
+    background: #9932CC
 </style>

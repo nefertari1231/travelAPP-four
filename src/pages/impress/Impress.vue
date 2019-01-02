@@ -45,7 +45,7 @@ export default {
       this.$refs.shareout.show()
     },
     login() {
-      if (this.$store.state.singleBg === 'static/image/login-bg.jpg') {
+      if (this.$store.state.userId === null) {
         this.$refs.login.show()
         this.$refs.serverout.hide()
         this.$refs.shareout.hide()

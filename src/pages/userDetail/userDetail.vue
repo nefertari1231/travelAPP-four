@@ -7,10 +7,13 @@
       <div class="header-title">
         Wo的主页
       </div>
-      <div class="header-right iconfont icon-edit-square" ></div>
+      <div class="header-right iconfont icon-edit-square" @click="showUpdateUser"></div>
     </div>
     <div class="banner">
-      <img class="banner-img" :src="this.$store.state.userBg">
+      <img class="banner-img" :src="this.$store.state.userBg" @click="updateBg">
+      <van-popup class="updateBg" v-model="showBg">
+        <van-uploader :before-read="onRead">更换背景</van-uploader>
+      </van-popup>
     </div>
     <img class="item-img"  :src="this.$store.state.userIcon" />
     <div class="icon-info">
@@ -26,23 +29,28 @@
       <div class="desc-attention">关注 {{this.$store.state.followCount}}</div>
       <div class="desc-fun">粉丝 {{this.$store.state.fansCount}}</div>
     </div>
-    <div class="text">简介：这家伙很懒，什么也没留下</div>
+    <div class="text">简介：{{this.$store.state.userDescription}}</div>
     <div class="split"></div>
   </div> <!--banner-->
+  <update-user ref="enterUpdateUser"></update-user>
 </div>
 </transition>
 </template>
 
 <script>
+import axios from 'axios'
+import UpdateUser from '../updateUser/UpdateUser'
 export default {
   name: 'userDetail',
+  components: {UpdateUser},
   props: {
     userDetail: Object
   },
   data () {
     return {
-      bgImgUrl: 'static/image/geren2.jpg',
-      showuserDetail: false
+      showuserDetail: false,
+      showBg: false,
+      userBg: ''
     }
   },
   methods: {
@@ -51,6 +59,33 @@ export default {
     },
     hide () {
       this.showuserDetail = false
+    },
+    showUpdateUser () {
+      this.$refs.enterUpdateUser.show()
+    },
+    updateBg() {
+      this.showBg = true
+    },
+    onRead(file) {
+      let formData = new FormData()
+      formData.append('file', file)
+      axios({
+        method: 'post',
+        url: 'http://localhost:8090/api/users/uploadUserBg?userId=' + this.$store.state.userId,
+        changeOrigin: true,
+        data: formData
+      }).then(response => {
+        if (response.data.status === 200) {
+          this.$toast.success('上传成功')
+          this.userBg = 'http://localhost:8090' + response.data.data
+          this.$store.dispatch('updateuserBg', this.userBg)
+          this.showBg = false
+        } else if (response.data.status === 500) {
+          this.$toast.fail('上传失败')
+        }
+      }).catch(error => {
+        console.log(error)
+      })
     }
   },
   mounted () {
@@ -60,10 +95,17 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  .updateBg
+    width: 40%
+    height 1.2rem
+    margin 0.2 auto
+    line-height: 1.2rem
+    font-size .35rem
+    text-align center
   .bg
     position: fixed
     background: #FFF
-    z-index: 100
+    z-index: 20
     top: 0
     left: 0
     right: 0

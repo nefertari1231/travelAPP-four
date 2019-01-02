@@ -20,7 +20,7 @@
         <textarea class="content" placeholder="请描述一下你的服务" contenteditable="" rows="6" v-model="serverDescription"></textarea>
         <div class="picture"></div>
         <div class="line2"></div>
-        <textarea class="content" placeholder="备注注意事项" contenteditable="" rows="6" ></textarea>
+        <textarea class="content" placeholder="备注注意事项" contenteditable="" rows="6" v-model="serverRemark"></textarea>
         <div class="text1">
           <div class="place-title">出游城市:
             <span class="place" @click="enterCity">{{city}} (点击切换)</span>
@@ -47,7 +47,8 @@ export default {
       city: '徐州市',
       serverName: '',
       serverDescription: '',
-      serverPrice: ''
+      serverPrice: '',
+      serverRemark: ''
     }
   },
   methods: {
@@ -73,17 +74,22 @@ export default {
             'serverName': this.serverName,
             'serverDescription': this.serverDescription,
             'serverPrice': this.serverPrice,
-            'serverPlace': this.city
+            'serverPlace': this.city,
+            'serverRemark': this.serverRemark
           }
         }).then(response => {
           console.log(response)
-          this.$toast.center('发布成功')
+          this.$toast.success('发布成功')
           this.hide()
+          this.serverName = ''
+          this.serverDescription = ''
+          this.serverPrice = ''
+          this.serverRemark = ''
         }).catch(error => {
           console.log(error)
         })
       } else {
-        this.$toast.center('请填完整信息')
+        this.$toast('请填完整信息')
       }
     }
   }

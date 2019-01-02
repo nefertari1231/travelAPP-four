@@ -9,6 +9,8 @@ export default new Vuex.Store({
     userBg: 'static/image/login-bg.jpg',
     userIcon: 'static/image/login.jpg',
     userNickname: '请登录/注册',
+    userArea: '来自星星的你',
+    userDescription: '这家伙很懒，什么也没有留下了',
     userSex: '',
     shareCount: 0,
     followCount: 0,
@@ -18,22 +20,58 @@ export default new Vuex.Store({
     getuserDetail(ctx, user) {
       ctx.commit('getuserDetail', user)
     },
+    updateuserBg(ctx, userBg) {
+      ctx.commit('updateuserBg', userBg)
+    },
+    updateuserIcon(ctx, userIcon) {
+      ctx.commit('updateuserIcon', userIcon)
+    },
+    updateuserNickname(ctx, Nickname) {
+      ctx.commit('updateuserNickname', Nickname)
+    },
+    updateuserSex(ctx, sex) {
+      ctx.commit('updateuserSex', sex)
+    },
+    updateuserArea(ctx, area) {
+      ctx.commit('updateuserArea', area)
+    },
+    updateuserDescription(ctx, Description) {
+      ctx.commit('updateuserDescription', Description)
+    },
     logOff(ctx) {
       ctx.commit('logOff')
     }
   },
   mutations: {
+    updateuserBg(user, userBg) {
+      user.userBg = userBg
+    },
+    updateuserIcon(user, userIcon) {
+      user.userIcon = userIcon
+    },
+    updateuserNickname(user, Nickname) {
+      user.userNickname = Nickname
+    },
+    updateuserSex(user, sex) {
+      user.userSex = sex
+    },
+    updateuserArea(user, area) {
+      user.userArea = area
+    },
+    updateuserDescription(user, Description) {
+      user.userDescription = Description
+    },
     getuserDetail(state, user) {
       state.userId = user.userId
       if (user.userBg === null) {
         state.userBg = 'static/image/login-bg.jpg'
       } else {
-        state.userBg = user.userBg
+        state.userBg = 'http://localhost:8090' + user.userBg
       }
       if (user.userIcon === null) {
         state.userIcon = 'static/image/login.jpg'
       } else {
-        state.userIcon = user.userIcon
+        state.userIcon = 'http://localhost:8090' + user.userIcon
       }
       if (user.userNickname === null) {
         state.userNickname = '智障儿童欢乐多'
@@ -44,6 +82,16 @@ export default new Vuex.Store({
         state.userSex = ''
       } else {
         state.userSex = user.userSex
+      }
+      if (user.userDescription === null) {
+        state.userDescription = '这家伙很懒，什么也没有留下了'
+      } else {
+        state.userDescription = user.userDescription
+      }
+      if (user.userArea === null) {
+        state.userArea = '来自星星的你'
+      } else {
+        state.userArea = user.userArea
       }
       if (user.shareCount === null) {
         state.shareCount = 0
@@ -66,6 +114,7 @@ export default new Vuex.Store({
       state.userBg = 'static/image/login-bg.jpg'
       state.userIcon = 'static/image/login.jpg'
       state.userNickname = '请登录/注册'
+      state.userArea = '来自星星的你'
       state.userSex = ''
       state.shareCount = 0
       state.followCount = 0

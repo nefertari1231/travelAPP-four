@@ -13,7 +13,7 @@
     <div class="content-bg">
       <div class="text1">
         <div class="iconfont icon-renren"></div>
-        <input class="user" v-model="username" placeholder="请输入学号" />
+        <input class="user" v-model="username" placeholder="请输入学号"  />
       </div>
       <div class="text2">
         <div class="iconfont icon-jiesuo"></div>
@@ -53,28 +53,41 @@ export default {
       if (this.username !== '') {
         if (this.password !== '' && this.repassword !== '') {
           if (this.password === this.repassword) {
-            axios({
-              method: 'post',
-              url: 'http://localhost:8090/api/users/register',
-              changeOrigin: true,
-              data: {
-                'username': this.username,
-                'password': this.password
-              }
-            }).then(response => {
-              this.$toast.center('注册成功')
-              this.hide()
-            }).catch(error => {
-              console.log(error)
-            })
+            if (/^\d{8}$/.test(this.username) && /^[a-zA-Z]\w{5,17}$/.test(this.password)) {
+              axios({
+                method: 'post',
+                url: 'http://localhost:8090/api/users/register',
+                changeOrigin: true,
+                data: {
+                  'username': this.username,
+                  'password': this.password
+                }
+              }).then(response => {
+                console.log(response)
+                if (response.data.status === 200) {
+                  this.$toast.success('注册成功')
+                  this.hide()
+                  this.username = ''
+                  this.password = ''
+                  this.repassword = ''
+                }
+                if (response.data.status === 500) {
+                  this.$toast(response.data.msg)
+                }
+              }).catch(error => {
+                console.log(error)
+              })
+            } else {
+              this.$toast('用户名为8位数字，密码为英文开头')
+            }
           } else {
-            this.$toast.center('二次输入密码不同')
+            this.$toast('二次输入密码不同')
           }
         } else {
-          this.$toast.center('请填入密码')
+          this.$toast('请填入密码')
         }
       } else {
-        this.$toast.center('请填入用户名和密码')
+        this.$toast('请填入用户名和密码')
       }
     }
   }

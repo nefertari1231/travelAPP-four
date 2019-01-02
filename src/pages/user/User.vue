@@ -245,11 +245,6 @@ export default {
   .item-title
     line-height: .54rem
     font-size: .34rem
-  .icon-right
-    font-size: .4rem
-    float: right
-    margin-right: .2rem
-    margin-top: -.3rem
   //thumb
   .content-bg
     overflow: hidden
