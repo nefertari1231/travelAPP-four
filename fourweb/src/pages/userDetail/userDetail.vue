@@ -96,10 +96,10 @@ export default {
 
 <style lang="stylus" scoped>
   .updateBg
-    width: 40%
-    height 1.2rem
+    width: 30%
+    height 0.8rem
     margin 0.2 auto
-    line-height: 1.2rem
+    line-height: 0.8rem
     font-size .35rem
     text-align center
   .bg
