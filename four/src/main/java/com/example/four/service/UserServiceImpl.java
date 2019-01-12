@@ -3,6 +3,7 @@ package com.example.four.service;
 import com.example.four.entity.User;
 import com.example.four.mapper.UserMapper;
 import com.example.four.utils.idworker.Sid;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -63,9 +64,11 @@ public class UserServiceImpl extends BaseService<UserMapper, User> implements Us
         Example userExample = new Example(User.class);
         Criteria criteria = userExample.createCriteria();
         criteria.andEqualTo("username", username);
-        criteria.andEqualTo("password", password);
         User result = userMapper.selectOneByExample(userExample);
-
-        return result;
+        boolean PwdFlag = BCrypt.checkpw(password, result.getPassword());
+        if(PwdFlag) {
+            return result;
+        }
+        return null;
     }
 }

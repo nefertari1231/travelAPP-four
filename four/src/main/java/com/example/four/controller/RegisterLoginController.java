@@ -5,11 +5,11 @@ import com.example.four.entity.User;
 import com.example.four.service.UserService;
 import com.example.four.utils.JSONResult;
 import com.example.four.utils.JwtUtils;
-import com.example.four.utils.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +44,8 @@ public class RegisterLoginController extends BaseController {
         //保存用户
         if(!usernameIsExist) {
             user.setUsername(user.getUsername());
-            user.setPassword(MD5Utils.getMD5Str(user.getPassword()));
+            String BcPassword = BCrypt.hashpw(user.getPassword(),BCrypt.gensalt());
+            user.setPassword(BcPassword);
             userService.saveUser(user);
         } else {
             return JSONResult.errorMsg("用户名已经存在，请换一个");
@@ -85,7 +86,7 @@ public class RegisterLoginController extends BaseController {
         }
 
         //判断用户名是否存在
-        User userResult = userService.queryUserForLogin(username, MD5Utils.getMD5Str(user.getPassword()));
+        User userResult = userService.queryUserForLogin(username, password);
 
         //返回
         if (userResult != null) {
