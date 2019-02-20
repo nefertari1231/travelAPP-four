@@ -23,18 +23,18 @@
               </div>
             </div>
           <div class="server">
-            <div class="around-content">
+            <div @click="showDestination()" class="around-content">
               <img  class="server-img" src="static/image/server2.jpg" />
               <div class="font-display">
                 <p class="font">周边玩</p>
               </div>
             </div>
           </div>
-          <div  class="server">
-            <div class="nearby-content">
+          <div class="server">
+            <div  @click="showPlayStrategy()" class="nearby-content">
               <img  class="server-img" src="static/image/server3.jpg">
               <div class="font-display">
-                <p class="font">附近的人</p>
+                <p class="font">旅游攻略</p>
               </div>
             </div>
           </div>
@@ -93,6 +93,8 @@
   <home-comment :homeComment="selectedComment" ref="homeComment"></home-comment>
     <search ref="search"></search>
     <service ref="server"></service>
+    <destination ref="destination"></destination>
+    <play-strategy ref="playStrategy"></play-strategy>
     <login ref="login"></login>
 </div>
 </template>
@@ -104,9 +106,13 @@ import HomeComment from '../homeComment/HomeComment'
 import Search from '../search/Search'
 import Service from '../service/Service'
 import Login from '../login/Login'
+import PlayStrategy from '../playStrategy/PlayStrategy'
+import destination from '../destination/destination'
 export default {
   name: 'Home',
   components: {
+    destination,
+    PlayStrategy,
     Login,
     Service,
     Search,
@@ -224,11 +230,19 @@ export default {
     showSever() {
       this.$refs.server.show()
     },
+    showDestination() {
+      this.$refs.destination.show()
+    },
+    showPlayStrategy() {
+      this.$refs.playStrategy.show()
+    },
     login() {
-      if (this.$store.state.userId === null) {
+      if (localStorage.getItem('Authorization') === null) {
         this.$refs.login.show()
         this.$refs.homeComment.hide()
         this.$refs.server.hide()
+        this.$refs.destination.hide()
+        this.$refs.playStrategy.hide()
       }
     },
     onRefresh() {

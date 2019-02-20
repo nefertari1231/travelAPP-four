@@ -76,8 +76,8 @@ export default {
     },
     submit() {
       axios({
-        method: 'post',
-        url: 'http://localhost:8090/api/users/logout?userId=' + this.$store.state.userId,
+        method: 'get',
+        url: 'http://localhost:8090/auth/logout?userId=' + this.$store.state.userId,
         changeOrigin: true
       }).then(response => {
         console.log(response)
@@ -103,6 +103,7 @@ export default {
   .settings-enter-active,.settings-leave-active
     transition: all 0.3s
   .settings-enter, .settings-leave-to
+    opacity: 0
     transform: translate3d( 0,100%, 0)
   //header
   .header-fixed

@@ -113,6 +113,7 @@ export default {
   .user-enter-active,.user-leave-active
     transition: all 0.3s
   .user-enter, .user-leave-to
+    opacity: 0
     transform: translate3d(100%, 0, 0)
     //banner
   .header-fixed

@@ -218,6 +218,7 @@ export default {
   .City-enter-active,.City-leave-active
     transition: all 0.3s
   .City-enter, .City-leave-to
+    opacity: 0
     transform: translate3d( 100%, 0, 0)
   //header
   .header

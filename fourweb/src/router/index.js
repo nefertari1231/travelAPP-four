@@ -3,11 +3,11 @@ import Router from 'vue-router'
 import Home from '@/pages/home/Home'
 import Siri from '@/pages/siri/Siri'
 import Message from '@/pages/message/Message'
-import User from '@/pages/user/user'
+import User from '@/pages/user/User'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -27,3 +27,5 @@ export default new Router({
     }
   ]
 })
+
+export default router

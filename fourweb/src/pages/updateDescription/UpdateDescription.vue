@@ -76,6 +76,7 @@ export default {
   .Description-enter-active,.Description-leave-active
     transition: all 0.3s
   .Description-enter, .Description-leave-to
+    opacity: 0
     transform: translate3d( 100%, 0, 0)
   .header
     display: flex

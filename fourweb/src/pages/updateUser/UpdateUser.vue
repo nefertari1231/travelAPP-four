@@ -133,6 +133,7 @@ export default {
   .updateUser-enter-active,.updateUser-leave-active
     transition: all 0.3s
   .updateUser-enter, .updateUser-leave-to
+    opacity: 0
     transform: translate3d(100%, 0, 0)
   //header
   .header-fixed

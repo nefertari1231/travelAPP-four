@@ -1,33 +1,224 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.four.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.example.four.entity.User">
-    <id column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
+  <resultMap type="com.example.four.entity.User" id="userMap" >
+    <id column="user_id" jdbcType="INTEGER" property="userId"/>
+    <result column="username" jdbcType="VARCHAR" property="username"/>
+    <result column="password" jdbcType="VARCHAR" property="password"/>
+    <result column="email" jdbcType="VARCHAR" property="email"/>
+    <result column="phone" jdbcType="VARCHAR" property="phone"/>
+    <result column="user_nickname" jdbcType="VARCHAR" property="userNickname"/>
+    <result column="user_bg" jdbcType="VARCHAR" property="userBg"/>
+    <result column="user_icon" jdbcType="VARCHAR" property="userIcon"/>
+    <result column="user_sex" jdbcType="VARCHAR" property="userSex"/>
+    <result column="user_area" jdbcType="VARCHAR" property="userArea"/>
+    <result column="user_description" jdbcType="VARCHAR" property="userDescription"/>
+    <result column="follow_count" jdbcType="INTEGER" property="followCount"/>
+    <result column="share_count" jdbcType="INTEGER" property="shareCount"/>
+    <result column="fans_count" jdbcType="INTEGER" property="fansCount"/>
+    <result column="create_time"  property="createTime" javaType="Date" jdbcType="DATE"/>
+    <result column="user_status" jdbcType="INTEGER" property="userStatus"/>
+    <result column="user_code" jdbcType="INTEGER" property="userCode"/>
+    <result column="user_token" jdbcType="VARCHAR" property="userToken"/>
+    <collection property="roles" column="user_id" select="getRoles"/>
   </resultMap>
+  <resultMap id="roleMap" type="com.example.four.entity.Role">
+    <id column="role_id" property="roleId"/>
+    <result column="role_name" property="roleName"/>
+    <result column="role_nameZH" property="roleNameZH"/>
+    <collection property="permissions" column="role_id" select="getPermissions"/>
+  </resultMap>
+  <select id="getRoles" parameterType="int" resultMap="roleMap">
+        select *
+        from role
+        where role_id in (select role_id from user_role where user_id=#{userId})
+    </select>
 
-  <select id="queryUsername" parameterType="com.example.four.entity.User" resultMap="BaseResultMap">
-    SELECT *
-    FROM user where username=#{username}
+  <!--CRUD-->
+  <!--查-->
+  <select id="checkUsername" resultMap="userMap" resultType="int">
+        select count(1) from user
+        where username = #{username}
+    </select>
+  <select id="getAllUsers" resultMap="userMap">
+        select *
+        from user u
+    </select>
+  <select id="login" parameterType="com.example.four.entity.User" resultMap="userMap">
+    select *
+    from user
+    <where>
+      <if test="username != null">
+        username=#{user_name} and
+      </if>
+      <if test="phone != null">
+        phone=#{phone} and
+      </if>
+      <if test="email != null">
+        email=#{email} and
+      </if>
+      password=#{password}
+    </where>
+
   </select>
-
-  <insert id="save" parameterType="com.example.four.entity.User">
-    insert into user (user_id, username, password)
-    values (#{userId},#{username},#{password})
+  <select id="getByUserId" resultMap="userMap">
+        select *
+        from user
+        where user_id=#{userId}
+    </select>
+  <select id="getByUserPhone" parameterType="String" resultMap="userMap">
+        select *
+        from user
+        where phone=#{phone}
+    </select>
+  <select id="getByUserName" parameterType="String" resultMap="userMap">
+        select *
+        from user
+        where username=#{username}
+    </select>
+  <select id="getByUserEmail" parameterType="String" resultMap="userMap">
+        select *
+        from user
+        where email=#{email}
+    </select>
+  <select id="getByUserToken" parameterType="String" resultMap="userMap">
+        select *
+        from  user
+        where user_token=#{userToken}
+    </select>
+  <!--增-->
+  <insert id="insert" parameterType="com.example.four.entity.User">
+     insert into user (username, password, phone, user_code, user_status)
+     values (#{username},#{password},#{phone},#{userCode}, 1)
   </insert>
+  <!--删-->
+  <delete id="deleteByUserId">
+        delete from user
+        where user_id=#{userId}
+    </delete>
+  <delete id="deleteByUserPhone">
+        delete from  user
+        where phone=#{phone}
+    </delete>
+  <!--改-->
+  <sql id="updateCommon">
+    <if test="password != null">
+      password = #{password},
+    </if>
+    <if test="userNickname != null">
+      user_nickname = #{userNickname},
+    </if>
+    <if test="userBg != null">
+      user_bg = #{userBg},
+    </if>
+    <if test="userIcon != null">
+      user_icon = #{userIcon},
+    </if>
+    <if test="userSex != null">
+      user_sex = #{userSex},
+    </if>
+    <if test="userArea != null">
+      user_area = #{userArea},
+    </if>
+    <if test="userDescription != null">
+      user_description = #{userDescription},
+    </if>
+    <if test="followCount != null">
+      follow_count = #{followCount},
+    </if>
+    <if test="shareCount != null">
+      share_count = #{shareCount},
+    </if>
+    <if test="fansCount != null">
+      fans_count = #{fansCount},
+    </if>
+    <if test="userStatus != null">
+      user_status = #{userStatus},
+    </if>
+    <if test="userCode != null">
+      user_code = #{userCode},
+    </if>
+    <if test="userToken != null">
+      user_token = #{userToken}
+    </if>
 
-  <!--<update id="update" parameterType="com.example.four.entity.User">-->
-    <!--update user-->
-    <!--<set>-->
-      <!--<if test="username != null">username=#{username},</if>-->
-      <!--<if test="password != null">password=#{password}</if>-->
-    <!--</set>-->
-    <!--where user_id=#{userId}-->
-  <!--</update>-->
+  </sql>
+  <update id="updateByUserId" parameterType="com.example.four.entity.User">
+    update user
+    <set>
+      <trim suffixOverrides=",">
+        <if test="username != null">
+          username=#{username},
+        </if>
+        <if test="phone != null">
+          phone=#{phone},
+        </if>
+        <include refid="updateCommon"></include>
+      </trim>
+    </set>
+    where user_id=#{userId}
+  </update>
+  <update id="updateByUserName" parameterType="com.example.four.entity.User">
+    update user
+    <set>
+      <trim suffixOverrides=",">
+        <if test="phone != null">
+          phone=#{phone},
+        </if>
+        <include refid="updateCommon"></include>
+      </trim>
+    </set>
+    where username=#{username}
+  </update>
+  <update id="updateByUserEmail" parameterType="com.example.four.entity.User">
+    update user
+    <set>
+      <trim suffixOverrides=",">
+        <if test="username != null">
+          username=#{username},
+        </if>
+        <if test="phone != null">
+          phone=#{phone},
+        </if>
+        <include refid="updateCommon"></include>
+      </trim>
+    </set>
+    where email=#{email}
+  </update>
+  <update id="updateByUserPhone" parameterType="com.example.four.entity.User">
+    update user
+    <set>
+      <trim suffixOverrides=",">
+        <if test="username != null">
+          username=#{username},
+        </if>
+        <if test="email != null">
+          email=#{email},
+        </if>
+        <include refid="updateCommon"></include>
+      </trim>
+    </set>
+    where phone=#{phone}
+  </update>
+  <update id="updateUserPasswordByUserIdOrUserNameOrUserPhone" parameterType="com.example.four.entity.User">
+    update user
+    set password=#{password}
+    <where>
+      <if test="username != null">
+        username=#{username}
+      </if>
+      <if test="phone != null">
+        phone=#{phone}
+      </if>
+      <if test="email != null">
+        email=#{email}
+      </if>
+    </where>
+  </update>
 
-  <!--<delete id="delete" >-->
-    <!--delete from user where user_id=#{userId}-->
-  <!--</delete>-->
-
+  <update id="updatePasswordByUserPhone" parameterType="com.example.four.entity.User">
+        update user
+        set password=#{password}
+        where phone=#{phone}
+    </update>
 </mapper>

@@ -61,6 +61,7 @@ export default {
   .shareout-enter-active,.shareout-leave-active
     transition: all 0.3s
   .shareout-enter, .shareout-leave-to
+    opacity: 0
     transform: translate3d( 0, 100%, 0)
   .header
     display: flex

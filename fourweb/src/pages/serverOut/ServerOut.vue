@@ -109,6 +109,7 @@ export default {
   .serverout-enter-active,.serverout-leave-active
     transition: all 0.3s
   .serverout-enter, .serverout-leave-to
+    opacity: 0
     transform: translate3d( 0, 100%, 0)
   .header
     display: flex

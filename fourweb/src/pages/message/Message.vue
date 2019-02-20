@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     login() {
-      if (this.$store.state.userId === null) {
+      if (localStorage.getItem('Authorization') === null) {
         this.$refs.login.show()
       }
     }

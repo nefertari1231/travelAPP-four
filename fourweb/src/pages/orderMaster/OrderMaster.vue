@@ -129,6 +129,7 @@ export default {
   .order-enter-active,.order-leave-active
     transition: all 0.3s
   .order-enter, .order-leave-to
+    opacity: 0
     transform: translate3d( 100%,0,0)
   //header
   .header

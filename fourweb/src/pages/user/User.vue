@@ -75,7 +75,7 @@
         </ul>
         <ul class="list-icon">
           <div class="title">系统工具</div>
-          <li class="item border">
+          <li class="item border" @click="showCollection()">
             <div class="item-picture">
               <span class="item-pictures iconfont icon-shoucang1"></span>
             </div>
@@ -110,6 +110,7 @@
   <user-detail ref="userDetail"></user-detail>
   <login ref="login" ></login>
   <settings ref="settings"></settings>
+  <collection ref="enteredCollection"></collection>
 </div>
 </template>
 
@@ -118,15 +119,25 @@ import userDetail from '../userDetail/userDetail'
 import Login from '../login/Login'
 import Settings from '../settings/Settings'
 import Bscroll from 'better-scroll'
+import Collection from '../collection/Collection'
 export default {
   name: 'user',
   components: {
+    Collection,
     Settings,
     userDetail,
     Login
   },
   mounted() {
-    this.scroll = new Bscroll(this.$refs.wrapper)
+    this.$nextTick(() => {
+      if (!this.scroll) {
+        this.scroll = new Bscroll(this.$refs.wrapper, {
+          click: true
+        })
+      } else {
+        this.scroll.refresh()
+      }
+    })
   },
   data() {
     return {
@@ -137,21 +148,19 @@ export default {
     enteruserDetail() {
       this.$refs.userDetail.show()
     },
-    exituserDetail() {
-      this.$refs.userDetail.hide()
-    },
     login() {
-      if (this.$store.state.userId === null) {
+      if (localStorage.getItem('Authorization') === null) {
         this.$refs.login.show()
-        this.exituserDetail()
-        this.hideSettings()
+        this.$refs.userDetail.hide()
+        this.$refs.settings.hide()
+        this.$refs.enteredCollection.hide()
       }
     },
     showSettings() {
       this.$refs.settings.show()
     },
-    hideSettings() {
-      this.$refs.settings.hide()
+    showCollection() {
+      this.$refs.enteredCollection.show()
     }
   }
 }

@@ -1,8 +1,8 @@
-package com.demo.config;
+package com.example.four.config;
 
-import com.demo.security.JwtAuthenticationEntryPoint;
-import com.demo.security.JwtAuthorizationTokenFilter;
-import com.demo.service.UserService;
+import com.example.four.security.JwtAuthenticationEntryPoint;
+import com.example.four.security.JwtAuthorizationTokenFilter;
+import com.example.four.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +28,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     *
+     */
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
 
@@ -84,28 +87,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                // we don't need CSRF because our token is invulnerable
-                .csrf().disable()
+            // we don't need CSRF because our token is invulnerable
+            .csrf().disable()
 
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+            .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 
-                // don't create session
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+            // don't create session
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
-                .authorizeRequests()
+            .authorizeRequests()
 
-                // Un-secure H2 Database
-                .antMatchers("/webjars/**").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/v2/api-docs/**").permitAll()
-                .antMatchers("/auth/**").permitAll()
-//                .antMatchers("/school/**").permitAll()
-//                .antMatchers("/canteen/**").permitAll()
-//                .antMatchers("/order/**").permitAll()
-//                .antMatchers("/cart/**").permitAll()
-//                .antMatchers("/user/**").permitAll()
-//                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated();
+            // Un-secure H2 Database
+            .antMatchers("/webjars/**").permitAll()
+            .antMatchers("/swagger-resources/**").permitAll()
+            .antMatchers("/v2/api-docs/**").permitAll()
+            .antMatchers("/auth/**").permitAll()
+            .antMatchers("/api/users/**").permitAll()
+            .antMatchers("/api/servers/**").permitAll()
+            .anyRequest().authenticated();
 
         httpSecurity
                 .addFilterBefore(authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
@@ -136,52 +135,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .ignoring()
                 .antMatchers(
-                        HttpMethod.GET,
-                        "/",
-                        "/webjars/**",
-                        "/swagger-resources/**",
-                        "/v2/api-docs/**",
-                        "/*.html",
-                        "/favicon.ico",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/static/**",
-                        "/**/*.js",
-                        "*.html",
-                        "*.css",
-                        "*.js",
-                        "*.png",
-                        "*.ttf",
-                        "*.*.ttf",
-                        "*.map",
-                        "app.4e017a20280a51523e55184bc8e32de3.css",
-                        "app.4e017a20280a51523e55184bc8e32de3.css.map",
-                        "element-icons.6f0a763.ttf",
-                        "*/static/*",
-                        "**/static/*",
-                        "mui.8820b7f.ttf",
-                        "app.8b0ecbd1a6c57fdae9a9.js",
-                        "app.8b0ecbd1a6c57fdae9a9.js.map",
-                        "manifest.3ad1d5771e9b13dbdad2.js",
-                        "manifest.3ad1d5771e9b13dbdad2.js.map",
-                        "vendor.612dc9c31d84e4dc5f70.js",
-                        "vendor.612dc9c31d84e4dc5f70.js.map",
-                        "mui.ttf"
-
-
+                    HttpMethod.GET,
+                    "/",
+                    "/webjars/**",
+                    "/swagger-resources/**",
+                    "/v2/api-docs/**",
+                    "/*.html",
+                    "/favicon.ico",
+                    "/**/*.html",
+                    "/**/*.css",
+                    "/**/*.js",
+                    "/**/*.jpg"
                 )
 
-
-                // Un-secure H2 Database (for testing purposes, H2 console shouldn't be unprotected in production)
-                .and()
-                .ignoring()
-                .antMatchers("/h2-console/**/**");
-
-
-
-
-
-
+        // Un-secure H2 Database (for testing purposes, H2 console shouldn't be unprotected in production)
+        .and()
+        .ignoring()
+        .antMatchers("/h2-console/**/**");
 
     }
 }

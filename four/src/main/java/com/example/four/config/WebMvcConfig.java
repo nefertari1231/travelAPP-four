@@ -22,25 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.demo.config;
+package com.example.four.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * @author liuzh
- * @since 2015-12-19 16:16
- */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    /**
-     * 重写父类方法
-     * @param registry
-     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/")
+                .addResourceLocations("file:D:/item/user_detail/");
     }
+
 }
+

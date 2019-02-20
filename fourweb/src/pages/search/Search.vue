@@ -45,6 +45,7 @@ export default {
   .search-enter-active,.search-leave-active
     transition: all 0.3s
   .search-enter, .search-leave-to
+    opacity: 0
     transform: translate3d(100%, 0, 0)
   //header
   .header

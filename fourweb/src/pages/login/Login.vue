@@ -3,7 +3,7 @@
     <div class="bg" v-show="showLogin">
       <div>
           <div class="header">
-            <div class="header-right iconfont icon-left" @click="hide()"></div>
+            <div class="header-right iconfont icon-left" @click=hide()></div>
             <div class="header-title">
               登录
             </div>
@@ -12,21 +12,22 @@
       <div>
           <div class="content-bg">
             <div class="content">
-              <p class="title title-tell">学号登录</p>
+              <p class="title title-tell">手机登录</p>
             </div>
             <div class="text1">
-              <div class="iconfont icon-renren"></div>
-              <input class="user" v-model="username"  placeholder="请输入学号" />
+              <div class="iconfont icon-shouji"></div>
+              <input class="user" v-model="username"  placeholder="请输入手机号" />
             </div>
             <div class="text2">
               <div class="iconfont icon-jiesuo"></div>
               <input class="user" v-model="password" :type="passwordType"  placeholder="请输入密码" />
               <span :class="pwdEye" @click="changeType"></span>
             </div>
+            <van-checkbox v-model="checked" class="passwordck" name="remember-me">记住密码</van-checkbox>
             <input class="btn" type="submit"  @click.stop.prevent="submit" value="登录">
             <div class="set">
               <p class="new-user" @click="enterRegister">新用户注册</p>
-              <p class="forget">忘记密码?</p>
+              <p class="forget" @click="enterChangePassword">忘记密码?</p>
             </div>
             <div class="split">
               <hr class="split-left">
@@ -40,6 +41,7 @@
           </div>
         </div> <!--content-->
       <register ref="enteredRegister"></register>
+      <change-password ref="enteredChangePassword"></change-password>
     </div>
   </transition>
 </template>
@@ -47,57 +49,97 @@
 <script>
 import axios from 'axios'
 import Register from '../register/Register'
+import ChangePassword from '../changePassword/ChangePassword'
 export default {
   name: 'Login',
-  components: {Register},
+  components: {ChangePassword, Register},
   data() {
     return {
+      showLogin: false,
       password: '',
       username: '',
-      showLogin: false,
       pwdEye: 'iconfont icon-yanjing-bi',
       passwordType: 'password',
+      checked: false,
       user: {}
     }
   },
+  beforeMount() {
+    this.queryUserInfo()
+  },
+  updated() {
+    this.queryUserInfo()
+  },
   methods: {
     submit() {
-      axios({
-        method: 'post',
-        url: 'http://localhost:8090/api/users/login',
-        changeOrigin: true,
-        data: {
-          'username': this.username,
-          'password': this.password
-        }
-      }).then(response => {
-        console.log(response)
-        this.user = response.data.data
-        if (response.data.status === 200) {
-          this.$toast.success('登录成功')
-          this.hide()
-          this.$store.dispatch('getuserDetail', this.user)
-          this.username = ''
-          this.password = ''
-        } else {
-          this.$toast.fail('登录失败')
-        }
-      }).catch(error => {
-        console.log(error)
-      })
-    },
-    show() {
-      this.showLogin = true
+      if (this.username === '' || this.password === '') {
+        this.$toast('账号或密码不能为空')
+      } else {
+        axios({
+          method: 'post',
+          url: 'http://localhost:8090/auth/login?telephone=' + this.username + '&password=' + this.password,
+          changeOrigin: true,
+          data: {
+            'username': this.username,
+            'password': this.password
+          }
+        }).then(response => {
+          console.log(response)
+          if (response.data.status === 200) {
+            this.userToken = 'Bearer ' + response.data.data.userToken
+            this.userId = response.data.data.userId
+            if (localStorage.getItem('Authorization') === null) {
+              this.$store.dispatch('getToken', this.userToken)
+              this.$store.dispatch('getUserId', this.userId)
+              this.$toast.success('登录成功')
+              this.hide()
+              this.username = ''
+              this.password = ''
+            } else {
+              if (localStorage.getItem('Authorization') === this.userToken) {
+                this.hide()
+              } else {
+                console.log('令牌错误')
+              }
+            }
+          } else {
+            this.$toast.fail(response.data.msg)
+            this.username = ''
+            this.password = ''
+          }
+        }).catch(error => {
+          console.log(error)
+        })
+      }
     },
     hide() {
       this.showLogin = false
     },
+    show() {
+      this.showLogin = true
+    },
     enterRegister() {
       this.$refs.enteredRegister.show()
+    },
+    enterChangePassword() {
+      this.$refs.enteredChangePassword.show()
     },
     changeType() {
       this.passwordType = this.passwordType === 'password' ? 'text' : 'password'
       this.pwdEye = this.pwdEye === 'iconfont icon-yanjing-bi' ? 'iconfont icon-yanjing-zheng' : 'iconfont icon-yanjing-bi'
+    },
+    queryUserInfo() {
+      if (localStorage.getItem('Id') !== null) {
+        axios({
+          method: 'get',
+          url: 'http://localhost:8090/api/users/query?userId=' + localStorage.getItem('Id'),
+          changeOrigin: true
+        }).then(response => {
+          console.log(response)
+          this.user = response.data.data
+          this.$store.dispatch('getuserDetail', this.user)
+        })
+      }
     }
   }
 }
@@ -115,6 +157,7 @@ export default {
   .login-enter-active,.login-leave-active
     transition: all 0.3s
   .login-enter, .login-leave-to
+    opacity: 0
     transform: translate3d(0, 100%, 0)
     //header
   .header
@@ -135,7 +178,7 @@ export default {
     //content
   .content-bg
     position: hidden
-    margin .9rem .3rem 0 .3rem
+    margin .5rem .3rem 0 .3rem
   .content
     overflow: hidden
     line-height: .7rem
@@ -152,10 +195,10 @@ export default {
     float: left
   .text1, .text2
     position: relative
-    margin: .4rem .2rem .3rem .2rem
+    margin: .4rem .1rem .3rem .1rem
     height: .8rem
     line-height: .8rem
-  .icon-renren, .icon-jiesuo
+  .icon-shouji, .icon-jiesuo
     font-size: .6rem
     margin-right: .2rem
   .user
@@ -221,4 +264,7 @@ export default {
     font-size: 1.2rem
     color:  #228B22
     float: right
+  .passwordck
+    margin-left:.3rem
+    margin-top .5rem
 </style>

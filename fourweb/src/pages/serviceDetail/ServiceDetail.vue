@@ -168,6 +168,7 @@ export default {
   .server-enter-active,.server-leave-active
     transition: all 0.3s
   .server-enter, .server-leave-to
+    opacity: 0
     transform: translate3d(100%, 0, 0)
     //header
   .header-fixed

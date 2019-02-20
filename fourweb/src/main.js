@@ -18,11 +18,12 @@ Vue.config.productionTip = false
 fastClick.attach(document.body)
 Vue.use(VueAwesomeSwiper)
 Vue.use(animated)
+
+Vue.config.productionTip = false
 Vue.prototype.$toast.setDefaultOptions({
-  duration: 500,
+  duration: 1000,
   loadingType: 'spinner'
 })
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

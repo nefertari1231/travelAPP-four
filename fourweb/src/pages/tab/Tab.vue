@@ -139,7 +139,7 @@ export default {
     transition-delay: 0.6s
     transform: rotate(45deg)
   #hamburger-6.is-active .line:nth-child(2)
-    width: 0rem
+    width: 0
   #hamburger-6.is-active .line:nth-child(1),
   #hamburger-6.is-active .line:nth-child(3)
     transition-delay: 0.3s

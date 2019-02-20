@@ -12,8 +12,13 @@
 <div>
     <div class="content-bg">
       <div class="text1">
-        <div class="iconfont icon-renren"></div>
-        <input class="user" v-model="username" placeholder="请输入学号"  />
+        <div class="iconfont icon-shouji"></div>
+        <input class="user" v-model="username" placeholder="请输入手机号"  />
+      </div>
+      <div class="text1">
+        <div class="iconfont icon-yanzhengma"></div>
+        <input class="yzm"  placeholder="请输入验证码" v-model="code" />
+        <button class="getyzm" @click.stop.prevent="accpetSendCode()">获取验证码</button>
       </div>
       <div class="text2">
         <div class="iconfont icon-jiesuo"></div>
@@ -23,6 +28,7 @@
         <div class="iconfont icon-jiesuo"></div>
         <input class="user" v-model="repassword" type="password"  placeholder="请再次输入密码" />
       </div>
+      <van-checkbox v-model="checked" class="ckregister">我已了解并阅读《注册服务条款》</van-checkbox>
       <input class="btn" type="submit" value="注册" @click.stop.prevent="successRegister()">
     </div>
   </div> <!--content-->
@@ -39,7 +45,9 @@ export default {
       showRegister: false,
       password: '',
       repassword: '',
-      username: ''
+      code: '',
+      username: '',
+      checked: true
     }
   },
   methods: {
@@ -48,46 +56,85 @@ export default {
     },
     hide() {
       this.showRegister = false
+      this.username = ''
+      this.password = ''
+      this.code = ''
+      this.repassword = ''
     },
-    successRegister() {
+    accpetSendCode() {
       if (this.username !== '') {
-        if (this.password !== '' && this.repassword !== '') {
-          if (this.password === this.repassword) {
-            if (/^\d{8}$/.test(this.username) && /^[a-zA-Z]\w{5,17}$/.test(this.password)) {
-              axios({
-                method: 'post',
-                url: 'http://localhost:8090/api/users/register',
-                changeOrigin: true,
-                data: {
-                  'username': this.username,
-                  'password': this.password
-                }
-              }).then(response => {
-                console.log(response)
-                if (response.data.status === 200) {
-                  this.$toast.success('注册成功')
-                  this.hide()
-                  this.username = ''
-                  this.password = ''
-                  this.repassword = ''
-                }
-                if (response.data.status === 500) {
-                  this.$toast(response.data.msg)
-                }
-              }).catch(error => {
-                console.log(error)
-              })
-            } else {
-              this.$toast('用户名为8位数字，密码为英文开头')
+        if (/^1[34578]\d{9}$/.test(this.username)) {
+          axios({
+            method: 'post',
+            url: 'http://localhost:8090/auth/sendCode?telephone=' + this.username,
+            changeOrigin: true,
+            data: {
+              'username': this.username
             }
-          } else {
-            this.$toast('二次输入密码不同')
-          }
+          }).then(response => {
+            console.log(response)
+            if (response.data.status === 200) {
+              this.$toast.success('获取成功')
+            }
+            if (response.data.status === 500) {
+              this.$toast(response.data.msg)
+            }
+          }).catch(error => {
+            console.log(error)
+          })
         } else {
-          this.$toast('请填入密码')
+          this.$toast('请填写有效的手机号')
         }
       } else {
-        this.$toast('请填入用户名和密码')
+        this.$toast('请填写手机号')
+      }
+    },
+    successRegister() {
+      if (this.password !== '' && this.repassword !== '') {
+        if (this.password === this.repassword) {
+          if (/^[a-zA-Z]\w{5,17}$/.test(this.password)) {
+            axios({
+              method: 'post',
+              url: 'http://localhost:8090/auth/register?telephone=' + this.username + '&code=' + this.code + '&password=' + this.password,
+              changeOrigin: true,
+              data: {
+                'username': this.username,
+                'code': this.code,
+                'password': this.password
+              }
+            }).then(response => {
+              console.log(response)
+              if (response.data.status === 200) {
+                this.$toast.success('注册成功')
+                this.hide()
+                this.username = ''
+                this.password = ''
+                this.code = ''
+                this.repassword = ''
+              }
+              if (response.data.status === 500 && response.data.msg === '验证错误') {
+                this.$toast(response.data.msg)
+                this.password = ''
+                this.code = ''
+                this.repassword = ''
+              } else {
+                this.$toast(response.data.msg)
+                this.username = ''
+                this.password = ''
+                this.code = ''
+                this.repassword = ''
+              }
+            }).catch(error => {
+              console.log(error)
+            })
+          } else {
+            this.$toast('密码为英文开头')
+          }
+        } else {
+          this.$toast('两次输入密码不同')
+        }
+      } else {
+        this.$toast('请填入密码')
       }
     }
   }
@@ -98,7 +145,7 @@ export default {
   .bg
     position: fixed
     background: #FFF
-    z-index: 100
+    z-index: 111
     top: 0
     left: 0
     right: 0
@@ -106,6 +153,7 @@ export default {
   .register-enter-active,.register-leave-active
     transition: all 0.3s
   .register-enter, .register-leave-to
+    opacity: 0
     transform: translate3d( 0,100%,0)
   //header
   .header
@@ -126,7 +174,7 @@ export default {
   //content
   .content-bg
     position: hidden
-    margin .9rem .3rem 0 .3rem
+    margin .2rem .3rem 0 .3rem
   .content
     overflow: hidden
     line-height: .7rem
@@ -138,7 +186,7 @@ export default {
     margin: .4rem .2rem .3rem .2rem
     height: .8rem
     line-height: .8rem
-  .icon-renren, .icon-jiesuo
+  .icon-shouji, .icon-jiesuo,.icon-yanzhengma
     font-size: .6rem
     margin-right: .2rem
   .user
@@ -177,4 +225,20 @@ export default {
     height: 2.4rem
     line-height: 2.4rem
     padding: 0 1.5rem
+  .ckregister
+    margin-left 0.3rem
+    margin-top .5rem
+  .yzm
+    width: 60%
+    height: .8rem
+    line-height: .8rem
+    font-size: .33rem
+  .getyzm
+    line-height 0.6rem
+    height 0.6rem
+    font-size .2rem
+    color white
+    width 1.5rem
+    border-radius: 0.2rem
+    background: dodgerblue
 </style>

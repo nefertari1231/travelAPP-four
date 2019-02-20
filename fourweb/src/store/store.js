@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    Authorization: null,
     userId: null,
     userBg: 'static/image/login-bg.jpg',
     userIcon: 'static/image/login.jpg',
@@ -14,11 +15,24 @@ export default new Vuex.Store({
     userSex: '',
     shareCount: 0,
     followCount: 0,
-    fansCount: 0
+    fansCount: 0,
+    selectData: [],
+    likeImg: 'icon-heart',
+    showLike: false,
+    showMosk: false,
+    showzan: false,
+    favourite: 'icon-like',
+    keepZan: []
   },
   actions: {
     getuserDetail(ctx, user) {
       ctx.commit('getuserDetail', user)
+    },
+    getUserId (ctx, userId) {
+      ctx.commit('getUserId', userId)
+    },
+    getToken (ctx, userToken) {
+      ctx.commit('getToken', userToken)
     },
     updateuserBg(ctx, userBg) {
       ctx.commit('updateuserBg', userBg)
@@ -43,6 +57,14 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    getUserId (state, userId) {
+      localStorage.setItem('Id', userId)
+      state.userId = localStorage.getItem('Id')
+    },
+    getToken (state, userToken) {
+      localStorage.setItem('Authorization', userToken)
+      state.Authorization = localStorage.getItem('Authorization')
+    },
     updateuserBg(user, userBg) {
       user.userBg = userBg
     },
@@ -62,7 +84,6 @@ export default new Vuex.Store({
       user.userDescription = Description
     },
     getuserDetail(state, user) {
-      state.userId = user.userId
       if (user.userBg === null) {
         state.userBg = 'static/image/login-bg.jpg'
       } else {
@@ -110,7 +131,10 @@ export default new Vuex.Store({
       }
     },
     logOff(state) {
-      state.userId = null
+      localStorage.removeItem('Authorization')
+      localStorage.removeItem('Id')
+      state.Authorization = localStorage.getItem('Authorization')
+      state.userId = localStorage.getItem('Id')
       state.userBg = 'static/image/login-bg.jpg'
       state.userIcon = 'static/image/login.jpg'
       state.userNickname = '请登录/注册'
@@ -119,6 +143,35 @@ export default new Vuex.Store({
       state.shareCount = 0
       state.followCount = 0
       state.fansCount = 0
+    },
+    // 收藏
+    getSelectDate(state, data) {
+      state.selectData.push(data)
+    },
+    // 收藏图标
+    like(state, data) {
+      state.likeImg = data
+    },
+    // 取消收藏
+    likeSelectDate(state, data) {
+      state.selectData.splice(state.selectData.indexOf(data), 1)
+    },
+    // 展示 赞 收藏 的 状态
+    showLike(state, data) {
+      state.showLike = data
+      state.showMosk = data
+    },
+    showZan(state, data) {
+      state.showzan = data
+    },
+    favourites(state, data) {
+      state.favourite = data
+    },
+    keepZan(state, data) {
+      state.keepZan.push(data)
+    },
+    Zan(state, data) {
+      state.keepZan.splice(state.keepZan.indexOf(data), 1)
     }
   }
 })

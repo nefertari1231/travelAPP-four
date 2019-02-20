@@ -88,6 +88,7 @@ export default {
   .updateSex-enter-active,.updateSex-leave-active
     transition: all 0.3s
   .updateSex-enter, .updateSex-leave-to
+    opacity: 0
     transform: translate3d(100%, 0, 0)
   //header
   .header-fixed

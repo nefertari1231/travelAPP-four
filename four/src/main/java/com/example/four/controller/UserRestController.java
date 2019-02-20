@@ -9,8 +9,11 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,16 +28,20 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 @RestController
 @CrossOrigin
 @Api(value = "api/users", tags ="usersApi", description = "用户相关业务接口")
-public class UserController extends BaseController {
+public class UserRestController  {
+    @Value("${jwt.header}")
+    private String tokenHeader;
 
     @Autowired
     private UserService userService;
 
+    private Logger logger=LoggerFactory.getLogger(this.getClass());
+
     @PutMapping(value = "/update")
     @ApiOperation(value = "用户更新", response = User.class, responseContainer = "list")
-    public JSONResult updateUserInfo (@RequestBody User user) throws Exception {
+    public JSONResult updateUserInfo (@RequestBody User user) {
 
-        userService.updateUserInfo(user);
+        userService.updateByUserId(user);
 
         return JSONResult.ok();
     }
@@ -42,9 +49,9 @@ public class UserController extends BaseController {
     @PostMapping(value = "/uploadUserIcon")
     @ApiOperation(value = "用户上传头像", response = User.class, responseContainer = "list")
     @ApiImplicitParam(name="userId", value = "用户ID", required = true, dataType = "String", paramType = "query")
-    public JSONResult uploadUserIcon (String userId, @RequestParam("file") MultipartFile file) throws Exception {
-
-        if (StringUtils.isBlank(userId)) {
+    public JSONResult uploadUserIcon (Integer userId, @RequestParam("file") MultipartFile file) throws Exception {
+//        StringUtils.isBlank(userId)
+        if (userId == null) {
             return JSONResult.errorMsg("用户Id不能为空...");
         }
 
@@ -69,9 +76,9 @@ public class UserController extends BaseController {
     @PostMapping(value = "/uploadUserBg")
     @ApiOperation(value = "用户上传壁纸", response = User.class, responseContainer = "list")
     @ApiImplicitParam(name="userId", value = "用户ID", required = true, dataType = "String", paramType = "query")
-    public JSONResult uploadUserBg (String userId, @RequestParam("file") MultipartFile file) throws Exception {
+    public JSONResult uploadUserBg (Integer userId, @RequestParam("file") MultipartFile file) throws Exception {
 
-        if (StringUtils.isBlank(userId)) {
+        if (userId == null) {
             return JSONResult.errorMsg("用户Id不能为空...");
         }
 
@@ -93,12 +100,12 @@ public class UserController extends BaseController {
         return JSONResult.ok(uploadPathDB);
     }
 
-    @PostMapping(value = "/query")
+    @GetMapping(value = "/query")
     @ApiOperation(value = "查询用户信息", response = User.class, responseContainer = "list")
     @ApiImplicitParam(name="userId", value = "用户ID", required = true, dataType = "String", paramType = "query")
-    public JSONResult query (String userId) throws Exception {
+    public JSONResult query (Integer userId) throws Exception {
 
-        if (StringUtils.isBlank(userId)) {
+        if (userId == null) {
             return JSONResult.errorMsg("用户Id不能为空...");
         }
 

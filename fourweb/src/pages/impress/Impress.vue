@@ -45,7 +45,7 @@ export default {
       this.$refs.shareout.show()
     },
     login() {
-      if (this.$store.state.userId === null) {
+      if (localStorage.getItem('Authorization') === null) {
         this.$refs.login.show()
         this.$refs.serverout.hide()
         this.$refs.shareout.hide()
@@ -59,6 +59,7 @@ export default {
   .icon-enter-active
     transition: all 0.3s
   .icon-enter, .icon-leave-to
+    opacity: 0
     transform: translate3d(0,100%, 0)
   .impress
     position: fixed
