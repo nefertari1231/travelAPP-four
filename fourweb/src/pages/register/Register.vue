@@ -29,7 +29,7 @@
         <input class="user" v-model="repassword" type="password"  placeholder="请再次输入密码" />
       </div>
       <van-checkbox v-model="checked" class="ckregister">我已了解并阅读《注册服务条款》</van-checkbox>
-      <input class="btn" type="submit" value="注册" @click.stop.prevent="successRegister()">
+      <input class="btn" type="submit" value="注册" :class="{'clickTrue': checked === true}" @click.stop.prevent="successRegister()">
     </div>
   </div> <!--content-->
 </div>
@@ -47,7 +47,7 @@ export default {
       repassword: '',
       code: '',
       username: '',
-      checked: true
+      checked: false
     }
   },
   methods: {
@@ -90,51 +90,53 @@ export default {
       }
     },
     successRegister() {
-      if (this.password !== '' && this.repassword !== '') {
-        if (this.password === this.repassword) {
-          if (/^[a-zA-Z]\w{5,17}$/.test(this.password)) {
-            axios({
-              method: 'post',
-              url: 'http://localhost:8090/auth/register?telephone=' + this.username + '&code=' + this.code + '&password=' + this.password,
-              changeOrigin: true,
-              data: {
-                'username': this.username,
-                'code': this.code,
-                'password': this.password
-              }
-            }).then(response => {
-              console.log(response)
-              if (response.data.status === 200) {
-                this.$toast.success('注册成功')
-                this.hide()
-                this.username = ''
-                this.password = ''
-                this.code = ''
-                this.repassword = ''
-              }
-              if (response.data.status === 500 && response.data.msg === '验证错误') {
-                this.$toast(response.data.msg)
-                this.password = ''
-                this.code = ''
-                this.repassword = ''
-              } else {
-                this.$toast(response.data.msg)
-                this.username = ''
-                this.password = ''
-                this.code = ''
-                this.repassword = ''
-              }
-            }).catch(error => {
-              console.log(error)
-            })
+      if (this.checked === true) {
+        if (this.password !== '' && this.repassword !== '') {
+          if (this.password === this.repassword) {
+            if (/^[a-zA-Z]\w{5,17}$/.test(this.password)) {
+              axios({
+                method: 'post',
+                url: 'http://localhost:8090/auth/register?telephone=' + this.username + '&code=' + this.code + '&password=' + this.password,
+                changeOrigin: true,
+                data: {
+                  'username': this.username,
+                  'code': this.code,
+                  'password': this.password
+                }
+              }).then(response => {
+                console.log(response)
+                if (response.data.status === 200) {
+                  this.$toast.success('注册成功')
+                  this.hide()
+                  this.username = ''
+                  this.password = ''
+                  this.code = ''
+                  this.repassword = ''
+                }
+                if (response.data.status === 500 && response.data.msg === '验证错误') {
+                  this.$toast(response.data.msg)
+                  this.password = ''
+                  this.code = ''
+                  this.repassword = ''
+                } else {
+                  this.$toast(response.data.msg)
+                  this.username = ''
+                  this.password = ''
+                  this.code = ''
+                  this.repassword = ''
+                }
+              }).catch(error => {
+                console.log(error)
+              })
+            } else {
+              this.$toast('密码为英文开头')
+            }
           } else {
-            this.$toast('密码为英文开头')
+            this.$toast('两次输入密码不同')
           }
         } else {
-          this.$toast('两次输入密码不同')
+          this.$toast('请填入密码')
         }
-      } else {
-        this.$toast('请填入密码')
       }
     }
   }
@@ -202,12 +204,14 @@ export default {
     border-radius: 0.5rem;
     width: 100%
     height: .9rem
-    background: dodgerblue
+    background: gray
     margin-top: .6rem
     line-height: .9rem
     text-align: center
     color: #FFF
     font-size: .4rem
+  .clickTrue
+    background: dodgerblue
   .set
     width: 100%
     line-height: .6rem

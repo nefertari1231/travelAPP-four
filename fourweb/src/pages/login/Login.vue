@@ -93,8 +93,10 @@ export default {
               this.$store.dispatch('getUserId', this.userId)
               this.$toast.success('登录成功')
               this.hide()
-              this.username = ''
-              this.password = ''
+              if (this.checked === false) {
+                this.username = ''
+                this.password = ''
+              }
             } else {
               if (localStorage.getItem('Authorization') === this.userToken) {
                 this.hide()
@@ -114,6 +116,10 @@ export default {
     },
     hide() {
       this.showLogin = false
+      if (this.checked === false) {
+        this.username = ''
+        this.password = ''
+      }
     },
     show() {
       this.showLogin = true

@@ -77,7 +77,7 @@ export default {
     submit() {
       axios({
         method: 'get',
-        url: 'http://localhost:8090/auth/logout?userId=' + this.$store.state.userId,
+        url: 'http://localhost:8090/auth/logout?userId=' + localStorage.getItem('Id'),
         changeOrigin: true
       }).then(response => {
         console.log(response)
