@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
 @RequestMapping(value ="api/servers", produces = {APPLICATION_JSON_UTF8_VALUE})
@@ -30,9 +32,18 @@ public class ServerController {
         server.setServerPrice(server.getServerPrice());
         server.setServerPlace(server.getServerPlace());
         server.setServerRemark(server.getServerRemark());
+        server.setUserId(server.getUserId());
+        server.setServerStatus(0);//设置服务状态
+        server.setCreateTime(new Date());
         serverService.saveServer(server);
 
         return JSONResult.ok(server);
+    }
+
+    @GetMapping(value = "/all")
+    @ApiOperation(value = "获取全部服务", response = Server.class, responseReference = "list")
+    public JSONResult getAllServers() {
+        return JSONResult.ok(serverService.getAllServers());
     }
 
 }
