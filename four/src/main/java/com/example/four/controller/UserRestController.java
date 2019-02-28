@@ -56,7 +56,7 @@ public class UserRestController  {
         }
 
         //头像保存命名空间
-        String fileSpace = "D:/item/user_detail";
+        String fileSpace = "C:/item/user_detail";
 
         //保存到数据库的相对路径
         String uploadPathDB = "/" + userId + "/Icon";
@@ -83,7 +83,7 @@ public class UserRestController  {
         }
 
         //壁纸保存命名空间
-        String fileSpace = "D:/item/user_detail";
+        String fileSpace = "C:/item/user_detail";
 
         //保存到数据库的相对路径
         String uploadPathDB = "/" + userId + "/Bg";
