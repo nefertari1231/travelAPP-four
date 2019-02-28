@@ -52,6 +52,7 @@ export default {
   },
   created() {
     axios.get('/api/good.json').then((res) => {
+      console.log(res)
       this.goods = res.data.data
     })
   },
