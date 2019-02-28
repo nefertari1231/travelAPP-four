@@ -7,10 +7,21 @@ import com.example.four.service.ServerService;
 import com.example.four.utils.JSONResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+=======
+import io.swagger.models.auth.In;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
+>>>>>>> febf4915dc414fa6c85ffc3664deefc5270e03e9
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -28,12 +39,20 @@ public class OrderController {
 
     @PostMapping(value = "/saveOrder")
     @ApiOperation(value = "保存订单", response = Order.class, responseContainer = "list")
+<<<<<<< HEAD
     public JSONResult saveOrder(@RequestBody Order order,String serverId) {
+=======
+    public JSONResult register(@RequestBody Order order,String serverId) {
+>>>>>>> febf4915dc414fa6c85ffc3664deefc5270e03e9
 
         Server server = new Server();
         server.setServerId(serverId);
         server.setServerStatus(1);
+<<<<<<< HEAD
         serverService.saveServer(server);
+=======
+        serverService.updateServers(server);
+>>>>>>> febf4915dc414fa6c85ffc3664deefc5270e03e9
 
         //保存订单
         order.setBuyerName(order.getBuyerName());

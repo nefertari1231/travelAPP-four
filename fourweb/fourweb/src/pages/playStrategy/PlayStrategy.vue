@@ -52,7 +52,6 @@ export default {
   },
   created() {
     axios.get('/api/good.json').then((res) => {
-      console.log(res)
       this.goods = res.data.data
     })
   },
@@ -96,6 +95,24 @@ export default {
       // 调取子组件的方法
       this.$refs.detail.showDetail()
       this.selectGoods = item
+
+      // 判断当前点击的 数据 是否在store里面有
+      if (JSON.stringify(this.$store.state.selectData).indexOf(JSON.stringify(item)) !== -1) {
+        // 点击状态
+        this.$store.commit('like', 'icon-heart-fill')
+        this.$store.commit('showLike', true)
+      } else {
+        // 初始状态
+        this.$store.commit('like', 'icon-heart')
+        this.$store.commit('showLike', false)
+      }
+      if (JSON.stringify(this.$store.state.keepZan).indexOf(JSON.stringify(item)) === -1) {
+        this.$store.commit('favourites', 'icon-like')
+        this.$store.commit('showZan', false)
+      } else {
+        this.$store.commit('favourites', 'icon-like--fill')
+        this.$store.commit('showZan', true)
+      }
     }
   }
 }

@@ -145,6 +145,7 @@ export default {
     },
     // 关闭滚动菜单
     closeScroll() {
+      console.log(1)
       this.scrollShow = false
       this.menuShow = true
     },

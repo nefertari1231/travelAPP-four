@@ -1,6 +1,12 @@
 package com.example.four.controller;
 
+<<<<<<< HEAD
 import com.example.four.entity.Share;
+=======
+import com.example.four.entity.Server;
+import com.example.four.entity.Share;
+import com.example.four.service.ServerService;
+>>>>>>> febf4915dc414fa6c85ffc3664deefc5270e03e9
 import com.example.four.service.ShareService;
 import com.example.four.utils.JSONResult;
 import io.swagger.annotations.Api;
@@ -21,7 +27,11 @@ public class ShareController {
 
     @PostMapping(value = "/saveShare")
     @ApiOperation(value = "保存分享", response = Share.class, responseContainer = "list")
+<<<<<<< HEAD
     public JSONResult saveShare(@RequestBody Share share) {
+=======
+    public JSONResult register(@RequestBody Share share) {
+>>>>>>> febf4915dc414fa6c85ffc3664deefc5270e03e9
 
         //保存分享
         share.setShareContent(share.getShareContent());

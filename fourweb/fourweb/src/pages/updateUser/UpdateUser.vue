@@ -100,7 +100,7 @@ export default {
       formData.append('file', file)
       axios({
         method: 'post',
-        url: 'http://localhost:8090/api/users/uploadUserIcon?userId=' + localStorage.getItem('Id'),
+        url: 'http://localhost:8090/api/users/uploadUserIcon?userId=' + this.$store.state.userId,
         changeOrigin: true,
         data: formData
       }).then(response => {

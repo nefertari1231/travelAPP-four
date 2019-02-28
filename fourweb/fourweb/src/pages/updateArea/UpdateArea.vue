@@ -70,7 +70,7 @@ export default {
     onCancel() {
       this.showArea = false
     },
-    onConfirm() {
+    onConfirm(picker, value, index) {
       axios({
         method: 'put',
         url: 'http://localhost:8090/api/users/update',

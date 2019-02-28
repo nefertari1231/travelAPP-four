@@ -1,6 +1,7 @@
 <template>
   <div class="footer">
     <div class="footer__favourite common" @click.stop.prevent="addFavourite">
+      <!-- <i class="iconfont" :class="[show?'icon-zan1':'icon-zan']"></i> -->
       <i class="iconfont" :class="this.$store.state.favourite"></i>
       <span>{{favourite}}</span>
     </div>
@@ -15,16 +16,12 @@
   </div>
 </template>
 <script type="text/javascript">
-import axios from 'axios'
 export default {
   props: ['count', 'select'],
   data() {
     return {
       mosk: false
     }
-  },
-  updated() {
-    console.log(this.select)
   },
   computed: {
     favourite() {
@@ -58,41 +55,11 @@ export default {
     collects() {
       this.mosk = !this.mosk
       // 判断是否收藏 然后在传值
-      if (this.collect === '收藏') {
-        axios({
-          method: 'post',
-          url: 'http://localhost:8090/api/collect/saveCollect',
-          changeOrigin: true,
-          data: {
-            'userId': localStorage.getItem('Id'),
-            'collectName': this.select.title
-          }
-        }).then(response => {
-          if (response.data.status === 200) {
-            console.log('1')
-          } else if (response.data.status === 500) {
-            console.log('2')
-          }
-        })
+      if (this.$store.state.likeImg === 'icon-heart') {
         this.$store.commit('getSelectDate', this.select)
         this.$store.commit('like', 'icon-heart-fill')
         this.$store.commit('showLike', true)
       } else {
-        axios({
-          method: 'post',
-          url: 'http://localhost:8090/api/collect/saveCollect',
-          changeOrigin: true,
-          data: {
-            'userId': this.$store.state.userId,
-            'collectName': this.select.title
-          }
-        }).then(response => {
-          if (response.data.status === 200) {
-            console.log('1')
-          } else if (response.data.status === 500) {
-            console.log('2')
-          }
-        })
         this.$store.commit('likeSelectDate', this.select)
         this.$store.commit('like', 'icon-heart')
         this.$store.commit('showLike', false)
