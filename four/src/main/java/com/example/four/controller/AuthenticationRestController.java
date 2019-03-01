@@ -1,6 +1,7 @@
 package com.example.four.controller;
 
 import com.example.four.VO.UserVO;
+import com.example.four.config.MyHttpSessionListener;
 import com.example.four.entity.User;
 import com.example.four.jopo.ErrorResponseEntity;
 import com.example.four.security.JwtAuthenticationRequest;
@@ -205,9 +206,9 @@ public class AuthenticationRestController extends BaseController{
                 userService.updateByUserName(userResult);
                 logger.info("JwtToken" + userResult.getUserToken());
             }
-            httpSession.setAttribute(telephone, telephone);
+            httpSession.setAttribute("loginName", telephone);
             String uniqueToken = UUID.randomUUID().toString();
-            redisOperator.set(USER_REDIS_SESSION + ":" + userResult.getUserId(),uniqueToken, 1000 * 60);
+            redisOperator.set(USER_REDIS_SESSION + ":" + userResult.getUserId(), uniqueToken, 1000 * 60);
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(userResult,userVO);
             userVO.setRedisToken(uniqueToken);
@@ -218,6 +219,31 @@ public class AuthenticationRestController extends BaseController{
         } else {
             return JSONResult.errorMsg("该用户没有注册，请先注册");
         }
+    }
+
+    /**
+     * 检测实时在线人数
+     *
+     */
+
+    @GetMapping("/online")
+    public Object online() {
+        return  "当前在线人数：" + MyHttpSessionListener.online + "人";
+    }
+
+    /**
+     * 判断session是否有效
+     * @param httpServletRequest
+     * @return
+     */
+    @GetMapping("/getSession")
+    public String getSession(HttpServletRequest httpServletRequest) {
+        HttpSession session = httpServletRequest.getSession();
+        String loginName = (String) session.getAttribute("loginName");
+        if (StringUtils.isNotBlank(loginName)) {
+            return "200";
+        }
+        return "";
     }
 
     /**
@@ -254,14 +280,15 @@ public class AuthenticationRestController extends BaseController{
      * 注销
      */
     @GetMapping("/logout")
-    public ResponseEntity logout(Integer userId, HttpSession httpSession){
+    public ResponseEntity logout(Integer userId, HttpServletRequest request){
         User user = userService.getByUserId(userId);
         if (user != null){
             user.setUserToken(null);
             int logoutResult = userService.updateByUserId(user);
             redisOperator.del(USER_REDIS_SESSION + ":" + userId);
+            HttpSession httpSession = request.getSession(false);
             if(httpSession != null){
-                httpSession.removeAttribute(user.getUsername());
+                httpSession.removeAttribute("loginName");
                 httpSession.invalidate();
             }
             logger.info("用户"+userId+"注销成功");

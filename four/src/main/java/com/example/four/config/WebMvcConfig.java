@@ -24,6 +24,8 @@
 
 package com.example.four.config;
 
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -37,6 +39,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/")
                 .addResourceLocations("file:C:/item/user_detail/");
     }
+
+    @Bean
+    public ServletListenerRegistrationBean listenerRegist() {
+        ServletListenerRegistrationBean srb = new ServletListenerRegistrationBean();
+        srb.setListener(new MyHttpSessionListener());
+        System.out.println("listener");
+        return srb;
+    }
+
 
 }
 
