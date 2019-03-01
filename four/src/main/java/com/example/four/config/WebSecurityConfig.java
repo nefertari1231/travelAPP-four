@@ -104,12 +104,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/auth/**").permitAll()
             .antMatchers("/api/users/**").permitAll()
             .antMatchers("/api/servers/**").permitAll()
-<<<<<<< HEAD
             .antMatchers("/api/collect/**").permitAll()
-=======
             .antMatchers("/api/order/**").permitAll()
             .antMatchers("/api/share/**").permitAll()
->>>>>>> febf4915dc414fa6c85ffc3664deefc5270e03e9
             .anyRequest().authenticated();
 
         httpSecurity

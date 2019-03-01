@@ -29,7 +29,7 @@ public class CollectController {
 
     @PostMapping(value = "/deleteCollect")
     @ApiOperation(value = "删除收藏", response = Collect.class, responseContainer = "list")
-    public JSONResult deleteCollect(@RequestBody String collectName) {
+    public JSONResult deleteCollect(String collectName) {
 
         collectService.deleteByCollectName(collectName);
         return JSONResult.ok();
