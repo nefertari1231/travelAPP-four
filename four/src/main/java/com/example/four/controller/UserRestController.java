@@ -3,6 +3,7 @@ package com.example.four.controller;
 import com.example.four.VO.UserVO;
 import com.example.four.entity.User;
 import com.example.four.service.UserService;
+import com.example.four.utils.CosUtil;
 import com.example.four.utils.JSONResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -151,6 +152,9 @@ public class UserRestController  {
 
                         //设置数据库保存的路径
                         uploadPathDB += ( "/" + fileName);
+
+                        //上传到云存储
+                        CosUtil.upload(fileName, new File(finalIconPath));
 
                         File outFile = new File(finalIconPath);
                         if (outFile.getParentFile() != null || !outFile.getParentFile().isDirectory()) {
