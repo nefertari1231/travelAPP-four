@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a089df9c-14e3-42c7-b7f3-7ad5891120f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/utils/CosUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../four/src/test/resources/test.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../four/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../four/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a089df9c-14e3-42c7-b7f3-7ad5891120f9" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -40,9 +35,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="170" />
-    <option name="y" value="21" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="267" />
+    <option name="y" value="7" />
     <option name="width" value="1395" />
     <option name="height" value="966" />
   </component>
@@ -124,15 +119,15 @@
       <updated>1551372234065</updated>
       <workItem from="1551372237239" duration="156000" />
       <workItem from="1551409185326" duration="2238000" />
-      <workItem from="1551411523983" duration="1730000" />
+      <workItem from="1551411523983" duration="2941000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4124000" />
+    <option name="totallyTimeSpent" value="5335000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="170" y="21" width="1395" height="966" extended-state="0" />
+    <frame x="267" y="7" width="1395" height="966" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34929994" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -146,7 +141,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.1923077" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.18990384" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
