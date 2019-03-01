@@ -14,13 +14,13 @@
             <li class="border-bottom">
               <div class="iconfont icon-user">
               <span class="title">购买人 :</span>
-            <input class="content"  name="user" placeholder="购买人姓名" v-model="endOrder.buyerName"/>
+            <input class="content"  name="user" placeholder="购买人姓名" v-model="buyerName"/>
               </div>
             </li>
             <li class="border-bottom">
               <div class="iconfont icon-shouji">
               <span class="title">电话 :</span>
-            <input class="content" name="user" placeholder="电话号码" v-model="endOrder.buyerPhone"/>
+            <input class="content" name="user" placeholder="电话号码" v-model="buyerPhone"/>
               </div>
             </li>
             <li class="border-bottom">
@@ -29,7 +29,7 @@
                 <div class="content2">
                 <div class="input-number">
                   <div class="input-sub" @click="changeNumber(-1)"></div>
-                  <input class="input-num" v-model="endOrder.count" />
+                  <input class="input-num" v-model="count" />
                   <div class="input-add" @click="changeNumber(1)"></div>
                 </div>
                 </div>
@@ -38,7 +38,7 @@
             <li class="border-bottom">
               <div class="iconfont icon-comment">
                 <span class="title">留言给他 :</span>
-                <input class="content"  name="user" placeholder="给他留言" v-model="endOrder.buyerTalk"/>
+                <input class="content"  name="user" placeholder="给他留言" v-model="buyerTalk"/>
               </div>
             </li>
         </ul>
@@ -57,7 +57,7 @@
           <div class="sure" @click="enterOrderDetail">确认</div>
         </div>
       </div>  <!--footer-->
-      <order-detail :orderDetail="endOrder" ref="orderDetail"></order-detail>
+      <order-detail :orderDetail="endOrder" :count="count" :server="orderMaster" ref="orderDetail" @allHide="allHide"></order-detail>
     </div>
   </transition>
 </template>
@@ -74,12 +74,11 @@ export default {
   data() {
     return {
       showOrder: false,
-      endOrder: {
-        count: 1,
-        buyerName: '',
-        buyerPhone: '',
-        buyerTalk: '请保证安全'
-      }
+      endOrder: {},
+      count: 1,
+      buyerName: '',
+      buyerPhone: '',
+      buyerTalk: ''
     }
   },
   filters: {
@@ -90,46 +89,46 @@ export default {
   methods: {
     show() {
       this.showOrder = true
+      console.log(this.orderMaster)
     },
     hide() {
       this.showOrder = false
     },
+    allHide() {
+      this.showOrder = false
+      this.$emit('allHide')
+    },
     changeNumber(way) {
       if (way > 0) {
-        this.endOrder.count++
+        this.count++
       } else {
-        this.endOrder.count--
-        if (this.endOrder.count < 1) {
-          this.endOrder.count = 1
+        this.count--
+        if (this.count < 1) {
+          this.count = 1
         }
       }
     },
-    extend(target, source) {
-      for (var obj in source) {
-        target[obj] = source[obj]
-      }
-      return target
-    },
     enterOrderDetail () {
-      if (this.endOrder.buyerName === '' || this.endOrder.buyerPhone === '') {
+      if (this.buyerName === '' || this.buyerPhone === '') {
         this.$toast.fail('请完善订单')
       } else {
-        this.endOrder = this.extend(this.orderMaster, this.endOrder)
         this.$refs.orderDetail.show()
         axios({
           method: 'post',
-          url: 'http://localhost:8090/api/order/saveOrder?serverId=' + this.endOrder.serverId,
+          url: 'http://localhost:8090/api/order/saveOrder',
           changeOrigin: true,
           data: {
-            'buyerName': this.endOrder.buyerName,
-            'buyerPhone': this.endOrder.buyerPhone,
-            'buyerCount': this.endOrder.count,
-            'buyerTalk': this.endOrder.buyerTalk,
-            'orderAmount': this.orderMaster.serverPrice * this.endOrder.count,
-            'userId': 5 // 设置默认用户
+            'buyerName': this.buyerName,
+            'buyerPhone': this.buyerPhone,
+            'buyerCount': this.count,
+            'buyerTalk': this.buyerTalk,
+            'orderAmount': this.orderMaster.serverPrice * this.count,
+            'userId': localStorage.getItem('Id'),
+            'serverId': this.orderMaster.serverId
           }
         }).then(response => {
-          console.log(response)
+          this.endOrder = response.data.data
+          console.log(this.endOrder)
           this.$toast.success('发布成功')
           // this.hide()
           this.buyerName = ''
@@ -143,7 +142,7 @@ export default {
   },
   computed: {
     moneyAll () {
-      return this.orderMaster.serverPrice * this.endOrder.count
+      return this.orderMaster.serverPrice * this.count
     }
   }
 }

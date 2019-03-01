@@ -28,10 +28,9 @@ public class OrderController {
 
     @PostMapping(value = "/saveOrder")
     @ApiOperation(value = "保存订单", response = Order.class, responseContainer = "list")
-    public JSONResult saveOrder(@RequestBody Order order,String serverId) {
+    public JSONResult saveOrder(@RequestBody Order order) {
 
         Server server = new Server();
-        server.setServerId(serverId);
         server.setServerStatus(1);
         serverService.saveServer(server);
         serverService.updateServers(server);
@@ -44,6 +43,7 @@ public class OrderController {
         order.setBuyerTalk(order.getBuyerTalk());
         order.setUserId(order.getUserId());
         order.setCreateTime(new Date());
+        order.setServerId(order.getServerId());
         orderService.saveOrder(order);
 
         return JSONResult.ok(order);

@@ -19,15 +19,15 @@ public class OrderService extends BaseService<OrderMapper, Order>{
 
     public void saveOrder(Order order) {
 
-        String orderId = sid.nextShort();
+        String orderSn = sid.nextShort();
 
-        order.setOrderId(orderId);
+        order.setOrderSn(orderSn);
 
-        orderMapper.inserOrder(order);
+        orderMapper.insertOrder(order);
 
     }
 
     public List<Order> getAllOrders(Integer userId) {
-        return orderMapper.getOrderByUserName(new Order(userId));
+        return orderMapper.getOrderByUserId(userId);
     }
 }

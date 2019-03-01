@@ -9,16 +9,16 @@
           </div>
         </div>
       </div> <!--header-->
-        <!--<ul class="content-bg">-->
-          <!--<li class="border-bottom">-->
-              <!--<span class="title">订单编号 :</span>-->
-              <!--<span class="content" ></span>-->
-          <!--</li>-->
-          <!--<li class="border-bottom">-->
-              <!--<span class="title">下单时间 :</span>-->
-              <!--<span class="content" ></span>-->
-          <!--</li>-->
-        <!--</ul>-->
+        <ul class="content-bg">
+          <li class="border-bottom">
+              <span class="title">订单编号 : {{orderDetail.orderSn}}</span>
+              <span class="content" ></span>
+          </li>
+          <li class="border-bottom">
+              <span class="title">下单时间 : {{orderDetail.createTime}}</span>
+              <span class="content" ></span>
+          </li>
+        </ul>
       <div class="cut-off2">本单本公司不服责任，谨慎下单</div>
         <div class="item-header">
           <img class="item-img"  src="static/image/touxiang7.jpg" />
@@ -30,7 +30,7 @@
         </div>
       <div class="cut-off"></div>
       <div class="money-title">价格：</div>
-      <div class="money-count">{{ orderDetail.serverPrice }}</div>
+      <div class="money-count">￥ {{server.serverPrice}}</div>
       <div class="cut-off3"></div>
       <div class="talk-bg"></div>
       <ul class="content-bg">
@@ -44,19 +44,19 @@
         </li>
         <li class="border-bottom">
           <span class="title">购买数量 : </span>
-          <span class="content" >{{ orderDetail.count }}</span>
+          <span class="content" >{{ count }}</span>
         </li>
         <li class="border-bottom">
           <span class="title">合计费用 :</span>
-          <span class="content" >{{ orderDetail.count * orderDetail.serverPrice }}</span>
+          <span class="content" >{{ count * server.serverPrice }}</span>
         </li>
         <li class="border-bottom">
           <span class="title">买家备注 :</span>
-          <span class="content" >{{ orderDetail.serverRemark }}</span>
+          <span class="content" >{{ orderDetail.buyerTalk }}</span>
         </li>
         <li class="border-bottom">
           <span class="title">商家提醒 :</span>
-          <span class="content" >{{ orderDetail.buyerTalk }}</span>
+          <span class="content" >{{ server.serverRemark }}</span>
         </li>
       </ul>
       <div>
@@ -73,16 +73,23 @@
 export default {
   name: 'orderDetail',
   props: {
-    orderDetail: Object
+    orderDetail: Object,
+    count: Number,
+    server: Object
   },
   data() {
     return {
-      showOrderDetail: false
+      showOrderDetail: false,
+      timer: null
     }
   },
   methods: {
     toMessage() {
-      this.$router.go(0)
+      this.hide()
+      this.$emit('allHide')
+      this.timer = setTimeout(() => {
+        this.$notify('有新的订单，请去消息页面查看')
+      }, 1000)
     },
     show() {
       this.showOrderDetail = true

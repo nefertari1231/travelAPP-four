@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface OrderMapper extends MyMapper<Order> {
-    void inserOrder(Order order);
+    void insertOrder(Order order);
 
-    List<Order> getOrderByUserName(Order order);
+    List<Order> getOrderByUserId(Integer userId);
 }

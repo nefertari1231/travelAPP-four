@@ -89,7 +89,7 @@
       </van-pull-refresh>
     </div>
   </div>
- <router-view></router-view>
+    <router-view></router-view>
   <home-comment :homeComment="selectedComment" ref="homeComment"></home-comment>
     <search ref="search"></search>
     <service ref="server"></service>

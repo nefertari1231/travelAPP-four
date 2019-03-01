@@ -14,9 +14,10 @@
           <div class="icons">
             <div class="icon" v-for="item in messageList" :key="item.id" @click="togo(item)">
               <div class="imgs">
-                <div class="imgs-icon">
+                <!--<van-tabbar-item info="1" class="rightIcon"></van-tabbar-item>-->
+                  <div class="imgs-icon">
                   <div class="iconfonts" :class="item.icon"></div>
-                </div>
+                  </div>
               </div>
               <p class="icon-desc">{{item.desc}}</p>
             </div>
@@ -169,6 +170,10 @@ export default {
     color: #FFF
     height: 1rem
     width: 1rem
+  .rightIcon
+    margin-top : .2rem
+    margin-bottom - .3rem
+    margin-left: .7rem
   .icon-dingdan
     background: green
   .icon-bulb

@@ -83,7 +83,7 @@
       <div class="join" @click="enterOrder">加入</div>
     </div>
   </div>  <!--footer-->
-  <order-master :orderMaster="serverDetail" ref="enterOrdered"></order-master>
+  <order-master :orderMaster="serverDetail" ref="enterOrdered" @allHide="allHide"></order-master>
 </div>
 </transition>
 </template>
@@ -127,6 +127,10 @@ export default {
     },
     hide() {
       this.showServiceDetail = false
+    },
+    allHide() {
+      this.showServiceDetail = false
+      this.$emit('allHide')
     },
     handleBannerClick () {
       this.showGallary = true

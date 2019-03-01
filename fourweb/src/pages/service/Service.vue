@@ -40,7 +40,7 @@
             <span class="footer-text">按日期筛选</span>
           </div>
       </div>
-    <serviceDetail :serverDetail="selectedServer" ref="serviceDetail"></serviceDetail>
+    <serviceDetail :serverDetail="selectedServer" ref="serviceDetail" @allHide="hide"></serviceDetail>
     </div>
   </transition>
 </template>
@@ -71,10 +71,6 @@ export default {
     selectServer(ServerDetail) {
       this.selectedServer = ServerDetail
       this.$refs.serviceDetail.show()
-      axios.get('http://localhost:8090/api/users/query?userId=' + localStorage.getItem('Id'))
-        .then(res => {
-          console.log(res.data.data)
-        })
     },
     show() {
       this.showService = true
@@ -93,7 +89,7 @@ export default {
     },
     compare: function (prop, type) {
       type = type || 'desc'
-      var flag1, flag2
+      let flag1, flag2
       if (type === 'desc') {
         flag1 = -1
         flag2 = 1
@@ -102,8 +98,8 @@ export default {
         flag2 = -1
       }
       return function (obj1, obj2) {
-        var val1 = obj1[prop]
-        var val2 = obj2[prop]
+        let val1 = obj1[prop]
+        let val2 = obj2[prop]
         if (val2 < val1) {
           return flag1
         } else if (val2 > val1) {
@@ -114,7 +110,7 @@ export default {
       }
     },
     sortPrice() {
-      var type = this.gold_isAsc ? 'desc' : 'asc'
+      let type = this.gold_isAsc ? 'desc' : 'asc'
       this.serviceList.sort(this.compare('gold', type))
       this.gold_isAsc = !this.gold_isAsc
     },

@@ -1,28 +1,36 @@
 <template>
   <transition name="message1" tag="div">
     <div v-show="message1show" class="bg">
-      <div class="header">
-        <div class="header-left iconfont icon-left" @click="hide()"></div>
-        <div class="header-title">订单信息</div>
-      </div>
-      <div :class="{'Message1_bg':msg == ''}" class="headlist" ref="wrapper">
-        <ul>
-          <li class="item border-bottom" v-for="item in order" :key="item.orderId">
-                <div class="item-info">
-                  <p class="item-title">订单号：{{ item.orderId }}</p>
-                  <p class="item-price">{{ item.orderAmount }}￥</p>
-                  <p class="item-desc">手机号码：15673733303</p>
-                  <p class="item-time">{{ item.createTime }}</p>
-                </div>
-          </li>
-        </ul>
+      <div>
+        <div class="header-fixed">
+          <div class="header-left iconfont icon-left" @click="hide()"></div>
+          <div class="header-title">
+            订单详情
+          </div>
+        </div>
+      </div> <!--header-->
+      <div class="headlist" ref="wrapper" >
+        <div>
+          <div :class="{'Message1_bg':msg == ''}" >
+            <ul>
+              <li class="item border-bottom" v-for="item in order" :key="item.orderId">
+                    <div class="item-info">
+                      <p class="item-title">订单号：{{ item.orderId }}</p>
+                      <p class="item-price">{{ item.orderAmount }}￥</p>
+                      <p class="item-desc">手机号码：15673733303</p>
+                      <p class="item-time">{{ item.createTime }}</p>
+                    </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </transition>
 </template>
 <script>
 import axios from 'axios'
-// import Bscroll from 'better-scroll'
+import Bscroll from 'better-scroll'
 export default {
   name: 'Message1',
   data () {
@@ -33,7 +41,7 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://localhost:8090/api/order/all?userId=5')
+    axios.get('http://localhost:8090/api/order/all?userId=' + localStorage.getItem('Id'))
       .then(response => {
         this.msg = ['1']
         this.order = response.data.data
@@ -42,6 +50,15 @@ export default {
   methods: {
     show() {
       this.message1show = true
+      this.$nextTick(() => {
+        if (!this.scroll) {
+          this.scroll = new Bscroll(this.$refs.wrapper, {
+            click: true
+          })
+        } else {
+          this.scroll.refresh()
+        }
+      })
     },
     hide() {
       this.message1show = false
@@ -50,42 +67,47 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.Message1_bg{
-  background: url('/static/image/bgi.jpg') no-repeat center;background-size:cover
-}
-.bg
-  position: fixed
-  background: #FFF
-  z-index: 60
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-//header
+  .Message1_bg{
+    background: url('/static/image/bgi.jpg') no-repeat center;background-size:cover
+  }
   .headlist
     overflow: hidden
     position: absolute
-    top: 1.2rem
+    top: 1.1rem
     left: 0
     right: 0
-    bottom: 1.5rem
-  .header
-    overflow: hidden
-    position: relative
+    bottom: 0
+    z-index: 0
+  .bg
+    position: fixed
+    background: #FFF
+    z-index: 60
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+  //header
+  .header-fixed
+    z-index: 30
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
     display: flex
     line-height: 1.1rem
     background: #333
     color: white
   .header-title
-    width:100%
+    width:.86rem
     flex: 1
     text-align: center
     font-size: .45rem
     margin-bottom: -.2rem
-    margin-right: -.8rem
-  .header-right
-    font-size:.6rem
-    margin-right: .2rem
+    margin-left: -.9rem
+  .icon-left
+    font-size:.5rem
+    margin-left: .3rem
+    color: #FFF
   //content
   .icons
     margin-top: .4rem

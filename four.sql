@@ -11,7 +11,7 @@
  Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 01/03/2019 18:26:07
+ Date: 01/03/2019 23:52:57
 */
 
 SET NAMES utf8mb4;
@@ -50,12 +50,7 @@ CREATE TABLE `collect`  (
   `user_id` int(11) NULL DEFAULT NULL,
   `collect_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`collect_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of collect
--- ----------------------------
-INSERT INTO `collect` VALUES (14, 2, '为了会呼吸的阳光');
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for friend_table
@@ -91,68 +86,33 @@ CREATE TABLE `messaage`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order`  (
-  `order_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订单id',
+  `order_id` int(32) NOT NULL AUTO_INCREMENT COMMENT '订单id',
   `buyer_phone` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '买家电话',
   `buyer_count` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '购买数量',
   `order_amount` decimal(8, 2) NULL DEFAULT NULL COMMENT '订单总金额',
   `buyer_talk` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '留言',
   `buyer_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '买家名字',
-  `order_sn` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订单编号',
+  `order_sn` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订单编号',
   `create_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` timestamp(0) NULL DEFAULT NULL COMMENT '修改时间',
+  `server_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '服务编号',
   `user_id` int(11) NULL DEFAULT NULL COMMENT '用户外键',
-  PRIMARY KEY (`order_id`) USING BTREE,
-  INDEX `user_id`(`user_id`) USING BTREE,
-  CONSTRAINT `order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of order
 -- ----------------------------
-INSERT INTO `order` VALUES ('19022670KRP1N0H0', '15673733303', '4', 400.00, '请保证安全', '杨广', NULL, '2019-02-26 11:21:05', NULL, 5);
-INSERT INTO `order` VALUES ('19022671W9A1BTC0', '15673733303', '4', 400.00, '请保证安全', '杨广', NULL, '2019-02-26 11:21:07', NULL, 5);
-INSERT INTO `order` VALUES ('1902269MK9S7AT9P', '15673733303', '4', 400.00, '请保证安全', '杨广', NULL, '2019-02-26 13:34:09', NULL, 5);
-INSERT INTO `order` VALUES ('1902269MT6BR539P', '15673733303', '4', 400.00, '请保证安全', '杨广', NULL, '2019-02-26 13:34:12', NULL, 5);
-INSERT INTO `order` VALUES ('1902269NKB66ATMW', '15673733303', '4', 400.00, '请保证安全', '杨广', NULL, NULL, NULL, 5);
-INSERT INTO `order` VALUES ('1902269R891T391P', '15673733303', '4', 400.00, '请保证安全', '杨广', NULL, NULL, NULL, 5);
-
--- ----------------------------
--- Table structure for order_detail
--- ----------------------------
-DROP TABLE IF EXISTS `order_detail`;
-CREATE TABLE `order_detail`  (
-  `order_detail_id` int(32) NOT NULL,
-  `order_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `server_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `order_sn` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订单编号',
-  `server_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '服务名称',
-  `server_price` decimal(8, 2) NOT NULL COMMENT '当前价格,单位分',
-  `server_description` int(11) NOT NULL COMMENT '服务描述',
-  `server_icon` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '小图',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
-  PRIMARY KEY (`order_detail_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Table structure for order_master
--- ----------------------------
-DROP TABLE IF EXISTS `order_master`;
-CREATE TABLE `order_master`  (
-  `order_id` int(255) NOT NULL,
-  `buyer_id` int(32) NOT NULL,
-  `order_sn` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '订单编号',
-  `buyer_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '买家名字',
-  `buyer_phone` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '买家电话',
-  `buyer_address` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '买家地址',
-  `buyer_count` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '购买数量',
-  `order_amount` decimal(8, 2) NOT NULL COMMENT '订单总金额',
-  `order_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '订单状态, 默认为新下单',
-  `pay_status` tinyint(3) NOT NULL DEFAULT 0 COMMENT '支付状态, 默认未支付',
-  `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
-  PRIMARY KEY (`order_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+INSERT INTO `order` VALUES (8, '18796255910', '2', 2.00, '舒适', '陈昕', '190301H4T7PHM2RP', '2019-03-01 22:39:38', NULL, '190301GH3KA4363C', 2);
+INSERT INTO `order` VALUES (9, '18799961321', '2', 2.00, '', '陈昕', '190301H5PA89C5WH', '2019-03-01 22:42:19', NULL, '190301GH3KA4363C', 2);
+INSERT INTO `order` VALUES (10, '大撒法', '2', 2.00, '', '大撒法', '190301H6SPXGCY3C', '2019-03-01 22:45:34', NULL, '190301GH3KA4363C', 2);
+INSERT INTO `order` VALUES (11, '18796255910', '1', 5.00, '玩就完事了', '陈昕', '190301H9FGNZB5S8', '2019-03-01 22:53:42', NULL, '190301H9842CPTTC', 2);
+INSERT INTO `order` VALUES (12, '18796255910', '1', 200.00, '', '陈昕', '190301HA8ZX35S80', '2019-03-01 22:56:07', NULL, '1902267SNA42YMCH', 2);
+INSERT INTO `order` VALUES (13, '531312', '1', 5.00, '', '士大夫', '190301HBGB6YSGF8', '2019-03-01 22:59:48', NULL, '190301H9842CPTTC', 2);
+INSERT INTO `order` VALUES (14, '121345', '1', 200.00, '', '大撒法', '190301HBWSX36PBC', '2019-03-01 23:00:49', NULL, '1902267SNA42YMCH', 2);
+INSERT INTO `order` VALUES (15, '大撒法', '1', 5.00, '', '士大夫', '190301HF425B1Z54', '2019-03-01 23:07:36', NULL, '190301H9842CPTTC', 2);
+INSERT INTO `order` VALUES (16, '12312', '1', 5.00, '', '大撒法', '190301HGGN18FNC0', '2019-03-01 23:11:50', NULL, '190301H9842CPTTC', 2);
+INSERT INTO `order` VALUES (17, '士大夫', '1', 5.00, '', '地方撒', '190301HM1M10NCM8', '2019-03-01 23:19:20', NULL, '190301H9842CPTTC', 2);
 
 -- ----------------------------
 -- Table structure for permission
@@ -233,8 +193,8 @@ CREATE TABLE `seller`  (
 DROP TABLE IF EXISTS `server`;
 CREATE TABLE `server`  (
   `server_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `server_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '服务名称',
-  `server_price` decimal(8, 2) NOT NULL COMMENT '服务价格',
+  `server_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '服务名称',
+  `server_price` decimal(8, 2) NULL DEFAULT NULL COMMENT '服务价格',
   `server_description` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '描述',
   `server_icon` varchar(512) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '小图',
   `server_status` tinyint(3) NULL DEFAULT 0 COMMENT '服务状态,0正常1下架',
@@ -253,6 +213,29 @@ CREATE TABLE `server`  (
 -- ----------------------------
 INSERT INTO `server` VALUES ('190225K36DBA6GF8', '服务的标题', 100.00, '我应该描述一下我的服务', NULL, 1, '2019-02-25 23:58:54', '2019-02-26 13:40:34', '徐州市', '我应该备注一下我的服务', NULL);
 INSERT INTO `server` VALUES ('1902267SNA42YMCH', '服务', 200.00, '服务', NULL, 0, '2019-02-26 10:56:37', '2019-02-26 10:56:37', '徐州市', '', NULL);
+INSERT INTO `server` VALUES ('190301GH3KA4363C', '大撒法', 1.00, '多少撒地方的', NULL, 0, '2019-03-01 21:49:29', '2019-03-01 21:49:28', '徐州市', '大撒法s', NULL);
+INSERT INTO `server` VALUES ('190301GZSPSM90PH', NULL, NULL, NULL, NULL, 1, '2019-03-01 22:24:33', '2019-03-01 22:24:33', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301H0298XAP28', NULL, NULL, NULL, NULL, 1, '2019-03-01 22:25:22', '2019-03-01 22:25:22', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301H0TGH8PZR4', NULL, NULL, NULL, NULL, 1, '2019-03-01 22:27:38', '2019-03-01 22:27:38', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301H3H4X2F5P0', NULL, NULL, NULL, NULL, 1, '2019-03-01 22:35:51', '2019-03-01 22:35:51', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301H4T7N084H0', NULL, NULL, NULL, NULL, 1, '2019-03-01 22:39:37', '2019-03-01 22:39:37', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301H5PA7DGD8H', NULL, NULL, NULL, NULL, 1, '2019-03-01 22:42:19', '2019-03-01 22:42:19', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301H6SPTDCW4H', NULL, NULL, NULL, NULL, 1, '2019-03-01 22:45:34', '2019-03-01 22:45:34', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301H9842CPTTC', '一起去网吧', 5.00, '一起去网吧玩吧', NULL, 0, '2019-03-01 22:53:01', '2019-03-01 22:53:00', '徐州市', '别上头', NULL);
+INSERT INTO `server` VALUES ('190301H9FGM0SMRP', NULL, NULL, NULL, NULL, 1, '2019-03-01 22:53:42', '2019-03-01 22:53:42', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HA8ZWF43HH', NULL, NULL, NULL, NULL, 1, '2019-03-01 22:56:06', '2019-03-01 22:56:06', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HBGB62XSY8', NULL, NULL, NULL, NULL, 1, '2019-03-01 22:59:47', '2019-03-01 22:59:47', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HBWSWF51P0', NULL, NULL, NULL, NULL, 1, '2019-03-01 23:00:48', '2019-03-01 23:00:48', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HF424G56K4', NULL, NULL, NULL, NULL, 1, '2019-03-01 23:07:35', '2019-03-01 23:07:35', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HGGN0H1DS8', NULL, NULL, NULL, NULL, 1, '2019-03-01 23:11:50', '2019-03-01 23:11:50', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HM1KZGR1AW', NULL, NULL, NULL, NULL, 1, '2019-03-01 23:19:20', '2019-03-01 23:19:20', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HMX796939P', NULL, NULL, NULL, NULL, 1, '2019-03-01 23:21:52', '2019-03-01 23:21:52', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HP1HM0MR1P', NULL, NULL, NULL, NULL, 1, '2019-03-01 23:25:20', '2019-03-01 23:25:20', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HPDH3ZRD40', NULL, NULL, NULL, NULL, 1, '2019-03-01 23:26:37', '2019-03-01 23:26:37', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HPPB1P9968', NULL, NULL, NULL, NULL, 1, '2019-03-01 23:27:21', '2019-03-01 23:27:21', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HR7BKNDCDP', NULL, NULL, NULL, NULL, 1, '2019-03-01 23:28:58', '2019-03-01 23:28:58', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HS81RCSMRP', NULL, NULL, NULL, NULL, 1, '2019-03-01 23:32:02', '2019-03-01 23:32:02', NULL, NULL, NULL);
+INSERT INTO `server` VALUES ('190301HXS06XN0H0', NULL, NULL, NULL, NULL, 1, '2019-03-01 23:42:32', '2019-03-01 23:42:32', NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for share
@@ -298,7 +281,7 @@ CREATE TABLE `user`  (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (1, '13439496682', '13439496682', '$2a$10$T5Dn2/zlv.A/VEB/eETwN.tQoZ3wrJ2FGMaq3FtTKzxK/SQi63AV2', NULL, '爱你会上瘾', NULL, NULL, '男', '北京市 北京市 东城区', '过的挺好', '3', '4', '1', 1, 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMzQzOTQ5NjY4MiIsImV4cCI6MTU0OTc3MzUzOCwiaWF0IjoxNTQ5MTY4NzM4fQ.8J8CWAsWC_MMaFmy98K94I937ZnluG1dwjEiu9PGMl6A1p8uk4aDRP5QWPuniWQghi4OoigGAVydZzf-xnrTxA', '', '2019-02-03 12:38:14');
-INSERT INTO `user` VALUES (2, '18796255910', '18796255910', '$2a$10$9Ki0O9Xfk3LIFqCe5dHyyenS5pdDhfmtcV3ZCfYekGs1lB42Xn6vW', NULL, '美女一枚', '/2/Bg/geren1.jpg', '/2/Icon/touxiang6.png', '女', '北京市 北京市 朝阳区', NULL, NULL, NULL, NULL, 1, 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODc5NjI1NTkxMCIsImV4cCI6MTU1MDQ4NTk4NiwiaWF0IjoxNTQ5ODgxMTg2fQ.WISb3aiJlJ-D-5-LP1IJqJWWduGUBd-sFjrkgKubI47TvPADXxeWEJnYTC1RDgNGSxXMvkm0pRQXSCjuQqnIEA', '', '2019-02-11 18:32:12');
+INSERT INTO `user` VALUES (2, '18796255910', '18796255910', '$2a$10$9Ki0O9Xfk3LIFqCe5dHyyenS5pdDhfmtcV3ZCfYekGs1lB42Xn6vW', NULL, '美女一枚', '/2/Bg/server1.jpg', '/2/Icon/touxiang5.jpg', '女', '北京市 北京市 朝阳区', NULL, NULL, NULL, NULL, 1, 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODc5NjI1NTkxMCIsImV4cCI6MTU1MDQ4NTk4NiwiaWF0IjoxNTQ5ODgxMTg2fQ.WISb3aiJlJ-D-5-LP1IJqJWWduGUBd-sFjrkgKubI47TvPADXxeWEJnYTC1RDgNGSxXMvkm0pRQXSCjuQqnIEA', '', '2019-02-11 18:32:12');
 INSERT INTO `user` VALUES (3, '13718754145', '13718754145', '$2a$10$SsoIKzAFgedY/eQidZizr.zN.VKW7V5udUxinFysC5jCUp3gp2AnW', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '', '2019-02-22 14:50:47');
 INSERT INTO `user` VALUES (4, '15152103389', '15152103389', '$2a$10$bDNxKtgflcgjlFq53dWblOIA1y8WmSA2IMmcNeGsybZhrClnJ6IDC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTE1MjEwMzM4OSIsImV4cCI6MTU1MTY2MjMwMCwiaWF0IjoxNTUxMDU3NTAwfQ.6Y66JXD6WtJT1T2UmPpYMuixlrFIBiZHqc5wu3zOtlm-ai1bRUJfi-mwV7ngbGXOZhfCOaHg2aKYq3Q4frEVWA', '', '2019-02-25 09:16:32');
 INSERT INTO `user` VALUES (5, '15673733303', '15673733303', '$2a$10$uQqhq1X0NjZwurww.sFNve9x4ZCts3TAKgxwNJt4pxSIHjXcC4S.G', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTY3MzczMzMwMyIsImV4cCI6MTU1MTY2MzI4NCwiaWF0IjoxNTUxMDU4NDg0fQ.Uq8pRs0KYwiKASlqz33lWJyOKaifj2tRhDfGRVaDNuyh5mKY9X70j6V0Q4YKjOHYcxt4yjdNG1XZBEWGdavHFg', '', '2019-02-25 09:34:22');
