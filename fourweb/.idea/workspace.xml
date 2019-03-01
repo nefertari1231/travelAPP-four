@@ -119,15 +119,15 @@
       <updated>1551372234065</updated>
       <workItem from="1551372237239" duration="156000" />
       <workItem from="1551409185326" duration="2238000" />
-      <workItem from="1551411523983" duration="2941000" />
+      <workItem from="1551411523983" duration="2970000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5335000" />
+    <option name="totallyTimeSpent" value="5364000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="267" y="7" width="1395" height="966" extended-state="0" />
+    <frame x="267" y="7" width="1395" height="966" extended-state="1" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34929994" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -260,6 +260,20 @@
         <state relative-caret-position="506">
           <caret line="84" column="9" selection-start-line="84" selection-start-column="9" selection-end-line="84" selection-end-column="9" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.editorconfig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.eslintignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-66" />
       </provider>
     </entry>
   </component>

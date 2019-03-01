@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : mysql
+ Source Server         : localhost_3306
  Source Server Type    : MySQL
- Source Server Version : 80013
+ Source Server Version : 50723
  Source Host           : localhost:3306
  Source Schema         : four
 
  Target Server Type    : MySQL
- Target Server Version : 80013
+ Target Server Version : 50723
  File Encoding         : 65001
 
- Date: 26/02/2019 15:13:58
+ Date: 01/03/2019 18:26:07
 */
 
 SET NAMES utf8mb4;
@@ -42,6 +42,22 @@ CREATE TABLE `city`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for collect
+-- ----------------------------
+DROP TABLE IF EXISTS `collect`;
+CREATE TABLE `collect`  (
+  `collect_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NULL DEFAULT NULL,
+  `collect_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`collect_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of collect
+-- ----------------------------
+INSERT INTO `collect` VALUES (14, 2, '为了会呼吸的阳光');
+
+-- ----------------------------
 -- Table structure for friend_table
 -- ----------------------------
 DROP TABLE IF EXISTS `friend_table`;
@@ -53,7 +69,7 @@ CREATE TABLE `friend_table`  (
   `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
   PRIMARY KEY (`friend_id`) USING BTREE,
   INDEX `fk[friend_table]single_id`(`user_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for messaage
@@ -68,7 +84,7 @@ CREATE TABLE `messaage`  (
   `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
   PRIMARY KEY (`message_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for order
@@ -156,7 +172,7 @@ CREATE TABLE `permission`  (
   PRIMARY KEY (`permission_id`) USING BTREE,
   INDEX `sdfs`(`parent_id`) USING BTREE,
   CONSTRAINT `permission_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `permission` (`permission_id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for province
@@ -281,8 +297,8 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, '13439496682', '13439496682', '$2a$10$T5Dn2/zlv.A/VEB/eETwN.tQoZ3wrJ2FGMaq3FtTKzxK/SQi63AV2', NULL, '爱你会上瘾', '/1/Bg/geren1.jpg', '/1/Icon/touxiang1.jpg', '男', '北京市 北京市 东城区', '过的挺好', '3', '4', '1', 1, 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMzQzOTQ5NjY4MiIsImV4cCI6MTU0OTc3MzUzOCwiaWF0IjoxNTQ5MTY4NzM4fQ.8J8CWAsWC_MMaFmy98K94I937ZnluG1dwjEiu9PGMl6A1p8uk4aDRP5QWPuniWQghi4OoigGAVydZzf-xnrTxA', '', '2019-02-03 12:38:14');
-INSERT INTO `user` VALUES (2, '18796255910', '18796255910', '$2a$10$9Ki0O9Xfk3LIFqCe5dHyyenS5pdDhfmtcV3ZCfYekGs1lB42Xn6vW', NULL, '美女一枚', '/2/Bg/geren2.jpg', '/2/Icon/touxiang2.jpg', '女', '北京市 北京市 朝阳区', NULL, NULL, NULL, NULL, 1, 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODc5NjI1NTkxMCIsImV4cCI6MTU1MDQ4NTk4NiwiaWF0IjoxNTQ5ODgxMTg2fQ.WISb3aiJlJ-D-5-LP1IJqJWWduGUBd-sFjrkgKubI47TvPADXxeWEJnYTC1RDgNGSxXMvkm0pRQXSCjuQqnIEA', '', '2019-02-11 18:32:12');
+INSERT INTO `user` VALUES (1, '13439496682', '13439496682', '$2a$10$T5Dn2/zlv.A/VEB/eETwN.tQoZ3wrJ2FGMaq3FtTKzxK/SQi63AV2', NULL, '爱你会上瘾', NULL, NULL, '男', '北京市 北京市 东城区', '过的挺好', '3', '4', '1', 1, 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMzQzOTQ5NjY4MiIsImV4cCI6MTU0OTc3MzUzOCwiaWF0IjoxNTQ5MTY4NzM4fQ.8J8CWAsWC_MMaFmy98K94I937ZnluG1dwjEiu9PGMl6A1p8uk4aDRP5QWPuniWQghi4OoigGAVydZzf-xnrTxA', '', '2019-02-03 12:38:14');
+INSERT INTO `user` VALUES (2, '18796255910', '18796255910', '$2a$10$9Ki0O9Xfk3LIFqCe5dHyyenS5pdDhfmtcV3ZCfYekGs1lB42Xn6vW', NULL, '美女一枚', '/2/Bg/geren1.jpg', '/2/Icon/touxiang6.png', '女', '北京市 北京市 朝阳区', NULL, NULL, NULL, NULL, 1, 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODc5NjI1NTkxMCIsImV4cCI6MTU1MDQ4NTk4NiwiaWF0IjoxNTQ5ODgxMTg2fQ.WISb3aiJlJ-D-5-LP1IJqJWWduGUBd-sFjrkgKubI47TvPADXxeWEJnYTC1RDgNGSxXMvkm0pRQXSCjuQqnIEA', '', '2019-02-11 18:32:12');
 INSERT INTO `user` VALUES (3, '13718754145', '13718754145', '$2a$10$SsoIKzAFgedY/eQidZizr.zN.VKW7V5udUxinFysC5jCUp3gp2AnW', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, '', '2019-02-22 14:50:47');
 INSERT INTO `user` VALUES (4, '15152103389', '15152103389', '$2a$10$bDNxKtgflcgjlFq53dWblOIA1y8WmSA2IMmcNeGsybZhrClnJ6IDC', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTE1MjEwMzM4OSIsImV4cCI6MTU1MTY2MjMwMCwiaWF0IjoxNTUxMDU3NTAwfQ.6Y66JXD6WtJT1T2UmPpYMuixlrFIBiZHqc5wu3zOtlm-ai1bRUJfi-mwV7ngbGXOZhfCOaHg2aKYq3Q4frEVWA', '', '2019-02-25 09:16:32');
 INSERT INTO `user` VALUES (5, '15673733303', '15673733303', '$2a$10$uQqhq1X0NjZwurww.sFNve9x4ZCts3TAKgxwNJt4pxSIHjXcC4S.G', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNTY3MzczMzMwMyIsImV4cCI6MTU1MTY2MzI4NCwiaWF0IjoxNTUxMDU4NDg0fQ.Uq8pRs0KYwiKASlqz33lWJyOKaifj2tRhDfGRVaDNuyh5mKY9X70j6V0Q4YKjOHYcxt4yjdNG1XZBEWGdavHFg', '', '2019-02-25 09:34:22');
