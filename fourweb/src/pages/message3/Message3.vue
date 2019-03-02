@@ -13,7 +13,7 @@
           <div>
             <ul v-for="item in discussList" :key="item.id">
               <li class="item-header">
-                对订单<span class="item-title">{{item.orderId}}</span>的评论
+                对订单<span class="item-title">{{item.orderSn}}</span>的评论
               </li>
               <li>
                 <div class="item-content">{{item.discussContent}}

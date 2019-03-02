@@ -9,13 +9,13 @@ import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.model.PutObjectResult;
 import com.qcloud.cos.region.Region;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
 
 public class ImgUtil {
     private static final Set<String> SUPPORTED_TYPE = new HashSet<>();
@@ -23,19 +23,19 @@ public class ImgUtil {
     /**
      * COS secretId
      */
-    private static final String secretId = "AKID4wgBaNWhAXguxog8UbbQ3Wpywxthom6H";
+    private static final String secretId = "AKIDXqupZ3sVN1RfeQ7g3BOO9h6MGwNaJNwM";
     /**
      * COS secretKey
      */
-    private static final String secretKey = "81f6KK5cuzpQoytZ4Lk2DQVTGsKaeV8X";
+    private static final String secretKey = "KTTH8pIWDk9JEzXv30iIdfS1LPPH8k7G";
     /**
      * COS bucketName
      */
-    private static final String bucketName = "pic-1257641594";
+    private static final String bucketName = "imgs-1257617444";
     /**
      * COS regionName
      */
-    private static final String regionName = "ap-beijing";
+    private static final String regionName = "ap-chengdu";
     private static final COSClient cosClient;
 
     static {
