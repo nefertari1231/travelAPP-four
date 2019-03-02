@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.four.mapper.PlaceMapper">
+  <resultMap id="BaseResultMap" type="com.example.four.entity.Place">
+    <id column="place_id" jdbcType="INTEGER" property="placeId" />
+    <result column="place_name" jdbcType="VARCHAR" property="placeName" />
+    <result column="place_img" jdbcType="VARCHAR" property="placeImg" />
+    <result column="cityMenu_id" jdbcType="INTEGER" property="citymenuId" />
+    <result column="place_tag" jdbcType="VARCHAR" property="placeTag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    place_id, place_name, place_img, cityMenu_id, place_tag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from place
+    where place_id = #{placeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from place
+    where place_id = #{placeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="place_id" keyProperty="placeId" parameterType="com.example.four.entity.Place" useGeneratedKeys="true">
+    insert into place (place_name, place_img, cityMenu_id, 
+      place_tag)
+    values (#{placeName,jdbcType=VARCHAR}, #{placeImg,jdbcType=VARCHAR}, #{citymenuId,jdbcType=INTEGER}, 
+      #{placeTag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="place_id" keyProperty="placeId" parameterType="com.example.four.entity.Place" useGeneratedKeys="true">
+    insert into place
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="placeName != null">
+        place_name,
+      </if>
+      <if test="placeImg != null">
+        place_img,
+      </if>
+      <if test="citymenuId != null">
+        cityMenu_id,
+      </if>
+      <if test="placeTag != null">
+        place_tag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="placeName != null">
+        #{placeName,jdbcType=VARCHAR},
+      </if>
+      <if test="placeImg != null">
+        #{placeImg,jdbcType=VARCHAR},
+      </if>
+      <if test="citymenuId != null">
+        #{citymenuId,jdbcType=INTEGER},
+      </if>
+      <if test="placeTag != null">
+        #{placeTag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.four.entity.Place">
+    update place
+    <set>
+      <if test="placeName != null">
+        place_name = #{placeName,jdbcType=VARCHAR},
+      </if>
+      <if test="placeImg != null">
+        place_img = #{placeImg,jdbcType=VARCHAR},
+      </if>
+      <if test="citymenuId != null">
+        cityMenu_id = #{citymenuId,jdbcType=INTEGER},
+      </if>
+      <if test="placeTag != null">
+        place_tag = #{placeTag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where place_id = #{placeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.four.entity.Place">
+    update place
+    set place_name = #{placeName,jdbcType=VARCHAR},
+      place_img = #{placeImg,jdbcType=VARCHAR},
+      cityMenu_id = #{citymenuId,jdbcType=INTEGER},
+      place_tag = #{placeTag,jdbcType=VARCHAR}
+    where place_id = #{placeId,jdbcType=INTEGER}
+  </update>
+</mapper>

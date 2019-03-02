@@ -148,7 +148,8 @@ export default {
       axios.get('http://localhost:8090/api/order/comment', {
         params: {
           userId: localStorage.getItem('Id')
-        }
+        },
+        changeOrigin: true
       })
         .then(response => {
           this.discussList = response.data.data

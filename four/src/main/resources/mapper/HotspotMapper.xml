@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.four.mapper.HotspotMapper">
+  <resultMap id="BaseResultMap" type="com.example.four.entity.Hotspot">
+    <id column="hotSpot_id" jdbcType="INTEGER" property="hotspotId" />
+    <result column="hotSpot_name" jdbcType="VARCHAR" property="hotspotName" />
+    <result column="hotSpot_img" jdbcType="VARCHAR" property="hotspotImg" />
+    <result column="cityMenu_id" jdbcType="INTEGER" property="citymenuId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    hotSpot_id, hotSpot_name, hotSpot_img, cityMenu_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from hotspot
+    where hotSpot_id = #{hotspotId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hotspot
+    where hotSpot_id = #{hotspotId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="hotSpot_id" keyProperty="hotspotId" parameterType="com.example.four.entity.Hotspot" useGeneratedKeys="true">
+    insert into hotspot (hotSpot_name, hotSpot_img, cityMenu_id
+      )
+    values (#{hotspotName,jdbcType=VARCHAR}, #{hotspotImg,jdbcType=VARCHAR}, #{citymenuId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="hotSpot_id" keyProperty="hotspotId" parameterType="com.example.four.entity.Hotspot" useGeneratedKeys="true">
+    insert into hotspot
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="hotspotName != null">
+        hotSpot_name,
+      </if>
+      <if test="hotspotImg != null">
+        hotSpot_img,
+      </if>
+      <if test="citymenuId != null">
+        cityMenu_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="hotspotName != null">
+        #{hotspotName,jdbcType=VARCHAR},
+      </if>
+      <if test="hotspotImg != null">
+        #{hotspotImg,jdbcType=VARCHAR},
+      </if>
+      <if test="citymenuId != null">
+        #{citymenuId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.four.entity.Hotspot">
+    update hotspot
+    <set>
+      <if test="hotspotName != null">
+        hotSpot_name = #{hotspotName,jdbcType=VARCHAR},
+      </if>
+      <if test="hotspotImg != null">
+        hotSpot_img = #{hotspotImg,jdbcType=VARCHAR},
+      </if>
+      <if test="citymenuId != null">
+        cityMenu_id = #{citymenuId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where hotSpot_id = #{hotspotId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.four.entity.Hotspot">
+    update hotspot
+    set hotSpot_name = #{hotspotName,jdbcType=VARCHAR},
+      hotSpot_img = #{hotspotImg,jdbcType=VARCHAR},
+      cityMenu_id = #{citymenuId,jdbcType=INTEGER}
+    where hotSpot_id = #{hotspotId,jdbcType=INTEGER}
+  </update>
+</mapper>

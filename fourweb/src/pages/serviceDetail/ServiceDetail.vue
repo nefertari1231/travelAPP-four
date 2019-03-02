@@ -120,6 +120,27 @@ export default {
       imgs: ['static/image/service1.jpg', 'static/image/service1.1.jpg', 'static/image/service1.2.jpg', 'static/image/service1.3.jpg']
     }
   },
+  watch: {
+    serverDetail: {
+      handler (val, oldVal) {
+        if (val !== oldVal) {
+          axios.get('http://localhost:8090/api/great/getGreatStatus', {
+            params: {
+              serverId: val.serverId,
+              userId: localStorage.getItem('Id')
+            }
+          })
+            .then(response => {
+              if (response.data.data) {
+                this.dolike = 'like'
+              } else {
+                this.dolike = 'unlike'
+              }
+            })
+        }
+      }
+    }
+  },
   methods: {
     queryUserInfo() {
       if (localStorage.getItem('Id') !== null) {
@@ -170,8 +191,21 @@ export default {
     },
     NoLike() {
       this.dolike = 'like'
+      axios.get('http://localhost:8090/api/great/toGreat', {
+        params: {
+          serverId: this.serverDetail.serverId,
+          userId: localStorage.getItem('Id')
+        }
+      })
+      this.dolike = 'like'
     },
     YesLike() {
+      axios.get('http://localhost:8090/api/great/toGreat', {
+        params: {
+          serverId: this.serverDetail.serverId,
+          userId: localStorage.getItem('Id')
+        }
+      })
       this.dolike = 'unlike'
     },
     NoCollect() {

@@ -21,7 +21,7 @@ public interface DiscussMapper {
 
     int updateByPrimaryKey(Discuss record);
 
-    @Select(value = "SELECT * FROM `discuss` WHERE order_id in (SELECT order_id FROM `order` WHERE order_id in (SELECT order_id FROM `server` WHERE user_id = #{userId" +
+    @Select(value = "SELECT * FROM `discuss` WHERE order_sn in (SELECT order_sn FROM `order` WHERE order_sn in (SELECT order_sn FROM `server` WHERE user_id = #{userId" +
             "" +
             "}))")
     List<Discuss> getAllByUser(@Param("userId") Integer userId);
