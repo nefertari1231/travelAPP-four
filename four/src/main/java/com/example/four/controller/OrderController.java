@@ -1,7 +1,11 @@
 package com.example.four.controller;
 
+import com.example.four.VO.CommentVO;
+import com.example.four.entity.Discuss;
 import com.example.four.entity.Order;
 import com.example.four.entity.Server;
+import com.example.four.exception.IllegalException;
+import com.example.four.service.DiscussService;
 import com.example.four.service.OrderService;
 import com.example.four.service.ServerService;
 import com.example.four.utils.JSONResult;
@@ -10,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Date;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
@@ -26,50 +31,50 @@ public class OrderController {
     @Autowired
     private ServerService serverService;
 
+    @Autowired
+    private DiscussService discussService;
+
     @PostMapping(value = "/saveOrder")
     @ApiOperation(value = "保存订单", response = Order.class, responseContainer = "list")
     public JSONResult saveOrder(@RequestBody Order order) {
 
         Server server = new Server();
         server.setServerStatus(1);
-        serverService.saveServer(server);
         serverService.updateServers(server);
 
         //保存订单
-        order.setBuyerName(order.getBuyerName());
-        order.setBuyerPhone(order.getBuyerPhone());
-        order.setBuyerCount(order.getBuyerCount());
-        order.setOrderAmount(order.getOrderAmount());
-        order.setBuyerTalk(order.getBuyerTalk());
-        order.setUserId(order.getUserId());
         order.setCreateTime(new Date());
-        order.setServerId(order.getServerId());
         orderService.saveOrder(order);
 
         return JSONResult.ok(order);
     }
 
-//    @PostMapping(value = "/saveOrderSn")
-//    @ApiOperation(value = "保存订单编号", response = Order.class, responseContainer = "list")
-//    public static String getOrderSn() {
-//        Date date=new Date();
-//        DateFormat format = new SimpleDateFormat("yyyyMMdd");
-//        String time = format.format(date);
-//        int hashCodeV = UUID.randomUUID().toString().hashCode();
-//        if (hashCodeV < 0) {//有可能是负数
-//            hashCodeV = -hashCodeV;
-//        }
-//        // 0 代表前面补充0
-//        // 4 代表长度为4
-//        // d 代表参数为正数型
-//        String order_sn = time + String.format("%011d", hashCodeV)
-//        return order_sn;
-//    }
+
+    @GetMapping(value = "/comment")
+    @ApiOperation(value = "查询全部的评论",response = Discuss.class, responseReference = "list")
+    public JSONResult getAllComment(Integer userId) {
+        return JSONResult.ok(discussService.getAllComment(userId));
+    }
 
     @GetMapping(value = "/all")
     @ApiOperation(value = "根据userId 查询全部订单", response = Order.class, responseContainer = "list")
     public JSONResult getAllOrderByUser(Integer userId) {
         return JSONResult.ok(orderService.getAllOrders(userId));
+    }
+
+    @PostMapping(value = "/toComment")
+    @ApiOperation(value = "发布评论")
+    public JSONResult toComment(@RequestBody CommentVO commentVO) throws IOException, IllegalException {
+        System.out.println(commentVO);
+        String img = commentVO.uploadImg();
+        Discuss discuss = new Discuss();
+        discuss.setDiscussValue(commentVO.getValue());//评分
+        discuss.setDiscussImg(img);//图片
+        discuss.setOrderSn(commentVO.getOrderId());//订单号
+        discuss.setDiscussContent(commentVO.getContent());//内容
+        discussService.insertComment(discuss);
+        System.out.println(img);
+        return JSONResult.ok();
     }
 
 }

@@ -3,7 +3,6 @@ package com.example.four.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -92,6 +91,10 @@ public class Server {
 
     public Server(Integer serverStatus) {
         this.serverStatus = serverStatus;
+    }
+
+    public Server(String serverId) {
+        this.serverId = serverId;
     }
 
     public Server() {

@@ -7,29 +7,41 @@
           赞
         </div>
       </div>
-<div class="Message4_body">
+<div class="Message4_body border-bottom" v-for="(item,index) in great" :key="index">
   <p>
     <span>{{name}}</span>
-    赞了您分享的内容
+    赞了您发的服务
     <img src="static/image/dianzan.png" class="Message4_img2">
+    <span style="float:right;color:#000;line-height:1.5rem">￥ {{ item.server.serverPrice}}</span>
   </p>
-  <div class="Message4_div"></div>
+  <p>
+   标题：{{ item.server.serverName }}
+  </p>
+  <div class="clear"></div>
+  <!-- <div class="Message4_div">
+  </div> -->
 </div>
 </div>
   </transition>
 </template>
 <script>
+import axios from 'axios'
 export default {
   name: 'Message4',
   data () {
     return {
-      name: 'xxx',
-      message4show: false
+      name: '来自星星的人',
+      message4show: false,
+      great: null
     }
   },
   methods: {
     show() {
       this.message4show = true
+      axios.get('http://localhost:8090/api/great/getGreat?userId=' + localStorage.getItem('Id'))
+        .then(response => {
+          this.great = response.data.data
+        })
     },
     hide() {
       this.message4show = false
@@ -38,6 +50,8 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+  .clear
+    clear both;
   .bg
     position: fixed
     background: #FFF
@@ -124,7 +138,7 @@ export default {
     font-size:0.4rem
   .Message4_body p span
     color:#4BA8FB
-    font-size:0.5rem
+    font-size:0.4rem
   .Message4_div
     width:95%
     height:3rem

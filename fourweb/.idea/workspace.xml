@@ -2,12 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a089df9c-14e3-42c7-b7f3-7ad5891120f9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/VO/CityVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/VO/CommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/VO/GreatVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/controller/CityController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/controller/GreatController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/entity/City.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/entity/CityMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/entity/Discuss.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/entity/Foods.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/entity/Great.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/entity/Hotspot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/entity/Place.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/exception/IllegalException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/mapper/CityMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/mapper/CityMenuMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/mapper/DiscussMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/mapper/FoodsMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/mapper/GreatMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/mapper/HotspotMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/mapper/PlaceMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/service/CityService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/service/DiscussService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/service/GreatService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/utils/ImgUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/discuss/Discuss.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../four/logs/spring-boot-logging.log" beforeDir="false" afterPath="$PROJECT_DIR$/../four/logs/spring-boot-logging.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../four/src/main/java/com/example/four/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../four/src/main/java/com/example/four/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../four/src/main/java/com/example/four/controller/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/controller/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../four/src/main/java/com/example/four/controller/ShareController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/controller/ShareController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../four/src/main/java/com/example/four/entity/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/entity/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../four/src/main/java/com/example/four/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../four/src/main/java/com/example/four/entity/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/login/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/login/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/message1/Message1.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message1/Message1.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/serverOut/ServerOut.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/serverOut/ServerOut.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/serviceDetail/ServiceDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/serviceDetail/ServiceDetail.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/message3/Message3.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message3/Message3.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/message4/Message4.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/message4/Message4.vue" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -21,11 +50,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/message1/Message1.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="264">
-              <caret line="17" column="63" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
+            <state relative-caret-position="1056">
+              <caret line="111" selection-start-line="111" selection-end-line="111" />
               <folding>
                 <element signature="n#div#0;n#div#0;n#div#0;n#transition#0;n#template#0;n#!!top" />
               </folding>
@@ -34,27 +63,42 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/serviceDetail/ServiceDetail.vue">
+        <entry file="file://$PROJECT_DIR$/src/pages/message2/Message2.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
-              <caret line="163" column="4" selection-start-line="163" selection-start-column="4" selection-end-line="163" selection-end-column="4" />
-              <folding>
-                <element signature="e#3537#3562#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-990" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/message3/Message3.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-264">
+              <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/store/store.js">
+        <entry file="file://$PROJECT_DIR$/src/pages/message4/Message4.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="57" column="17" lean-forward="true" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="176">
+              <caret line="8" column="12" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/message5/Message5.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-572">
+              <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/pages/productRole/ProductRole.vue">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -95,8 +139,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="229" />
-    <option name="y" value="41" />
+    <option name="x" value="49" />
+    <option name="y" value="37" />
     <option name="width" value="1437" />
     <option name="height" value="1006" />
   </component>
@@ -135,7 +179,28 @@
               <item name="fourweb" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="message1" type="462c0819:PsiDirectoryNode" />
+              <item name="message2" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fourweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fourweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="message3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fourweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fourweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="message4" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fourweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fourweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="message5" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fourweb" type="b2602c69:ProjectViewProjectNode" />
@@ -143,6 +208,13 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
               <item name="orderMaster" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fourweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fourweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="productRole" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fourweb" type="b2602c69:ProjectViewProjectNode" />
@@ -180,6 +252,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
+    <property name="last_opened_file_path" value="C:/Example/fourweb" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="D:\item\Four\fourweb\node_modules\eslint" />
@@ -188,6 +261,13 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="D:\item\Four\fourweb\node_modules\prettier" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\item\Four\fourweb\src\pages\message4" />
+      <recent name="D:\item\Four\fourweb\src\pages\message3" />
+      <recent name="D:\item\Four\fourweb\src\pages" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -214,18 +294,17 @@
       <workItem from="1551372237239" duration="156000" />
       <workItem from="1551409185326" duration="2238000" />
       <workItem from="1551411523983" duration="22421000" />
-      <workItem from="1551491474102" duration="3418000" />
+      <workItem from="1551491474102" duration="4295000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28233000" />
+    <option name="totallyTimeSpent" value="29110000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="494" y="34" width="1437" height="1006" extended-state="0" />
-    <editor active="true" />
+    <frame x="49" y="37" width="1437" height="1006" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22158685" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22158685" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -237,7 +316,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.17545871" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.17545871" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -305,13 +384,6 @@
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-66" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/message/Message.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="17" column="41" lean-forward="true" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/desInfo/desInfo.vue">
@@ -442,15 +514,57 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/changePassword/ChangePassword.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/discuss/Discuss.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/message/Message.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1870">
+          <caret line="17" column="41" lean-forward="true" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/message1/Message1.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="17" column="63" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
+        <state relative-caret-position="1056">
+          <caret line="111" selection-start-line="111" selection-end-line="111" />
           <folding>
             <element signature="n#div#0;n#div#0;n#div#0;n#transition#0;n#template#0;n#!!top" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/message2/Message2.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-990" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/message3/Message3.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-264">
+          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/message4/Message4.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="12" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/message5/Message5.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-572">
+          <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/productRole/ProductRole.vue">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

@@ -22,6 +22,7 @@ public class ShareController {
     @PostMapping(value = "/saveShare")
     @ApiOperation(value = "保存分享", response = Share.class, responseContainer = "list")
     public JSONResult saveShare(@RequestBody Share share) {
+
         //保存分享
         share.setShareContent(share.getShareContent());
         shareService.saveShare(share);
