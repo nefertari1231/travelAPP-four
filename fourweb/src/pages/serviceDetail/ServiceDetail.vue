@@ -407,6 +407,7 @@ export default {
     width: 33.3%
     background: #eee
     color: #aaa
+    color: red
   .icon-shoucang1,.icon-like,.icon-like-fill
     margin-top:.1rem
     font-size: .4rem

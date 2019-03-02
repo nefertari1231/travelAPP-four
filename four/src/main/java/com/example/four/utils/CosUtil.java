@@ -48,11 +48,6 @@ public class CosUtil {
         transferManager = new TransferManager(cosClient, threadPool);
     }
 
-    public static void main(String[] args) {
-        //上传
-        upload("/123.pdf",new File("src/test/resources/test.pdf"));
-        cosClient.shutdown();
-    }
 
     static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm ss");
 

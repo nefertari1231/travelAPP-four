@@ -6,10 +6,10 @@
     <result column="discuss_content" jdbcType="VARCHAR" property="discussContent" />
     <result column="discuss_value" jdbcType="INTEGER" property="discussValue" />
     <result column="discuss_img" jdbcType="VARCHAR" property="discussImg" />
-    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="order_sn" jdbcType="VARCHAR" property="orderSn" />
   </resultMap>
   <sql id="Base_Column_List">
-    discuss_id, discuss_content, discuss_value, discuss_img, order_id
+    discuss_id, discuss_content, discuss_value, discuss_img, order_sn
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -23,9 +23,9 @@
   </delete>
   <insert id="insert" keyColumn="discuss_id" keyProperty="discussId" parameterType="com.example.four.entity.Discuss" useGeneratedKeys="true">
     insert into discuss (discuss_content, discuss_value, discuss_img, 
-      order_id)
+      order_sn)
     values (#{discussContent,jdbcType=VARCHAR}, #{discussValue,jdbcType=INTEGER}, #{discussImg,jdbcType=VARCHAR}, 
-      #{orderId,jdbcType=VARCHAR})
+      #{orderSn,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="discuss_id" keyProperty="discussId" parameterType="com.example.four.entity.Discuss" useGeneratedKeys="true">
     insert into discuss
@@ -39,8 +39,8 @@
       <if test="discussImg != null">
         discuss_img,
       </if>
-      <if test="orderId != null">
-        order_id,
+      <if test="orderSn != null">
+        order_sn,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -53,8 +53,8 @@
       <if test="discussImg != null">
         #{discussImg,jdbcType=VARCHAR},
       </if>
-      <if test="orderId != null">
-        #{orderId,jdbcType=VARCHAR},
+      <if test="orderSn != null">
+        #{orderSn,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -70,8 +70,8 @@
       <if test="discussImg != null">
         discuss_img = #{discussImg,jdbcType=VARCHAR},
       </if>
-      <if test="orderId != null">
-        order_id = #{orderId,jdbcType=VARCHAR},
+      <if test="orderSn != null">
+        order_id = #{orderSn,jdbcType=VARCHAR},
       </if>
     </set>
     where discuss_id = #{discussId,jdbcType=INTEGER}
@@ -81,7 +81,7 @@
     set discuss_content = #{discussContent,jdbcType=VARCHAR},
       discuss_value = #{discussValue,jdbcType=INTEGER},
       discuss_img = #{discussImg,jdbcType=VARCHAR},
-      order_id = #{orderId,jdbcType=VARCHAR}
+      order_Sn = #{orderSn,jdbcType=VARCHAR}
     where discuss_id = #{discussId,jdbcType=INTEGER}
   </update>
 </mapper>

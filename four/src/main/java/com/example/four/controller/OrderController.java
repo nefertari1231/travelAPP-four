@@ -70,7 +70,7 @@ public class OrderController {
         Discuss discuss = new Discuss();
         discuss.setDiscussValue(commentVO.getValue());//评分
         discuss.setDiscussImg(img);//图片
-        discuss.setOrderSn(commentVO.getOrderId());//订单号
+        discuss.setOrderSn(commentVO.getOrderSn());//订单号
         discuss.setDiscussContent(commentVO.getContent());//内容
         discussService.insertComment(discuss);
         System.out.println(img);

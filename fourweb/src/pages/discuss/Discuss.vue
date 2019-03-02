@@ -91,7 +91,9 @@ export default {
       this.imgType.splice(0, 1, file.file.type.split('/')[1])
     },
     show() {
-      console.log(this.DiscussDetail)
+      this.$nextTick(() => {
+        console.log(this.discussDetail)
+      })
       this.discussshow = true
     },
     hide() {
@@ -102,10 +104,9 @@ export default {
         'content': this.discussContent,
         'imgArr': this.imgArr,
         'imgType': this.imgType,
-        'orderId': this.discussDetail.orderId,
+        'orderSn': this.discussDetail.orderSn,
         'value': this.value
-      }
-      )
+      })
         .then(response => {
           this.discussshow = false
         })

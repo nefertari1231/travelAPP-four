@@ -23,19 +23,19 @@ public class ImgUtil {
     /**
      * COS secretId
      */
-    private static final String secretId = "AKIDXqupZ3sVN1RfeQ7g3BOO9h6MGwNaJNwM";
+    private static final String secretId = "AKID4wgBaNWhAXguxog8UbbQ3Wpywxthom6H";
     /**
      * COS secretKey
      */
-    private static final String secretKey = "KTTH8pIWDk9JEzXv30iIdfS1LPPH8k7G";
+    private static final String secretKey = "81f6KK5cuzpQoytZ4Lk2DQVTGsKaeV8X";
     /**
      * COS bucketName
      */
-    private static final String bucketName = "imgs-1257617444";
+    private static final String bucketName = "pic-1257641594";
     /**
      * COS regionName
      */
-    private static final String regionName = "ap-chengdu";
+    private static final String regionName = "ap-beijing";
     private static final COSClient cosClient;
 
     static {

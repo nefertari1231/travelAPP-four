@@ -10,7 +10,7 @@ public class CommentVO {
 
     private String content;
 
-    private String orderId;
+    private String orderSn;
 
     private String[] imgArr;
 
@@ -26,12 +26,12 @@ public class CommentVO {
         this.content = content;
     }
 
-    public String getOrderId() {
-        return orderId;
+    public String getOrderSn() {
+        return orderSn;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setOrderSn(String orderSn) {
+        this.orderSn = orderSn;
     }
 
     public String[] getImgArr() {
@@ -61,7 +61,7 @@ public class CommentVO {
     @Override
     public String toString() {
         return "CommentVO{" +
-                "orderId='" + orderId + '\'' +
+                "orderSn='" + orderSn + '\'' +
                 ", imgArr=" + Arrays.toString(imgArr) +
                 ", imgType=" + Arrays.toString(imgType) +
                 ", value=" + value +

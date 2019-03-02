@@ -19,24 +19,30 @@
                       <p class="item-price">￥ {{ item.orderAmount }}</p>
                       <p class="item-desc">手机号码：{{item.buyerPhone}}</p>
                       <p class="item-time">{{ item.createTime }}</p>
+                      <button class="item-button" @click="discuss(item)">评论</button>
                     </div>
               </li>
             </ul>
           </div>
         </div>
       </div>
+      <router-view></router-view>
+      <discuss :discussDetail="selectDiscuss" ref="discuss"></discuss>
     </div>
   </transition>
 </template>
 <script>
 import axios from 'axios'
 import Bscroll from 'better-scroll'
+import Discuss from '../discuss/Discuss'
 export default {
   name: 'Message1',
+  components: {Discuss},
   data () {
     return {
       order: null,
       msg: [],
+      selectDiscuss: {},
       message1show: false
     }
   },
@@ -63,6 +69,10 @@ export default {
     },
     hide() {
       this.message1show = false
+    },
+    discuss(item) {
+      this.selectDiscuss = item
+      this.$refs.discuss.show()
     }
   }
 }
@@ -158,9 +168,15 @@ export default {
   .Message1_img
     width:2rem
   .item
-    height: 1.5 rem;
+    height: 1.8rem;
     line-height .5 rem;
     padding:0 .8em;
   .item .item-price
     float:right
+  .item .item-button
+    float: right
+    background: #ff9300
+    margin-top: -0.5rem
+    padding: 0 .2rem;
+    border-radius: .06rem
 </style>
