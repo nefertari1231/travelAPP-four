@@ -52,6 +52,9 @@ export default new Vuex.Store({
     updateuserDescription(ctx, Description) {
       ctx.commit('updateuserDescription', Description)
     },
+    updatefollowCount(ctx, way) {
+      ctx.commit('updatefollowCount', way)
+    },
     logOff(ctx) {
       ctx.commit('logOff')
     }
@@ -83,6 +86,9 @@ export default new Vuex.Store({
     updateuserDescription(user, Description) {
       user.userDescription = Description
     },
+    updatefollowCount(state, way) {
+      state.followCount = state.followCount + way
+    },
     getuserDetail(state, user) {
       if (user.userBg === null) {
         state.userBg = 'static/image/login-bg.jpg'
@@ -113,21 +119,6 @@ export default new Vuex.Store({
         state.userArea = '来自星星的你'
       } else {
         state.userArea = user.userArea
-      }
-      if (user.shareCount === null) {
-        state.shareCount = 0
-      } else {
-        state.shareCount = user.shareCount
-      }
-      if (user.followCount === null) {
-        state.followCount = 0
-      } else {
-        state.followCount = user.followCount
-      }
-      if (user.fansCount === null) {
-        state.fansCount = 0
-      } else {
-        state.fansCount = user.fansCount
       }
     },
     logOff(state) {

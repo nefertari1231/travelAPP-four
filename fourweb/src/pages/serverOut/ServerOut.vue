@@ -76,7 +76,7 @@ export default {
             'serverPrice': this.serverPrice,
             'serverPlace': this.city,
             'serverRemark': this.serverRemark,
-            'userId': this.$store.state.userId
+            'userId': localStorage.getItem('Id')
           }
         }).then(response => {
           console.log(response)

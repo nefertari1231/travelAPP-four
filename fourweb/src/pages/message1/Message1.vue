@@ -15,9 +15,9 @@
             <ul>
               <li class="item border-bottom" v-for="item in order" :key="item.orderId">
                     <div class="item-info">
-                      <p class="item-title">订单号：{{ item.orderId }}</p>
-                      <p class="item-price">{{ item.orderAmount }}￥</p>
-                      <p class="item-desc">手机号码：15673733303</p>
+                      <p class="item-title">订单号：{{ item.orderSn }}</p>
+                      <p class="item-price">￥ {{ item.orderAmount }}</p>
+                      <p class="item-desc">手机号码：{{item.buyerPhone}}</p>
                       <p class="item-time">{{ item.createTime }}</p>
                     </div>
               </li>
@@ -45,6 +45,7 @@ export default {
       .then(response => {
         this.msg = ['1']
         this.order = response.data.data
+        console.log(this.order)
       })
   },
   methods: {

@@ -14,14 +14,17 @@
     <div>
       <div class="single-content">
         <div class="item-header">
-          <img class="item-img"  :src="sellImgUrl" />
-          <div class="icon-m">
+          <img class="item-img"  :src="'http://localhost:8090' + this.user.userIcon" />
+          <div class="icon-m" v-show="this.user.userSex === '男'">
             <div class="iconfont icon-man"></div>
           </div>
+          <div class="icon-f" v-show="this.user.userSex === '女'">
+            <div class="iconfont icon-woman"></div>
+          </div>
           <div class="item-info">
-            <p class="item-title">{{sellName}}
-              <span class="item-attention" v-if="showMessage === 'a'" @click="MessageFalse()"> + 关注</span>
-              <span class="item-attention" v-else @click="MessageTrue()">已关注</span>
+            <p class="item-title">{{this.user.userNickname}}
+              <span class="item-attention" v-if="showMessage === 'a'" @click="MessageFalse(1)"> + 关注</span>
+              <span class="item-attention" v-else @click="MessageTrue(-1)">已关注</span>
               <!--<span class="item-attention"> + 关注</span>-->
             </p>
             <p class="item-count">已经出游3次</p>
@@ -88,6 +91,7 @@
 </transition>
 </template>
 <script>
+import axios from 'axios'
 import Bscroll from 'better-scroll'
 import CommonGallary from 'common/gallary/Gallary'
 import OrderMaster from '../orderMaster/OrderMaster'
@@ -100,10 +104,14 @@ export default {
     OrderMaster,
     CommonGallary
   },
+  mounted() {
+    this.$nextTick(() => {
+      this.queryUserInfo()
+    })
+  },
   data() {
     return {
-      sellName: '老王',
-      sellImgUrl: 'static/image/touxiang7.jpg',
+      user: {},
       showMessage: 'a',
       dolike: 'unlike',
       collect: 'uncollect',
@@ -113,6 +121,18 @@ export default {
     }
   },
   methods: {
+    queryUserInfo() {
+      if (localStorage.getItem('Id') !== null) {
+        axios({
+          method: 'get',
+          url: 'http://localhost:8090/api/users/query?userId=' + localStorage.getItem('Id'),
+          changeOrigin: true
+        }).then(response => {
+          this.user = response.data.data
+          console.log(this.user)
+        })
+      }
+    },
     show() {
       this.showServiceDetail = true
       this.$nextTick(() => {
@@ -141,8 +161,9 @@ export default {
     enterOrder() {
       this.$refs.enterOrdered.show()
     },
-    MessageFalse() {
+    MessageFalse(way) {
       this.showMessage = 'b'
+      this.$store.dispatch('updatefollowCount', way)
     },
     MessageTrue() {
       this.showMessage = 'a'

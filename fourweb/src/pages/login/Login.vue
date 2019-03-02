@@ -139,7 +139,10 @@ export default {
         axios({
           method: 'get',
           url: 'http://localhost:8090/api/users/query?userId=' + localStorage.getItem('Id'),
-          changeOrigin: true
+          changeOrigin: true,
+          headers: {
+            'token': localStorage.getItem('Authorization')
+          }
         }).then(response => {
           console.log(response)
           this.user = response.data.data
