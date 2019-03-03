@@ -6,7 +6,8 @@
         <div class="header-title">
           赞
         </div>
-      </div>
+  <div class="header-right">{{great.length}}GEZAN</div>
+  </div>
 <div class="Message4_body border-bottom" v-for="(item,index) in great" :key="index">
   <p>
     <span>{{name}}</span>
@@ -32,7 +33,7 @@ export default {
     return {
       name: '来自星星的人',
       message4show: false,
-      great: null
+      great: ''
     }
   },
   methods: {
